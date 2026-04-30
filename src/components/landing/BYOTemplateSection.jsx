@@ -81,29 +81,29 @@ export default function BYOTemplateSection() {
           {/* Copy */}
           <div className="lg:pt-8">
             <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-muted-foreground mb-6">
-              The thing no other tool does
+              Your look. Our brains.
             </p>
 
-            {/* Manifesto — display weight, H1-level size */}
             <h2
               className="font-black tracking-[-0.035em] text-foreground mb-8"
               style={{ fontSize: 'clamp(36px, 5.5vw, 72px)', lineHeight: '0.97' }}
             >
-              Every other tool
+              Bring your
               <br />
-              gives you 12 templates.
+              template.
               <br />
-              <span style={{ color: 'var(--primary)' }}>We give you infinity.</span>
+              <span style={{ color: 'var(--primary)' }}>We do the rest.</span>
             </h2>
 
             <p
               className="text-foreground/60 mb-8 max-w-md"
               style={{ fontSize: '17px', lineHeight: '1.6' }}
             >
-              Drop in any HTML/CSS/Tailwind layout — brutalist, editorial, monospace, your own
-              design system. We fill it with polished, tailored content.{' '}
-              <strong className="text-foreground font-semibold">Your vibe. Our content.</strong>{' '}
-              Same artistic taste, every application.
+              Screenshot or upload any resume or cover letter design you love — brutalist, editorial,
+              classic, whatever. We generate a fully{' '}
+              <strong className="text-foreground font-semibold">ATS-friendly, tailored PDF</strong>{' '}
+              in that exact style, filled with content matched to the job. Your aesthetic. Zero
+              compromise.
             </p>
 
             <div
@@ -114,7 +114,7 @@ export default function BYOTemplateSection() {
               }}
             >
               <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--primary)' }} />
-              HTML · CSS · Tailwind · Any layout
+              Any vibe · ATS-ready · Tailored PDF output
             </div>
           </div>
 
