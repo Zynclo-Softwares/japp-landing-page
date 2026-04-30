@@ -43,40 +43,50 @@ function GlobeCanvas() {
       const H = canvas.height;
       ctx.clearRect(0, 0, W, H);
 
-      const R = W * 0.58;
+      // Globe sits at bottom: center is below canvas bottom edge
+      const R = W * 0.52;
       const cx = W / 2;
-      const cy = H + R * 0.08;
+      // Push globe center down so only the top arc shows
+      const cy = H + R * 0.15;
 
-      // Radial rays
+      // Dark background that fills the section (amber-tinted dark)
+      const bgGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, R * 1.6);
+      bgGrad.addColorStop(0, 'rgba(40,20,0,1)');
+      bgGrad.addColorStop(0.5, 'rgba(18,9,0,1)');
+      bgGrad.addColorStop(1, 'rgba(6,3,0,1)');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Radial rays from globe top
       const rayY = cy - R;
-      for (let i = 0; i < 20; i++) {
-        const angle = -Math.PI / 2 + (i / 19 - 0.5) * Math.PI * 1.3;
-        const grad = ctx.createLinearGradient(cx, rayY, cx + Math.cos(angle) * W * 1.4, rayY + Math.sin(angle) * H * 1.4);
-        grad.addColorStop(0, 'rgba(245,175,0,0.09)');
+      for (let i = 0; i < 24; i++) {
+        const angle = -Math.PI / 2 + (i / 23 - 0.5) * Math.PI * 1.4;
+        const grad = ctx.createLinearGradient(cx, rayY, cx + Math.cos(angle) * W * 1.6, rayY + Math.sin(angle) * H * 1.6);
+        grad.addColorStop(0, 'rgba(245,175,0,0.07)');
         grad.addColorStop(1, 'rgba(245,175,0,0)');
         ctx.beginPath();
         ctx.moveTo(cx, rayY);
-        ctx.lineTo(cx + Math.cos(angle) * W * 1.4, rayY + Math.sin(angle) * H * 1.4);
+        ctx.lineTo(cx + Math.cos(angle) * W * 1.6, rayY + Math.sin(angle) * H * 1.6);
         ctx.strokeStyle = grad;
         ctx.lineWidth = 1.5;
         ctx.stroke();
       }
 
       // Halo glow
-      const halo = ctx.createRadialGradient(cx, cy, R * 0.55, cx, cy, R * 1.35);
-      halo.addColorStop(0, 'rgba(245,170,0,0.28)');
-      halo.addColorStop(0.45, 'rgba(200,120,0,0.10)');
+      const halo = ctx.createRadialGradient(cx, cy, R * 0.55, cx, cy, R * 1.4);
+      halo.addColorStop(0, 'rgba(245,170,0,0.25)');
+      halo.addColorStop(0.5, 'rgba(200,120,0,0.08)');
       halo.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.beginPath();
-      ctx.arc(cx, cy, R * 1.35, 0, Math.PI * 2);
+      ctx.arc(cx, cy, R * 1.4, 0, Math.PI * 2);
       ctx.fillStyle = halo;
       ctx.fill();
 
       // Sphere fill
       const sphere = ctx.createRadialGradient(cx - R * 0.2, cy - R * 0.35, R * 0.02, cx, cy, R);
-      sphere.addColorStop(0, 'rgba(255,195,20,0.22)');
-      sphere.addColorStop(0.35, 'rgba(30,16,0,0.88)');
-      sphere.addColorStop(1, 'rgba(4,2,0,0.97)');
+      sphere.addColorStop(0, 'rgba(255,195,20,0.20)');
+      sphere.addColorStop(0.35, 'rgba(30,16,0,0.92)');
+      sphere.addColorStop(1, 'rgba(4,2,0,0.98)');
       ctx.beginPath();
       ctx.arc(cx, cy, R, 0, Math.PI * 2);
       ctx.fillStyle = sphere;
@@ -94,7 +104,7 @@ function GlobeCanvas() {
         const xr = Math.abs(Math.sin(phi)) * R;
         ctx.beginPath();
         ctx.ellipse(cx, yr, xr, xr * 0.15, 0, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(245,175,0,0.11)';
+        ctx.strokeStyle = 'rgba(245,175,0,0.12)';
         ctx.lineWidth = 0.7;
         ctx.stroke();
       }
@@ -128,15 +138,15 @@ function GlobeCanvas() {
 
       ctx.restore();
 
-      // Rim
-      const rim = ctx.createRadialGradient(cx, cy, R * 0.9, cx, cy, R * 1.03);
+      // Rim glow
+      const rim = ctx.createRadialGradient(cx, cy, R * 0.9, cx, cy, R * 1.04);
       rim.addColorStop(0, 'rgba(245,175,0,0)');
-      rim.addColorStop(0.5, 'rgba(245,175,0,0.45)');
+      rim.addColorStop(0.5, 'rgba(245,175,0,0.5)');
       rim.addColorStop(1, 'rgba(245,175,0,0)');
       ctx.beginPath();
       ctx.arc(cx, cy, R, 0, Math.PI * 2);
       ctx.strokeStyle = rim;
-      ctx.lineWidth = 3.5;
+      ctx.lineWidth = 4;
       ctx.stroke();
 
       // Arc travel lines
@@ -193,18 +203,17 @@ function GlobeCanvas() {
 export default function ApplyAnywhereSection() {
   return (
     <section className="overflow-hidden">
-      {/* Full-width globe block — page background shows through canvas */}
-      <div className="relative w-full" style={{ height: 'clamp(480px, 65vw, 720px)' }}>
+      <div className="relative w-full" style={{ height: 'clamp(500px, 60vw, 700px)' }}>
         <GlobeCanvas />
 
-        {/* All text overlaid on globe, same as blue reference */}
-        <div className="absolute inset-0 flex flex-col items-center justify-start pt-16 z-10 pointer-events-none px-6">
-          <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-muted-foreground mb-5">
+        {/* Text sits in upper portion, above the globe arc */}
+        <div className="absolute inset-0 flex flex-col items-center justify-start pt-14 z-10 pointer-events-none px-6">
+          <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-white/50 mb-5">
             Apply anywhere on the internet
           </p>
 
           <h2
-            className="font-black text-foreground text-center mb-3"
+            className="font-black text-white text-center mb-3"
             style={{ fontSize: 'clamp(32px, 5vw, 64px)', lineHeight: '1.05', letterSpacing: '-0.03em' }}
           >
             No job-board lock-in.
@@ -212,14 +221,14 @@ export default function ApplyAnywhereSection() {
             No API limits.
           </h2>
 
-          <p className="text-base text-muted-foreground mb-8">
+          <p className="text-base text-white/60 mb-8">
             If a human can apply,{' '}
             <span style={{ color: 'var(--primary)' }}>Just Apply can apply.</span>
           </p>
 
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-1">
             {boards.map((board) => (
-              <span key={board} className="text-sm font-semibold text-foreground/50">
+              <span key={board} className="text-sm font-semibold text-white/40">
                 {board}
               </span>
             ))}
