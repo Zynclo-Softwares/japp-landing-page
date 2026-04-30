@@ -36,7 +36,7 @@ export default function OldVsNewSection() {
           style={{ fontSize: '18px', lineHeight: '1.5' }}
         >
           Open the JD. Paste into ChatGPT. Paste back into Docs. "Make it ATS-friendly." Re-format.
-          Download. Upload. Repeat 40 times. We collapsed all of it into one window.
+          Download. Upload. Repeat 40 times. We collapsed all of it — no copy-pasting, no URL hunting. Just point and apply.
         </p>
 
         {/* IMG-2 — full-width centerpiece (the viral screenshot moment) */}
@@ -102,7 +102,7 @@ export default function OldVsNewSection() {
 
             <div className="space-y-4">
               {[
-                { step: '1', label: 'Drop any job post URL', sub: 'From anywhere on the internet' },
+                { step: '1', label: 'See a job. Tell the agent.', sub: 'No URL needed — it sees your screen' },
                 { step: '2', label: 'Agent researches the company', sub: 'Site, news, team, JD — all of it' },
                 { step: '3', label: 'Tailored bundle delivered', sub: 'Resume + cover in your template' },
               ].map(({ step, label, sub }) => (

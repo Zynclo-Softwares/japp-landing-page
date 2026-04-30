@@ -6,8 +6,8 @@ const steps = [
   },
   {
     num: '02',
-    title: 'Drop any job post.',
-    desc: 'A URL, a JD paste, or a Notion page — doesn\'t matter where it lives.',
+    title: 'See a job. Just say apply.',
+    desc: 'The agent sees your screen. No URL, no copy-pasting — just tell it what you want.',
   },
   {
     num: '03',
