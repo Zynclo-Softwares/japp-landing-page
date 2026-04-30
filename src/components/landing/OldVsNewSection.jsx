@@ -1,4 +1,4 @@
-const IMG_LIGHT = 'https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/ba5e1daa5_image.png';
+const IMG_LIGHT = 'https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/12c80f467_image.png';
 const IMG_DARK = 'https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/97083b349_image.png';
 
 export default function OldVsNewSection() {
