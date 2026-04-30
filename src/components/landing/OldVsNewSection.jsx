@@ -56,7 +56,7 @@ export default function OldVsNewSection() {
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
-                objectPosition: '55% center',
+                objectPosition: '15% center',
               }}
             />
           </div>
