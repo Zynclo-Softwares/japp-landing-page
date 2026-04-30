@@ -45,14 +45,6 @@ export default function Nav({ theme, toggleTheme }) {
 
         {/* Right */}
         <div className="flex items-center gap-2">
-          {/* ⌘K chip */}
-          <span
-            className="hidden lg:inline-flex items-center gap-1 px-2 py-1 rounded-md border border-border text-[11px] font-mono text-muted-foreground"
-            title="Command palette coming soon"
-          >
-            <span>⌘K</span>
-          </span>
-
           <button
             onClick={toggleTheme}
             className="p-2 rounded-lg hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
