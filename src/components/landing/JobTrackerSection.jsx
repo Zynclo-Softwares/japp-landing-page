@@ -21,7 +21,12 @@ export default function JobTrackerSection() {
         </p>
 
         <div className="flex justify-center">
-          <DashboardIllustration />
+          <img
+            src="https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/728007517_image.png"
+            alt="Job Tracker Dashboard"
+            className="w-full rounded-2xl"
+            style={{ maxWidth: 860 }}
+          />
         </div>
       </div>
     </section>
