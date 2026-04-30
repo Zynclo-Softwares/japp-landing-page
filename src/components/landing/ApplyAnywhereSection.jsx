@@ -144,22 +144,28 @@ function GlobeCanvas() {
 
       ctx.restore();
 
-      // ── Glowing rim ──
-      // Inner bright line
+      // ── Glowing rim — thick atmospheric fill ──
+      // Wide outer atmospheric halo (fills inward from edge)
+      const rimWidth = R * 0.18;
+      const rimGrad = ctx.createRadialGradient(cx, cy, R - rimWidth, cx, cy, R + rimWidth * 0.5);
+      rimGrad.addColorStop(0,   'rgba(255,185,0,0)');
+      rimGrad.addColorStop(0.5, 'rgba(255,195,0,0.18)');
+      rimGrad.addColorStop(0.78,'rgba(255,200,0,0.55)');
+      rimGrad.addColorStop(0.92,'rgba(255,220,50,0.9)');
+      rimGrad.addColorStop(1,   'rgba(255,230,80,0)');
+
+      ctx.beginPath();
+      ctx.arc(cx, cy, R + rimWidth * 0.5, 0, Math.PI * 2);
+      ctx.arc(cx, cy, R - rimWidth, 0, Math.PI * 2, true);
+      ctx.fillStyle = rimGrad;
+      ctx.fill();
+
+      // Crisp bright line at the very edge
       ctx.beginPath();
       ctx.arc(cx, cy, R, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(255,200,0,0.85)';
-      ctx.lineWidth = 1.8;
+      ctx.strokeStyle = 'rgba(255,230,80,0.95)';
+      ctx.lineWidth = 1.5;
       ctx.stroke();
-
-      // Soft outer glow
-      for (let g = 1; g <= 4; g++) {
-        ctx.beginPath();
-        ctx.arc(cx, cy, R + g * 5, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(255,185,0,${0.12 - g * 0.025})`;
-        ctx.lineWidth = 7;
-        ctx.stroke();
-      }
 
       t++;
       animRef.current = requestAnimationFrame(draw);
