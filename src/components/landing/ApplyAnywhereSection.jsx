@@ -82,8 +82,8 @@ function GlobeCanvas({ isDark }) {
       ctx.fill();
 
       // ── Sphere body — matches page background ──
-      const bgColor = isDark ? '#17130a' : '#f5f3ef';
-      const bgEdge  = isDark ? '#0d0a05' : '#ece9e3';
+      const bgColor = isDark ? '#17130a' : '#ffffff';
+      const bgEdge  = isDark ? '#0d0a05' : '#ffffff';
       const sphereGrad = ctx.createRadialGradient(cx * 0.85, cy * 0.85, 0, cx, cy, R);
       sphereGrad.addColorStop(0,   bgColor);
       sphereGrad.addColorStop(0.7, bgColor);
