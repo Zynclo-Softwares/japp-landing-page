@@ -12,7 +12,6 @@ import JobTrackerSection from '../components/landing/JobTrackerSection';
 import HITLSection from '../components/landing/HITLSection';
 import PricingSection from '../components/landing/PricingSection';
 import FaqSection from '../components/landing/FaqSection';
-import FinalCTASection from '../components/landing/FinalCTASection';
 import Footer from '../components/landing/Footer';
 import WelcomeModal from '../components/landing/WelcomeModal';
 
@@ -110,8 +109,6 @@ export default function Landing() {
         </div>
 
         <FaqSection />
-
-        <FinalCTASection />
       </main>
 
       <Footer />
