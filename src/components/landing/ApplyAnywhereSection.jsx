@@ -46,10 +46,10 @@ function GlobeCanvas() {
       ctx.clearRect(0, 0, W, H);
 
       const cx = W / 2;
-      // Globe radius = 75% of width so it fills most of the section width
-      const R = W * 0.48;
-      // Center is at 80% down the canvas — only top portion of sphere is visible
-      const cy = H * 0.82;
+      // Large globe — fills the lower portion of the section
+      const R = Math.max(W * 0.52, H * 0.85);
+      // Globe center sits just below canvas center so top half of sphere is fully visible
+      const cy = H * 0.72 + R * 0.3;
 
       // ── Dark background ──
       ctx.fillStyle = '#06040f';
