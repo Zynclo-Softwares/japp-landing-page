@@ -18,7 +18,7 @@ export default function PromoBar() {
         <span className="font-700">It keeps you in the loop. It keeps the company in the loop. It produces exactly what you want.</span>
       </span>
       <span className="sm:hidden text-[oklch(0.3_0.05_57)]">Semi-autonomous job-application studio · Now in private beta</span>
-      <span className="hidden sm:inline text-[oklch(0.5_0.05_57)] shrink-0">· Now in private beta · macOS desktop app</span>
+      <span className="hidden sm:inline text-[oklch(0.5_0.05_57)] shrink-0">· Now in private beta</span>
       <button
         onClick={() => setVisible(false)}
         aria-label="Dismiss announcement"

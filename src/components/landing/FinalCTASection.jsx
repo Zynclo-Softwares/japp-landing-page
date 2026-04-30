@@ -48,7 +48,7 @@ export default function FinalCTASection() {
           className="text-white/80 mb-10 font-medium max-w-md mx-auto"
           style={{ fontSize: '20px', lineHeight: '1.5' }}
         >
-          Just Apply is in private beta on macOS. The first cohort is open.
+          Just Apply is in private beta. The first cohort is open.
         </p>
 
         <a
@@ -61,11 +61,11 @@ export default function FinalCTASection() {
           }}
         >
           <Download size={16} />
-          Get the Mac app — Free
+          Get the app — Free
         </a>
 
         <p className="text-white/50 text-sm font-medium mt-4">
-          No credit card · Apple Silicon · ~80MB
+          No credit card · ~80MB
         </p>
       </div>
     </section>

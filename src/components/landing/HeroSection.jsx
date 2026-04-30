@@ -31,7 +31,7 @@ export default function HeroSection() {
           {/* Copy */}
           <div>
             <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-muted-foreground mb-6">
-              The semi-autonomous apply studio · macOS beta
+              The semi-autonomous apply studio · Now in private beta
             </p>
 
             <h1

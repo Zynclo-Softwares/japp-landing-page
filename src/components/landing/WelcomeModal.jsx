@@ -128,7 +128,7 @@ export default function WelcomeModal() {
                 </a>
 
                 <p className="text-center text-xs text-foreground/35 font-medium mt-3">
-                  macOS · Apple Silicon · No credit card
+                  No credit card · Free to start
                 </p>
               </div>
             </div>

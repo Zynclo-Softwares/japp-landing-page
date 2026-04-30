@@ -29,7 +29,7 @@ export default function Footer() {
           {/* Build badge */}
           <div className="flex items-center gap-2">
             <span className="text-xs text-muted-foreground font-mono">
-              v0.1.0 · macOS · Apple Silicon
+              v0.1.0 · Private Beta
             </span>
             {/* Easter egg dot */}
             <button
