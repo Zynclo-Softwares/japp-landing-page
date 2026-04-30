@@ -21,12 +21,11 @@ export default function Nav({ theme, toggleTheme }) {
       <div className="max-w-6xl mx-auto px-6 lg:px-8 flex items-center justify-between h-14">
         {/* Wordmark */}
         <a href="#" className="flex items-center gap-2 font-black text-lg tracking-tight text-foreground">
-          <span
-            className="w-7 h-7 rounded-lg flex items-center justify-center text-sm font-black"
-            style={{ background: 'var(--primary)', color: 'var(--primary-foreground)' }}
-          >
-            J
-          </span>
+          <img
+            src="https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/bfb560be2_logo.png"
+            alt="Just Apply logo"
+            className="w-7 h-7 rounded-lg object-cover"
+          />
           Just Apply
         </a>
 

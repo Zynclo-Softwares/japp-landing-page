@@ -56,13 +56,20 @@ export default function WelcomeModal() {
               </button>
 
               <div className="px-10 pt-8 pb-10">
-                {/* Eyebrow */}
-                <p
-                  className="text-[11px] font-black tracking-[0.14em] uppercase mb-5"
-                  style={{ color: '#F5C800' }}
-                >
-                  Just Apply · Private Beta
-                </p>
+                {/* Logo + Eyebrow */}
+                <div className="flex items-center gap-3 mb-5">
+                  <img
+                    src="https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/bfb560be2_logo.png"
+                    alt="Just Apply logo"
+                    className="w-10 h-10 rounded-xl object-cover"
+                  />
+                  <p
+                    className="text-[11px] font-black tracking-[0.14em] uppercase"
+                    style={{ color: '#F5C800' }}
+                  >
+                    Just Apply · Private Beta
+                  </p>
+                </div>
 
                 {/* Headline */}
                 <h2

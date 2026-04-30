@@ -9,12 +9,11 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           {/* Wordmark */}
           <div className="flex items-center gap-2 font-black text-base tracking-tight text-foreground">
-            <span
-              className="w-6 h-6 rounded-md flex items-center justify-center text-xs font-black"
-              style={{ background: 'var(--primary)', color: 'var(--primary-foreground)' }}
-            >
-              J
-            </span>
+            <img
+              src="https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/bfb560be2_logo.png"
+              alt="Just Apply logo"
+              className="w-6 h-6 rounded-md object-cover"
+            />
             Just Apply
           </div>
 
