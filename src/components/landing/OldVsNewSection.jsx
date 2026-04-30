@@ -40,8 +40,8 @@ export default function OldVsNewSection() {
             style={{
               top: '-8%',
               bottom: '-20%',
-              right: '-2%',
-              width: '52%',
+              right: '8%',
+              width: '44%',
               transform: 'perspective(900px) rotateY(-4deg) rotateX(2deg)',
               boxShadow: '-32px 0 80px -8px oklch(0 0 0 / 0.5), 0 40px 80px -12px oklch(0 0 0 / 0.4)',
               borderRadius: '20px',
