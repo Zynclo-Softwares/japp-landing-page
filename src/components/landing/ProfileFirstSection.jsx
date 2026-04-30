@@ -1,3 +1,5 @@
+import { useRef, useEffect, useState } from 'react';
+
 const steps = [
   {
     num: '01',
@@ -31,7 +33,99 @@ const steps = [
   },
 ];
 
+function StepCard({ num, title, desc, align, cardRef }) {
+  return (
+    <div
+      ref={cardRef}
+      className={`rounded-2xl border border-border p-6 lg:p-8 transition-all duration-200 hover:-translate-y-0.5 hover:border-[oklch(0.852_0.199_91.936_/_0.35)] relative z-10 ${align === 'right' ? 'text-right' : 'text-left'}`}
+      style={{
+        background: 'var(--card)',
+        boxShadow: '0 2px 16px -4px oklch(0.852 0.199 91.936 / 0.1)',
+      }}
+    >
+      <span
+        className="text-4xl font-black tracking-[-0.03em] block mb-2"
+        style={{ color: 'oklch(0.852 0.199 91.936)' }}
+      >
+        {num}
+      </span>
+      <h3
+        className="font-bold text-foreground mb-1.5"
+        style={{ fontSize: '17px', lineHeight: '1.25', letterSpacing: '-0.015em' }}
+      >
+        {title}
+      </h3>
+      <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
+    </div>
+  );
+}
+
 export default function ProfileFirstSection() {
+  const containerRef = useRef(null);
+  const cardRefs = useRef([]);
+  const [pathD, setPathD] = useState('');
+
+  useEffect(() => {
+    const compute = () => {
+      const container = containerRef.current;
+      if (!container) return;
+      const cRect = container.getBoundingClientRect();
+
+      const points = cardRefs.current.map((el, i) => {
+        if (!el) return null;
+        const r = el.getBoundingClientRect();
+        const side = steps[i].side;
+        // exit point: bottom-right of left card, bottom-left of right card
+        // entry point: top of next card (centered or slight offset)
+        return {
+          exitX: side === 'left' ? r.right - cRect.left : r.left - cRect.left,
+          exitY: r.bottom - cRect.top - r.height * 0.3,
+          entryX: side === 'left' ? r.right - cRect.left : r.left - cRect.left,
+          entryY: r.top - cRect.top + r.height * 0.3,
+          centerX: r.left - cRect.left + r.width / 2,
+          topY: r.top - cRect.top,
+          bottomY: r.bottom - cRect.top,
+          side,
+          left: r.left - cRect.left,
+          right: r.right - cRect.left,
+          width: r.width,
+        };
+      });
+
+      if (points.some(p => !p)) return;
+
+      // Build path: from exit of card[i] to entry of card[i+1]
+      let d = '';
+      for (let i = 0; i < points.length - 1; i++) {
+        const cur = points[i];
+        const nxt = points[i + 1];
+
+        // exit: right edge of left card (mid-height), or left edge of right card
+        const x1 = cur.side === 'left' ? cur.right : cur.left;
+        const y1 = (cur.topY + cur.bottomY) / 2;
+
+        // entry: top of next card (horizontally centered-ish)
+        const x2 = nxt.side === 'left' ? nxt.left + nxt.width * 0.7 : nxt.left + nxt.width * 0.3;
+        const y2 = nxt.topY;
+
+        // control points for smooth S-curve
+        const midY = (y1 + y2) / 2;
+        const cp1x = x1 + (cur.side === 'left' ? 60 : -60);
+        const cp1y = midY - 20;
+        const cp2x = x2 + (nxt.side === 'left' ? 60 : -60);
+        const cp2y = midY + 20;
+
+        d += `M ${x1} ${y1} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${x2} ${y2} `;
+      }
+
+      setPathD(d);
+    };
+
+    compute();
+    window.addEventListener('resize', compute);
+    return () => window.removeEventListener('resize', compute);
+  }, []);
+
   return (
     <section className="py-24 lg:py-32 border-t border-border bg-muted/30">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
@@ -54,62 +148,45 @@ export default function ProfileFirstSection() {
         </p>
 
         {/* Roadmap */}
-        <div className="relative max-w-3xl mx-auto">
-          {/* SVG curved road */}
+        <div ref={containerRef} className="relative max-w-3xl mx-auto">
+
+          {/* SVG path layer — behind cards (z-0) */}
           <svg
-            className="absolute inset-0 w-full h-full pointer-events-none"
-            viewBox="0 0 600 750"
-            preserveAspectRatio="none"
-            xmlns="http://www.w3.org/2000/svg"
+            className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible"
+            style={{ top: 0, left: 0 }}
           >
-            <defs>
-              <linearGradient id="roadGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="oklch(0.852 0.199 91.936)" stopOpacity="0" />
-                <stop offset="10%" stopColor="oklch(0.852 0.199 91.936)" stopOpacity="0.7" />
-                <stop offset="90%" stopColor="oklch(0.852 0.199 91.936)" stopOpacity="0.7" />
-                <stop offset="100%" stopColor="oklch(0.852 0.199 91.936)" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-            {/* Path snaking left→right→left→right→left across the 5 dot positions */}
-            {/* Dots at x≈150 (left) and x≈450 (right), spaced ~150px vertically */}
-            <path
-              d="M 150 75 C 150 150, 450 100, 450 225 C 450 300, 150 250, 150 375 C 150 450, 450 400, 450 525 C 450 600, 150 550, 150 675"
-              fill="none"
-              stroke="url(#roadGrad)"
-              strokeWidth="2.5"
-              strokeDasharray="6 5"
-            />
+            {pathD && (
+              <path
+                d={pathD}
+                fill="none"
+                stroke="oklch(0.852 0.199 91.936)"
+                strokeWidth="2"
+                strokeDasharray="7 5"
+                strokeLinecap="round"
+                opacity="0.75"
+              />
+            )}
           </svg>
 
-          <div className="flex flex-col gap-0">
+          <div className="flex flex-col gap-6">
             {steps.map(({ num, title, desc, side }, idx) => (
-              <div key={num} className="relative flex items-center min-h-[150px]">
-
-                {/* Left slot */}
-                <div className="w-[calc(50%-28px)] pr-6">
+              <div key={num} className="flex">
+                {/* Left half */}
+                <div className="w-1/2 pr-4">
                   {side === 'left' && (
-                    <StepCard num={num} title={title} desc={desc} align="right" />
+                    <StepCard
+                      num={num} title={title} desc={desc} align="right"
+                      cardRef={el => cardRefs.current[idx] = el}
+                    />
                   )}
                 </div>
-
-                {/* Centre dot */}
-                <div className="relative z-10 flex-shrink-0 w-14 flex justify-center">
-                  <div
-                    className="w-5 h-5 rounded-full border-2 flex items-center justify-center"
-                    style={{
-                      background: 'var(--background)',
-                      borderColor: 'oklch(0.852 0.199 91.936)',
-                      boxShadow: '0 0 0 5px oklch(0.852 0.199 91.936 / 0.15)',
-                    }}
-                  >
-                    <div className="w-2 h-2 rounded-full" style={{ background: 'oklch(0.852 0.199 91.936)' }} />
-                  </div>
-                </div>
-
-                {/* Right slot */}
-                <div className="w-[calc(50%-28px)] pl-6">
+                {/* Right half */}
+                <div className="w-1/2 pl-4">
                   {side === 'right' && (
-                    <StepCard num={num} title={title} desc={desc} align="left" />
+                    <StepCard
+                      num={num} title={title} desc={desc} align="left"
+                      cardRef={el => cardRefs.current[idx] = el}
+                    />
                   )}
                 </div>
               </div>
@@ -118,31 +195,5 @@ export default function ProfileFirstSection() {
         </div>
       </div>
     </section>
-  );
-}
-
-function StepCard({ num, title, desc, align }) {
-  return (
-    <div
-      className={`inline-block rounded-2xl border border-border p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-[oklch(0.852_0.199_91.936_/_0.35)] w-full ${align === 'right' ? 'text-right' : 'text-left'}`}
-      style={{
-        background: 'var(--card)',
-        boxShadow: '0 2px 16px -4px oklch(0.852 0.199 91.936 / 0.1)',
-      }}
-    >
-      <span
-        className="text-4xl font-black tracking-[-0.03em] block mb-2"
-        style={{ color: 'oklch(0.852 0.199 91.936)' }}
-      >
-        {num}
-      </span>
-      <h3
-        className="font-bold text-foreground mb-1.5"
-        style={{ fontSize: '17px', lineHeight: '1.25', letterSpacing: '-0.015em' }}
-      >
-        {title}
-      </h3>
-      <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
-    </div>
   );
 }
