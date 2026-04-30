@@ -27,20 +27,31 @@ export default function OldVsNewSection() {
         </p>
 
         {/* Full image with floating card overlay on the right */}
-        <div className="relative rounded-3xl overflow-hidden">
+        <div className="relative rounded-3xl overflow-visible">
           <img
             src={IMG2_URL}
             alt="The old way vs Just Apply"
-            className="w-full object-cover"
+            className="w-full object-cover rounded-3xl"
             style={{ maxHeight: '520px', objectPosition: 'center' }}
           />
-          {/* Floating "Just Apply" card — right side */}
-          <div className="absolute top-1/2 right-4 lg:right-10 -translate-y-1/2 w-[38%] max-w-xs drop-shadow-2xl">
+          {/* Floating "Just Apply" card — oversized, breaks out of canvas for 3D effect */}
+          <div
+            className="absolute right-[-2%] lg:right-[-1%]"
+            style={{
+              top: '-12%',
+              bottom: '-12%',
+              width: '46%',
+              perspective: '1000px',
+            }}
+          >
             <img
               src={CARD_URL}
               alt="Just Apply card"
-              className="w-full rounded-2xl"
-              style={{ boxShadow: '0 24px 80px -12px oklch(0 0 0 / 0.5)' }}
+              className="w-full h-full object-cover object-top rounded-2xl"
+              style={{
+                boxShadow: '-24px 0 80px -8px oklch(0 0 0 / 0.55), 0 32px 80px -12px oklch(0 0 0 / 0.45)',
+                transform: 'perspective(900px) rotateY(-4deg) rotateX(2deg)',
+              }}
             />
           </div>
         </div>
