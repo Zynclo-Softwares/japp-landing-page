@@ -1,22 +1,43 @@
+import { useRef, useState } from 'react';
+
 export default function JustApplyCard3D() {
+  const containerRef = useRef(null);
+  const [rotateY, setRotateY] = useState(-16);
+
+  const handleMouseMove = (e) => {
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const normalized = (x / rect.width) * 2 - 1; // -1 to 1
+    setRotateY(-16 + normalized * 20);
+  };
+
+  const handleMouseLeave = () => {
+    setRotateY(-16);
+  };
+
   return (
     <div
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       style={{
         perspective: '1200px',
         perspectiveOrigin: '55% 50%',
+        cursor: 'pointer',
       }}
-      className="flex items-center justify-center w-full py-12"
+      className="flex items-center justify-center w-full py-16"
     >
       <div
         style={{
-          transform: 'rotateY(-16deg) rotateX(3deg)',
+          transform: `rotateY(${rotateY}deg) rotateX(3deg)`,
           transformStyle: 'preserve-3d',
-          width: '460px',
+          transition: 'transform 0.1s ease-out',
+          width: '420px',
           maxWidth: '100%',
           position: 'relative',
         }}
       >
-        {/* Yellow thick edge (depth illusion) */}
+        {/* Yellow thick edge */}
         <div
           style={{
             position: 'absolute',
@@ -53,7 +74,7 @@ export default function JustApplyCard3D() {
           </p>
 
           {/* Steps */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '26px', marginBottom: '32px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '28px', marginBottom: '36px' }}>
             {[
               { n: 1, title: 'See a job. Tell the agent.', sub: 'No URL needed — it sees your screen' },
               { n: 2, title: 'Agent researches the company', sub: 'Site, news, team, JD — all of it' },
