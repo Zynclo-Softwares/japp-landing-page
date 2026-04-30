@@ -49,13 +49,7 @@ function GlobeCanvas() {
       // Push globe center down so only the top arc shows
       const cy = H + R * 0.15;
 
-      // Dark background that fills the section (amber-tinted dark)
-      const bgGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, R * 1.6);
-      bgGrad.addColorStop(0, 'rgba(40,20,0,1)');
-      bgGrad.addColorStop(0.5, 'rgba(18,9,0,1)');
-      bgGrad.addColorStop(1, 'rgba(6,3,0,1)');
-      ctx.fillStyle = bgGrad;
-      ctx.fillRect(0, 0, W, H);
+      // No background — page background shows through
 
       // Radial rays from globe top
       const rayY = cy - R;
@@ -208,12 +202,12 @@ export default function ApplyAnywhereSection() {
 
         {/* Text sits in upper portion, above the globe arc */}
         <div className="absolute inset-0 flex flex-col items-center justify-start pt-14 z-10 pointer-events-none px-6">
-          <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-white/50 mb-5">
+          <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-muted-foreground mb-5">
             Apply anywhere on the internet
           </p>
 
           <h2
-            className="font-black text-white text-center mb-3"
+            className="font-black text-foreground text-center mb-3"
             style={{ fontSize: 'clamp(32px, 5vw, 64px)', lineHeight: '1.05', letterSpacing: '-0.03em' }}
           >
             No job-board lock-in.
@@ -221,14 +215,14 @@ export default function ApplyAnywhereSection() {
             No API limits.
           </h2>
 
-          <p className="text-base text-white/60 mb-8">
+          <p className="text-base text-muted-foreground mb-8">
             If a human can apply,{' '}
             <span style={{ color: 'var(--primary)' }}>Just Apply can apply.</span>
           </p>
 
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-1">
             {boards.map((board) => (
-              <span key={board} className="text-sm font-semibold text-white/40">
+              <span key={board} className="text-sm font-semibold text-foreground/50">
                 {board}
               </span>
             ))}
