@@ -38,10 +38,10 @@ export default function OldVsNewSection() {
           <div
             className="absolute"
             style={{
-              top: '-18%',
-              bottom: '-18%',
-              right: '2%',
-              width: '52%',
+              top: '-14%',
+              bottom: '-14%',
+              right: '-2%',
+              width: '44%',
               transform: 'perspective(900px) rotateY(-4deg) rotateX(2deg)',
               boxShadow: '-32px 0 80px -8px oklch(0 0 0 / 0.5), 0 40px 80px -12px oklch(0 0 0 / 0.4)',
               borderRadius: '20px',
@@ -56,7 +56,7 @@ export default function OldVsNewSection() {
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
-                objectPosition: 'center center',
+                objectPosition: '30% center',
               }}
             />
           </div>
