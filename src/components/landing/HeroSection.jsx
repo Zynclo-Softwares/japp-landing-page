@@ -1,8 +1,6 @@
 import HeroOrbit from './HeroOrbit';
-import ImagePlaceholder from './ImagePlaceholder';
+import HeroScene3D from './HeroScene3D';
 
-const IMG1_PROMPT =
-  'A single floating glass-morphism card in 3/4 perspective, showing a tailored resume document. Around it, four smaller satellite cards orbit gently: a JD parser, a company-research dossier, a cover letter, and a job-tracker row. Soft amber glow underneath, like a lamp on a dark wooden desk. Background is deep graphite (#0d0d0d) with a faint grid. No people. Render style: clean 3D, matte materials, subtle subsurface scattering on the amber light, slight depth-of-field blur on the satellites. 16:9, ultra-detailed, marketing hero quality.';
 
 const trustItems = [
   'Agent sees your screen — no URL needed',
@@ -90,10 +88,9 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Orbit visual + IMG-1 placeholder below on desktop */}
-          <div className="flex flex-col items-center justify-center gap-4">
-            <HeroOrbit />
-            <ImagePlaceholder id="IMG-1" prompt={IMG1_PROMPT} className="w-full" />
+          {/* 3D scene */}
+          <div className="flex flex-col items-center justify-center">
+            <HeroScene3D />
           </div>
         </div>
       </div>
