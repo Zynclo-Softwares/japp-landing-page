@@ -52,7 +52,7 @@ export default function Landing() {
         Skip to content
       </a>
 
-      <PromoBar />
+
       <Nav theme={theme} toggleTheme={toggleTheme} />
 
       <main id="main-content">
