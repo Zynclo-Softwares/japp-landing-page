@@ -98,12 +98,14 @@ export default function ProfileFirstSection() {
         const nxt = points[i + 1];
 
         // Exit from right-center of left card, or left-center of right card
-        const x1 = cur.side === 'left' ? cur.right : cur.left;
+        // Inset by 20px so the thick stroke doesn't bleed into the card
+        const GAP = 20;
+        const x1 = cur.side === 'left' ? cur.right + GAP : cur.left - GAP;
         const y1 = cur.midY;
 
-        // Enter at top-center of next card
+        // Enter at top-center of next card, inset 20px above
         const x2 = nxt.midX;
-        const y2 = nxt.top;
+        const y2 = nxt.top - GAP;
 
         // Curve: go horizontally out then sweep down to top-center
         const cp1x = x1 + (cur.side === 'left' ? 60 : -60);
