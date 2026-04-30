@@ -34,18 +34,19 @@ export default function OldVsNewSection() {
             className="w-full object-cover rounded-3xl"
             style={{ maxHeight: '520px', minHeight: '400px', height: '100%', objectPosition: 'center' }}
           />
-          {/* Floating "Just Apply" card — covers the brown right portion with 3D tilt */}
+          {/* Floating "Just Apply" card — sleek, 3D tilt */}
           <div
             className="absolute"
             style={{
               top: '-6%',
               bottom: '-18%',
               right: '-1%',
-              width: '52%',
+              width: '44%',
               transform: 'perspective(1200px) rotateY(-6deg) rotateX(1.5deg)',
-              boxShadow: '-40px 0 100px -8px oklch(0 0 0 / 0.55), 0 40px 80px -12px oklch(0 0 0 / 0.35)',
+              boxShadow: '-24px 0 60px -8px oklch(0 0 0 / 0.5), 0 32px 60px -12px oklch(0 0 0 / 0.3)',
               borderRadius: '20px',
               overflow: 'hidden',
+              border: '1.5px solid oklch(0.852 0.199 91.936 / 0.5)',
             }}
           >
             <img
@@ -57,7 +58,6 @@ export default function OldVsNewSection() {
                 height: '100%',
                 objectFit: 'cover',
                 objectPosition: '20% center',
-                transform: 'perspective(1200px) rotateY(6deg) rotateX(-1.5deg) scale(1.02)',
               }}
             />
           </div>
