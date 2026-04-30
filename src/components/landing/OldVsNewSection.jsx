@@ -1,11 +1,24 @@
+import { useEffect, useState } from 'react';
+
 const IMG_LIGHT = 'https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/12c80f467_image.png';
 const IMG_DARK = 'https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/97083b349_image.png';
 
 export default function OldVsNewSection() {
+  const [isDark, setIsDark] = useState(() =>
+    document.documentElement.classList.contains('dark')
+  );
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    });
+    observer.observe(document.documentElement, { attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="py-24 lg:py-32" id="features">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
-        {/* Eyebrow */}
         <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-muted-foreground mb-4 text-center">
           The copy-paste dance is over
         </p>
@@ -26,16 +39,10 @@ export default function OldVsNewSection() {
           Download. Upload. Repeat 40 times. We collapsed all of it — no copy-pasting, no URL hunting. Just point and apply.
         </p>
 
-        {/* Single combined image — switches with theme */}
         <img
-          src={IMG_LIGHT}
+          src={isDark ? IMG_DARK : IMG_LIGHT}
           alt="The old way vs Just Apply"
-          className="w-full rounded-3xl dark:hidden"
-        />
-        <img
-          src={IMG_DARK}
-          alt="The old way vs Just Apply"
-          className="w-full rounded-3xl hidden dark:block"
+          className="w-full rounded-3xl"
         />
       </div>
     </section>
