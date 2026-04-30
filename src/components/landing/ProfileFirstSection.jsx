@@ -97,24 +97,20 @@ export default function ProfileFirstSection() {
         const cur = points[i];
         const nxt = points[i + 1];
 
-        // Exit from the right/left edge of current card, mid-height
-        const x1 = cur.side === 'left' ? cur.right : cur.left;
-        const y1 = cur.midY;
+        // Exit from center-bottom of current card
+        const x1 = cur.midX;
+        const y1 = cur.bottom;
 
-        // Enter at the top of next card
-        const x2 = nxt.side === 'left' ? nxt.left + 40 : nxt.right - 40;
+        // Enter at center-top of next card
+        const x2 = nxt.midX;
         const y2 = nxt.top;
 
-        // Wide rounded U-turn: swing way out horizontally then arc back
-        const gap = cRect.width;
-        const swingX = cur.side === 'left'
-          ? Math.min(x1 + gap * 0.55, cRect.width - 10)
-          : Math.max(x1 - gap * 0.55, 10);
-
-        const cp1x = swingX;
-        const cp1y = y1;
-        const cp2x = swingX;
-        const cp2y = y2;
+        // Smooth vertical S-curve between center-bottom and center-top
+        const midY = (y1 + y2) / 2;
+        const cp1x = x1;
+        const cp1y = midY;
+        const cp2x = x2;
+        const cp2y = midY;
 
         d += `M ${x1} ${y1} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${x2} ${y2} `;
       }
