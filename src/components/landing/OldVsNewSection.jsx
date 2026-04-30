@@ -39,7 +39,7 @@ export default function OldVsNewSection() {
             className="absolute"
             style={{
               top: '-8%',
-              bottom: '-20%',
+              bottom: '-35%',
               right: '-2%',
               width: '44%',
               transform: 'perspective(900px) rotateY(-4deg) rotateX(2deg)',
