@@ -5,7 +5,7 @@ const boards = [
 
 ];
 
-function GlobeCanvas() {
+function GlobeCanvas({ isDark }) {
   const canvasRef = useRef(null);
   const animRef = useRef(null);
 
@@ -81,11 +81,13 @@ function GlobeCanvas() {
       ctx.fillStyle = halo;
       ctx.fill();
 
-      // ── Sphere body — very dark, almost black ──
-      const sphereGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, R);
-      sphereGrad.addColorStop(0, '#0e0a02');
-      sphereGrad.addColorStop(0.6, '#080501');
-      sphereGrad.addColorStop(1, '#030200');
+      // ── Sphere body — matches page background ──
+      const bgColor = isDark ? '#17130a' : '#f5f3ef';
+      const bgEdge  = isDark ? '#0d0a05' : '#ece9e3';
+      const sphereGrad = ctx.createRadialGradient(cx * 0.85, cy * 0.85, 0, cx, cy, R);
+      sphereGrad.addColorStop(0,   bgColor);
+      sphereGrad.addColorStop(0.7, bgColor);
+      sphereGrad.addColorStop(1,   bgEdge);
       ctx.beginPath();
       ctx.arc(cx, cy, R, 0, Math.PI * 2);
       ctx.fillStyle = sphereGrad;
@@ -173,7 +175,7 @@ function GlobeCanvas() {
       cancelAnimationFrame(animRef.current);
       window.removeEventListener('resize', resize);
     };
-  }, []);
+  }, [isDark]);
 
   return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />;
 }
@@ -199,7 +201,7 @@ export default function ApplyAnywhereSection() {
   return (
     <section className="overflow-hidden">
       <div className="relative w-full" style={{ height: 'clamp(520px, 62vw, 720px)' }}>
-        <GlobeCanvas />
+        <GlobeCanvas isDark={isDark} />
 
         <div
           className="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none px-6"
