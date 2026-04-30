@@ -46,10 +46,10 @@ function GlobeCanvas({ isDark }) {
       ctx.clearRect(0, 0, W, H);
 
       const cx = W / 2;
-      // Large globe — fills the lower portion of the section
-      const R = Math.max(W * 0.52, H * 0.85);
-      // Globe center sits just below canvas center so top half of sphere is fully visible
-      const cy = H * 0.72 + R * 0.3;
+      // Globe sized so full semi-circle is visible within the section
+      const R = Math.min(W * 0.42, H * 0.78);
+      // Globe center at bottom so exactly a half-sphere shows
+      const cy = H * 0.95;
 
       // No background — transparent canvas, inherits page bg
 
