@@ -97,19 +97,26 @@ export default function ProfileFirstSection() {
         const cur = points[i];
         const nxt = points[i + 1];
 
-        // Exit from the side-edge mid-height of current card
+        // Exit from the right/left edge of current card, mid-height
         const x1 = cur.side === 'left' ? cur.right : cur.left;
         const y1 = cur.midY;
 
-        // Enter from the top of next card
-        const x2 = nxt.side === 'left' ? nxt.left + 60 : nxt.right - 60;
+        // Enter at the top of next card
+        const x2 = nxt.side === 'left' ? nxt.left + 40 : nxt.right - 40;
         const y2 = nxt.top;
 
-        // Wide sweeping control points for road-like curves
-        const midY = (y1 + y2) / 2;
-        const swingX = cur.side === 'left' ? cur.right + 80 : cur.left - 80;
+        // Wide rounded U-turn: swing way out horizontally then arc back
+        const gap = cRect.width;
+        const swingX = cur.side === 'left'
+          ? Math.min(x1 + gap * 0.55, cRect.width - 10)
+          : Math.max(x1 - gap * 0.55, 10);
 
-        d += `M ${x1} ${y1} C ${swingX} ${y1}, ${swingX} ${midY}, ${x2} ${y2} `;
+        const cp1x = swingX;
+        const cp1y = y1;
+        const cp2x = swingX;
+        const cp2y = y2;
+
+        d += `M ${x1} ${y1} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${x2} ${y2} `;
       }
 
       setPathD(d);
@@ -150,13 +157,13 @@ export default function ProfileFirstSection() {
             {pathD && (
               <>
                 {/* Road outer glow */}
-                <path d={pathD} fill="none" stroke="oklch(0.852 0.199 91.936)" strokeWidth="28" strokeLinecap="round" strokeLinejoin="round" opacity="0.07" />
+                <path d={pathD} fill="none" stroke="oklch(0.852 0.199 91.936)" strokeWidth="64" strokeLinecap="round" strokeLinejoin="round" opacity="0.07" />
+                {/* Road shoulder */}
+                <path d={pathD} fill="none" stroke="oklch(0.852 0.199 91.936)" strokeWidth="48" strokeLinecap="round" strokeLinejoin="round" opacity="0.13" />
                 {/* Road surface */}
-                <path d={pathD} fill="none" stroke="oklch(0.852 0.199 91.936)" strokeWidth="18" strokeLinecap="round" strokeLinejoin="round" opacity="0.18" />
-                {/* Road edge lines */}
-                <path d={pathD} fill="none" stroke="oklch(0.852 0.199 91.936)" strokeWidth="18" strokeLinecap="round" strokeLinejoin="round" opacity="0.25" />
+                <path d={pathD} fill="none" stroke="oklch(0.852 0.199 91.936)" strokeWidth="36" strokeLinecap="round" strokeLinejoin="round" opacity="0.20" />
                 {/* Centre dashed line */}
-                <path d={pathD} fill="none" stroke="oklch(0.852 0.199 91.936)" strokeWidth="2" strokeLinecap="round" strokeDasharray="20 12" opacity="0.85" />
+                <path d={pathD} fill="none" stroke="oklch(0.852 0.199 91.936)" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="22 14" opacity="0.9" />
               </>
             )}
           </svg>
