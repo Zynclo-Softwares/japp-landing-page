@@ -9,7 +9,6 @@ import BYOTemplateSection from '../components/landing/BYOTemplateSection';
 import CompanyResearchSection from '../components/landing/CompanyResearchSection';
 import ApplyAnywhereSection from '../components/landing/ApplyAnywhereSection';
 import JobTrackerSection from '../components/landing/JobTrackerSection';
-import FormFillSection from '../components/landing/FormFillSection';
 import HITLSection from '../components/landing/HITLSection';
 import PricingSection from '../components/landing/PricingSection';
 import FaqSection from '../components/landing/FaqSection';
@@ -93,12 +92,6 @@ export default function Landing() {
         </div>
 
         <JobTrackerSection />
-
-        <div className="flex justify-center">
-          <div className="w-2/5 h-px bg-border" />
-        </div>
-
-        <FormFillSection />
 
         <div className="flex justify-center">
           <div className="w-2/5 h-px bg-border" />
