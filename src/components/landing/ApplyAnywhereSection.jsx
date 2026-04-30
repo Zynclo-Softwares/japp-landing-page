@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 
 const boards = [
   'LinkedIn',
@@ -9,133 +10,190 @@ const boards = [
   'That weird Notion page some founder posted on Twitter',
 ];
 
-// Dot positions on the globe (cx, cy as % of 400x400 viewBox)
-const globeDots = [
-  { x: 200, y: 200 }, // center
-  { x: 120, y: 140 }, { x: 280, y: 130 }, { x: 310, y: 200 },
-  { x: 260, y: 270 }, { x: 140, y: 260 }, { x: 90,  y: 200 },
-  { x: 200, y: 110 }, { x: 200, y: 290 },
-  { x: 160, y: 175 }, { x: 240, y: 175 }, { x: 170, y: 235 }, { x: 230, y: 235 },
-];
-
-// Nodes orbiting around globe
-const orbitNodes = [
-  { label: 'LinkedIn',   angle: 0,   r: 170 },
-  { label: 'Greenhouse', angle: 60,  r: 175 },
-  { label: 'Lever',      angle: 120, r: 168 },
-  { label: 'Workday',    angle: 180, r: 172 },
-  { label: 'Wellfound',  angle: 240, r: 170 },
-  { label: 'Notion job', angle: 300, r: 173 },
-];
-
-function toXY(angle, r, cx = 200, cy = 200) {
-  const rad = (angle * Math.PI) / 180;
-  return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
-}
-
 function GlobeIllustration() {
+  const canvasRef = useRef(null);
+  const animRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width = 800;
+    const H = canvas.height = 420;
+    const cx = W / 2, cy = H * 0.52;
+    const R = 160;
+
+    // Generate random surface dots
+    const dots = Array.from({ length: 280 }, () => {
+      const u = Math.random(), v = Math.random();
+      const theta = 2 * Math.PI * u;
+      const phi = Math.acos(2 * v - 1);
+      return { theta, phi, pulse: Math.random() * Math.PI * 2, speed: 0.5 + Math.random() * 1.5 };
+    });
+
+    // Arc connections between random pairs
+    const arcs = Array.from({ length: 18 }, () => ({
+      a: Math.floor(Math.random() * dots.length),
+      b: Math.floor(Math.random() * dots.length),
+      progress: Math.random(),
+      speed: 0.003 + Math.random() * 0.004,
+    }));
+
+    let t = 0;
+    const rotSpeed = 0.003;
+
+    function project(theta, phi, rot) {
+      const x = Math.sin(phi) * Math.cos(theta + rot);
+      const y = Math.cos(phi);
+      const z = Math.sin(phi) * Math.sin(theta + rot);
+      return { x: cx + x * R, y: cy - y * R, z };
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+
+      // Dark background
+      const bgGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, W * 0.7);
+      bgGrad.addColorStop(0, '#1a1200');
+      bgGrad.addColorStop(0.5, '#0d0900');
+      bgGrad.addColorStop(1, '#000000');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Radial light rays from top of globe
+      const rayOriginY = cy - R * 0.6;
+      for (let i = 0; i < 16; i++) {
+        const angle = (i / 16) * Math.PI * 2;
+        const rayGrad = ctx.createLinearGradient(cx, rayOriginY, cx + Math.cos(angle) * W, rayOriginY + Math.sin(angle) * H);
+        rayGrad.addColorStop(0, 'rgba(245,180,0,0.06)');
+        rayGrad.addColorStop(1, 'rgba(245,180,0,0)');
+        ctx.beginPath();
+        ctx.moveTo(cx, rayOriginY);
+        ctx.lineTo(cx + Math.cos(angle) * W * 1.5, rayOriginY + Math.sin(angle) * H * 1.5);
+        ctx.strokeStyle = rayGrad;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+
+      // Globe glow halo
+      const halo = ctx.createRadialGradient(cx, cy - R * 0.1, R * 0.7, cx, cy, R * 1.6);
+      halo.addColorStop(0, 'rgba(245,180,0,0.22)');
+      halo.addColorStop(0.5, 'rgba(245,150,0,0.08)');
+      halo.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.beginPath();
+      ctx.arc(cx, cy, R * 1.6, 0, Math.PI * 2);
+      ctx.fillStyle = halo;
+      ctx.fill();
+
+      // Globe sphere fill
+      const sphereGrad = ctx.createRadialGradient(cx - R * 0.25, cy - R * 0.3, R * 0.05, cx, cy, R);
+      sphereGrad.addColorStop(0, 'rgba(245,180,0,0.18)');
+      sphereGrad.addColorStop(0.5, 'rgba(20,12,0,0.85)');
+      sphereGrad.addColorStop(1, 'rgba(5,3,0,0.95)');
+      ctx.beginPath();
+      ctx.arc(cx, cy, R, 0, Math.PI * 2);
+      ctx.fillStyle = sphereGrad;
+      ctx.fill();
+
+      // Clip to sphere for grid + dots
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(cx, cy, R, 0, Math.PI * 2);
+      ctx.clip();
+
+      // Latitude lines
+      for (let lat = -80; lat <= 80; lat += 20) {
+        const phi = (90 - lat) * Math.PI / 180;
+        const yr = cy - Math.cos(phi) * R;
+        const xr = Math.abs(Math.sin(phi)) * R;
+        ctx.beginPath();
+        ctx.ellipse(cx, yr, xr, xr * 0.18, 0, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(245,180,0,0.12)';
+        ctx.lineWidth = 0.6;
+        ctx.stroke();
+      }
+
+      // Longitude lines
+      for (let i = 0; i < 10; i++) {
+        const angle = (i / 10) * Math.PI + t * rotSpeed;
+        ctx.beginPath();
+        ctx.ellipse(cx, cy, Math.abs(Math.cos(angle)) * R, R, 0, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(245,180,0,0.10)';
+        ctx.lineWidth = 0.6;
+        ctx.stroke();
+      }
+
+      // Surface dots
+      dots.forEach(d => {
+        const p = project(d.theta, d.phi, t * rotSpeed);
+        if (p.z < 0) return; // back-face cull
+        const pulse = 0.5 + 0.5 * Math.sin(t * d.speed + d.pulse);
+        const size = 1.2 + pulse * 1.4;
+        const alpha = 0.3 + pulse * 0.65;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(245,190,10,${alpha})`;
+        ctx.fill();
+      });
+
+      ctx.restore(); // unclip
+
+      // Globe edge rim
+      const rimGrad = ctx.createRadialGradient(cx, cy, R * 0.88, cx, cy, R * 1.02);
+      rimGrad.addColorStop(0, 'rgba(245,180,0,0)');
+      rimGrad.addColorStop(0.6, 'rgba(245,180,0,0.35)');
+      rimGrad.addColorStop(1, 'rgba(245,180,0,0)');
+      ctx.beginPath();
+      ctx.arc(cx, cy, R, 0, Math.PI * 2);
+      ctx.strokeStyle = rimGrad;
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      // Arc connections (animated travel lines)
+      arcs.forEach(arc => {
+        arc.progress += arc.speed;
+        if (arc.progress > 1) arc.progress = 0;
+        const pA = project(dots[arc.a].theta, dots[arc.a].phi, t * rotSpeed);
+        const pB = project(dots[arc.b].theta, dots[arc.b].phi, t * rotSpeed);
+        if (pA.z < 0 || pB.z < 0) return;
+        const midX = (pA.x + pB.x) / 2;
+        const midY = (pA.y + pB.y) / 2 - 30;
+        // Draw partial arc up to progress
+        const steps = 40;
+        const stop = Math.floor(arc.progress * steps);
+        ctx.beginPath();
+        for (let s = 0; s <= stop; s++) {
+          const tt = s / steps;
+          const bx = (1-tt)*(1-tt)*pA.x + 2*(1-tt)*tt*midX + tt*tt*pB.x;
+          const by = (1-tt)*(1-tt)*pA.y + 2*(1-tt)*tt*midY + tt*tt*pB.y;
+          s === 0 ? ctx.moveTo(bx, by) : ctx.lineTo(bx, by);
+        }
+        ctx.strokeStyle = `rgba(245,190,10,${0.5 - arc.progress * 0.4})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        // Dot at tip
+        if (stop > 0) {
+          const tip = stop / steps;
+          const bx = (1-tip)*(1-tip)*pA.x + 2*(1-tip)*tip*midX + tip*tip*pB.x;
+          const by = (1-tip)*(1-tip)*pA.y + 2*(1-tip)*tip*midY + tip*tip*pB.y;
+          ctx.beginPath();
+          ctx.arc(bx, by, 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255,210,50,0.9)';
+          ctx.fill();
+        }
+      });
+
+      t++;
+      animRef.current = requestAnimationFrame(draw);
+    }
+
+    draw();
+    return () => cancelAnimationFrame(animRef.current);
+  }, []);
+
   return (
-    <div className="relative w-full flex items-center justify-center py-4">
-      {/* Outer ambient glow */}
-      <div className="absolute inset-0 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 50% 50%, oklch(0.852 0.199 91.936 / 0.13) 0%, transparent 65%)' }}
-      />
-      <svg viewBox="0 0 400 400" className="w-full max-w-lg" style={{ overflow: 'visible' }}>
-        {/* Globe base */}
-        <defs>
-          <radialGradient id="globeGrad" cx="42%" cy="38%" r="60%">
-            <stop offset="0%" stopColor="oklch(0.852 0.199 91.936)" stopOpacity="0.18" />
-            <stop offset="100%" stopColor="oklch(0.852 0.199 91.936)" stopOpacity="0.04" />
-          </radialGradient>
-          <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="oklch(0.852 0.199 91.936)" stopOpacity="0.5" />
-            <stop offset="100%" stopColor="oklch(0.852 0.199 91.936)" stopOpacity="0" />
-          </radialGradient>
-        </defs>
-
-        {/* Globe circle */}
-        <circle cx="200" cy="200" r="95" fill="url(#globeGrad)" stroke="oklch(0.852 0.199 91.936)" strokeWidth="1" strokeOpacity="0.3" />
-
-        {/* Latitude lines */}
-        {[-40, -15, 10, 35, 60].map((offset, i) => (
-          <ellipse key={i} cx="200" cy={200 + offset} rx="95" ry={Math.abs(offset) < 20 ? 28 : Math.abs(offset) < 40 ? 18 : 8}
-            fill="none" stroke="oklch(0.852 0.199 91.936)" strokeWidth="0.6" strokeOpacity="0.2" />
-        ))}
-        {/* Longitude lines */}
-        {[0, 30, 60, 90, 120, 150].map((angle, i) => (
-          <ellipse key={i} cx="200" cy="200" rx={Math.abs(Math.cos(angle * Math.PI / 180)) * 95 + 4} ry="95"
-            fill="none" stroke="oklch(0.852 0.199 91.936)" strokeWidth="0.6" strokeOpacity="0.15"
-            transform={`rotate(${angle} 200 200)`} />
-        ))}
-
-        {/* Connection lines from center to orbit nodes */}
-        {orbitNodes.map((node, i) => {
-          const pos = toXY(node.angle, node.r);
-          const edgePos = toXY(node.angle, 96);
-          return (
-            <motion.line key={i}
-              x1={edgePos.x} y1={edgePos.y} x2={pos.x} y2={pos.y}
-              stroke="oklch(0.852 0.199 91.936)" strokeWidth="1" strokeOpacity="0.4"
-              strokeDasharray="4 4"
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ pathLength: 1, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 + i * 0.15 }}
-            />
-          );
-        })}
-
-        {/* Pulsing dots on globe */}
-        {globeDots.map((dot, i) => (
-          <motion.circle key={i} cx={dot.x} cy={dot.y} r="2.5"
-            fill="oklch(0.852 0.199 91.936)"
-            animate={{ opacity: [0.3, 0.9, 0.3], scale: [1, 1.4, 1] }}
-            transition={{ duration: 2 + (i % 3) * 0.5, delay: i * 0.2, repeat: Infinity, ease: 'easeInOut' }}
-          />
-        ))}
-
-        {/* Center cursor dot */}
-        <motion.circle cx="200" cy="200" r="10" fill="url(#glowGrad)"
-          animate={{ r: [10, 14, 10], opacity: [0.6, 1, 0.6] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <circle cx="200" cy="200" r="4" fill="oklch(0.852 0.199 91.936)" />
-
-        {/* Orbit node chips */}
-        {orbitNodes.map((node, i) => {
-          const pos = toXY(node.angle, node.r);
-          const isLeft = pos.x < 200;
-          return (
-            <motion.g key={i}
-              initial={{ opacity: 0, scale: 0.7 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, delay: 0.5 + i * 0.15 }}
-            >
-              <motion.g
-                animate={{ y: [0, -4, 0] }}
-                transition={{ duration: 3 + i * 0.4, repeat: Infinity, ease: 'easeInOut', delay: i * 0.3 }}
-              >
-                <rect
-                  x={isLeft ? pos.x - 62 : pos.x - 6}
-                  y={pos.y - 12}
-                  width={68} height={24} rx={12}
-                  fill="var(--card)" stroke="oklch(0.852 0.199 91.936)" strokeWidth="1" strokeOpacity="0.4"
-                  style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.10))' }}
-                />
-                <text
-                  x={isLeft ? pos.x - 28 : pos.x + 28}
-                  y={pos.y + 4}
-                  textAnchor="middle"
-                  fontSize="8" fontWeight="700"
-                  fill="oklch(0.852 0.199 91.936)"
-                  fontFamily="Nunito Sans, sans-serif"
-                >
-                  {node.label}
-                </text>
-              </motion.g>
-            </motion.g>
-          );
-        })}
-      </svg>
+    <div className="relative w-full rounded-3xl overflow-hidden" style={{ background: '#000' }}>
+      <canvas ref={canvasRef} className="w-full" style={{ display: 'block', maxHeight: '420px' }} />
     </div>
   );
 }
