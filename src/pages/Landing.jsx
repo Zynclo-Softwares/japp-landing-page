@@ -1,0 +1,132 @@
+import { useState, useEffect } from 'react';
+import NoiseOverlay from '../components/landing/NoiseOverlay';
+import PromoBar from '../components/landing/PromoBar';
+import Nav from '../components/landing/Nav';
+import HeroSection from '../components/landing/HeroSection';
+import OldVsNewSection from '../components/landing/OldVsNewSection';
+import ProfileFirstSection from '../components/landing/ProfileFirstSection';
+import BYOTemplateSection from '../components/landing/BYOTemplateSection';
+import CompanyResearchSection from '../components/landing/CompanyResearchSection';
+import ApplyAnywhereSection from '../components/landing/ApplyAnywhereSection';
+import GenerationStudioSection from '../components/landing/GenerationStudioSection';
+import JobTrackerSection from '../components/landing/JobTrackerSection';
+import FormFillSection from '../components/landing/FormFillSection';
+import HITLSection from '../components/landing/HITLSection';
+import PricingSection from '../components/landing/PricingSection';
+import FaqSection from '../components/landing/FaqSection';
+import FinalCTASection from '../components/landing/FinalCTASection';
+import Footer from '../components/landing/Footer';
+
+export default function Landing() {
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('japp-theme') || 'light';
+    }
+    return 'light';
+  });
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+    localStorage.setItem('japp-theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
+
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      <NoiseOverlay />
+
+      {/* Skip to content */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:font-semibold focus:text-sm"
+        style={{ background: 'var(--primary)', color: 'var(--primary-foreground)' }}
+      >
+        Skip to content
+      </a>
+
+      <PromoBar />
+      <Nav theme={theme} toggleTheme={toggleTheme} />
+
+      <main id="main-content">
+        <HeroSection />
+
+        {/* Section divider */}
+        <div className="flex justify-center">
+          <div className="w-2/5 h-px bg-border" />
+        </div>
+
+        <OldVsNewSection />
+
+        <div className="flex justify-center">
+          <div className="w-2/5 h-px bg-border" />
+        </div>
+
+        <ProfileFirstSection />
+
+        <div className="flex justify-center">
+          <div className="w-2/5 h-px bg-border" />
+        </div>
+
+        <BYOTemplateSection />
+
+        <div className="flex justify-center">
+          <div className="w-2/5 h-px bg-border" />
+        </div>
+
+        <CompanyResearchSection />
+
+        <div className="flex justify-center">
+          <div className="w-2/5 h-px bg-border" />
+        </div>
+
+        <ApplyAnywhereSection />
+
+        <div className="flex justify-center">
+          <div className="w-2/5 h-px bg-border" />
+        </div>
+
+        <GenerationStudioSection />
+
+        <div className="flex justify-center">
+          <div className="w-2/5 h-px bg-border" />
+        </div>
+
+        <JobTrackerSection />
+
+        <div className="flex justify-center">
+          <div className="w-2/5 h-px bg-border" />
+        </div>
+
+        <FormFillSection />
+
+        <div className="flex justify-center">
+          <div className="w-2/5 h-px bg-border" />
+        </div>
+
+        <HITLSection />
+
+        <div className="flex justify-center">
+          <div className="w-2/5 h-px bg-border" />
+        </div>
+
+        <PricingSection />
+
+        <div className="flex justify-center">
+          <div className="w-2/5 h-px bg-border" />
+        </div>
+
+        <FaqSection />
+
+        <FinalCTASection />
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
