@@ -41,7 +41,7 @@ export default function OldVsNewSection() {
               top: '-6%',
               bottom: '-18%',
               right: '-1%',
-              left: '44%',
+              left: '47%',
               width: 'auto',
               transform: 'perspective(1200px) rotateY(-6deg) rotateX(1.5deg)',
               boxShadow: '-24px 0 60px -8px oklch(0 0 0 / 0.5), 0 32px 60px -12px oklch(0 0 0 / 0.3)',
