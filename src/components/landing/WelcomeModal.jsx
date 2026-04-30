@@ -6,9 +6,15 @@ export default function WelcomeModal() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    if (localStorage.getItem('japp-welcome-seen')) return;
     const timer = setTimeout(() => setOpen(true), 400);
     return () => clearTimeout(timer);
   }, []);
+
+  const handleClose = () => {
+    localStorage.setItem('japp-welcome-seen', '1');
+    setOpen(false);
+  };
 
   return (
     <AnimatePresence>
@@ -22,7 +28,7 @@ export default function WelcomeModal() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-[90] bg-black/60 backdrop-blur-sm"
-            onClick={() => setOpen(false)}
+            onClick={handleClose}
           />
 
           {/* Modal */}
@@ -49,7 +55,7 @@ export default function WelcomeModal() {
 
               {/* Close button */}
               <button
-                onClick={() => setOpen(false)}
+                onClick={handleClose}
                 className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-black/8 transition-colors text-foreground/40 hover:text-foreground/70"
               >
                 <X size={16} />
@@ -113,7 +119,7 @@ export default function WelcomeModal() {
                 {/* CTA */}
                 <a
                   href="#download"
-                  onClick={() => setOpen(false)}
+                  onClick={handleClose}
                   className="flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl text-base font-black transition-all duration-150 active:scale-95"
                   style={{
                     background: '#F5C800',
