@@ -47,10 +47,6 @@ function GlobeCanvas() {
       const cx = W / 2;
       const cy = H + R * 0.08;
 
-      // Background
-      ctx.fillStyle = '#000';
-      ctx.fillRect(0, 0, W, H);
-
       // Radial rays
       const rayY = cy - R;
       for (let i = 0; i < 20; i++) {
@@ -196,59 +192,42 @@ function GlobeCanvas() {
 
 export default function ApplyAnywhereSection() {
   return (
-    <section className="overflow-hidden">
-      {/* Full-width dark globe block with all text inside */}
-      <div className="relative w-full" style={{ height: 'clamp(480px, 65vw, 720px)', background: '#000' }}>
+    <section className="py-24 lg:py-32 overflow-hidden">
+      <div className="max-w-6xl mx-auto px-6 lg:px-8 text-center mb-10">
+        {/* Label */}
+        <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-muted-foreground mb-4">
+          Apply anywhere on the internet
+        </p>
+
+        {/* Main headline */}
+        <h2
+          className="font-black tracking-[-0.03em] text-foreground mb-3"
+          style={{ fontSize: 'clamp(32px, 5vw, 64px)', lineHeight: '1.05' }}
+        >
+          No job-board lock-in.
+          <br />
+          No API limits.
+        </h2>
+
+        {/* Tagline — small, under the headline */}
+        <p className="text-base font-semibold text-muted-foreground mb-8">
+          If a human can apply,{' '}
+          <span style={{ color: 'var(--primary)' }}>Just Apply can apply.</span>
+        </p>
+
+        {/* Board names */}
+        <div className="flex flex-wrap justify-center gap-x-6 gap-y-1">
+          {boards.map((board) => (
+            <span key={board} className="text-sm font-semibold text-foreground/50 hover:text-foreground/80 transition-colors cursor-default">
+              {board}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Globe — transparent background, page bg shows through */}
+      <div className="relative w-full" style={{ height: 'clamp(300px, 45vw, 520px)' }}>
         <GlobeCanvas />
-
-        {/* Top fade from page bg */}
-        <div className="absolute top-0 left-0 right-0 h-20 pointer-events-none z-20"
-          style={{ background: 'linear-gradient(to bottom, var(--background) 0%, transparent 100%)' }}
-        />
-
-        {/* All text overlaid */}
-        <div className="absolute inset-0 flex flex-col items-center justify-start pt-12 z-10 pointer-events-none px-6">
-          {/* Label */}
-          <p className="text-[11px] font-bold tracking-[0.12em] uppercase mb-5" style={{ color: 'rgba(245,175,0,0.7)' }}>
-            Apply anywhere on the internet
-          </p>
-
-          {/* Main headline */}
-          <h2
-            className="font-black text-white text-center mb-4"
-            style={{ fontSize: 'clamp(32px, 5vw, 64px)', lineHeight: '1.05', letterSpacing: '-0.03em', textShadow: '0 2px 40px rgba(0,0,0,0.8)' }}
-          >
-            No job-board lock-in.
-            <br />
-            No API limits.
-          </h2>
-
-          {/* Board names */}
-          <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 mb-10">
-            {boards.map((board) => (
-              <span key={board} className="text-sm font-semibold" style={{ color: 'rgba(255,255,255,0.45)' }}>
-                {board}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Bottom tagline sitting on the globe */}
-        <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center pb-16 z-10 pointer-events-none px-6">
-          <h3
-            className="font-black text-white text-center"
-            style={{ fontSize: 'clamp(24px, 3.5vw, 48px)', lineHeight: '1.15', letterSpacing: '-0.025em', textShadow: '0 0 80px rgba(245,175,0,0.5), 0 2px 20px rgba(0,0,0,0.9)' }}
-          >
-            If a human can apply,
-            <br />
-            <span style={{ color: 'oklch(0.852 0.199 91.936)' }}>Just Apply can apply.</span>
-          </h3>
-        </div>
-
-        {/* Bottom fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none z-20"
-          style={{ background: 'linear-gradient(to top, var(--background) 0%, transparent 100%)' }}
-        />
       </div>
     </section>
   );
