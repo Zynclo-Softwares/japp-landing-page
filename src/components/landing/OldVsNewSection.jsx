@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import JustApplyCard3D from './JustApplyCard3D';
 
 const IMG_LIGHT = 'https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/12c80f467_image.png';
 const IMG_DARK = 'https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/97083b349_image.png';
@@ -39,11 +40,18 @@ export default function OldVsNewSection() {
           Download. Upload. Repeat 40 times. We collapsed all of it — no copy-pasting, no URL hunting. Just point and apply.
         </p>
 
-        <img
-          src={isDark ? IMG_DARK : IMG_LIGHT}
-          alt="The old way vs Just Apply"
-          className="w-full rounded-3xl"
-        />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          {/* Old way image */}
+          <img
+            src={isDark ? IMG_DARK : IMG_LIGHT}
+            alt="The old way"
+            className="w-full rounded-3xl"
+          />
+          {/* 3D Just Apply card */}
+          <div className="flex items-center justify-center py-8">
+            <JustApplyCard3D />
+          </div>
+        </div>
       </div>
     </section>
   );
