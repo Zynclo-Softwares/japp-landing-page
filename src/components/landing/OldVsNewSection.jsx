@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import JustApplyCard3D from './JustApplyCard3D';
 
-const IMG_LIGHT = 'https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/12c80f467_image.png';
-const IMG_DARK = 'https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/97083b349_image.png';
+const IMG_LIGHT = 'https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/ded278d39_image.png';
+const IMG_DARK = 'https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/c6e319554_image.png';
 
 export default function OldVsNewSection() {
   const [isDark, setIsDark] = useState(() =>
