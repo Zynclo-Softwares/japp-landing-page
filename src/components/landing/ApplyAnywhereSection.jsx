@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const boards = [
   'LinkedIn', 'Wellfound', 'Lever', 'Greenhouse', 'Workday',
@@ -51,9 +51,7 @@ function GlobeCanvas() {
       // Globe center sits just below canvas center so top half of sphere is fully visible
       const cy = H * 0.72 + R * 0.3;
 
-      // ── Dark background ──
-      ctx.fillStyle = '#06040f';
-      ctx.fillRect(0, 0, W, H);
+      // No background — transparent canvas, inherits page bg
 
       // ── Radial rays from globe apex ──
       const apexY = cy - R;
@@ -181,22 +179,38 @@ function GlobeCanvas() {
 }
 
 export default function ApplyAnywhereSection() {
+  const [isDark, setIsDark] = useState(() =>
+    document.documentElement.classList.contains('dark')
+  );
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    });
+    observer.observe(document.documentElement, { attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
+
+  const headingColor = isDark ? 'text-white' : 'text-foreground';
+  const subColor = isDark ? 'text-white/40' : 'text-muted-foreground';
+  const bodyColor = isDark ? 'text-white/55' : 'text-foreground/60';
+  const tagColor = isDark ? 'text-white/35' : 'text-foreground/40';
+
   return (
     <section className="overflow-hidden">
       <div className="relative w-full" style={{ height: 'clamp(520px, 62vw, 720px)' }}>
         <GlobeCanvas />
 
-        {/* Text overlaid — centered vertically, lower half like blue reference */}
         <div
           className="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none px-6"
           style={{ paddingTop: '8%' }}
         >
-          <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-white/40 mb-5">
+          <p className={`text-[11px] font-bold tracking-[0.12em] uppercase mb-5 ${subColor}`}>
             Apply anywhere on the internet
           </p>
 
           <h2
-            className="font-black text-white text-center mb-3 drop-shadow-lg"
+            className={`font-black text-center mb-3 drop-shadow-lg ${headingColor}`}
             style={{ fontSize: 'clamp(32px, 5vw, 64px)', lineHeight: '1.05', letterSpacing: '-0.03em' }}
           >
             No job-board lock-in.
@@ -204,14 +218,14 @@ export default function ApplyAnywhereSection() {
             No API limits.
           </h2>
 
-          <p className="text-base text-white/55 mb-8">
+          <p className={`text-base mb-8 ${bodyColor}`}>
             If a human can apply,{' '}
             <span style={{ color: 'var(--primary)' }}>Just Apply can apply.</span>
           </p>
 
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-1">
             {boards.map((board) => (
-              <span key={board} className="text-sm font-semibold text-white/35">
+              <span key={board} className={`text-sm font-semibold ${tagColor}`}>
                 {board}
               </span>
             ))}
