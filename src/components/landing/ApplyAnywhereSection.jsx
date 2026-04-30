@@ -58,12 +58,16 @@ function GlobeCanvas({ isDark }) {
 
 
       // ── Sphere body — matches page background ──
-      const bgColor = isDark ? '#17130a' : '#ffffff';
-      const bgEdge  = isDark ? '#0d0a05' : '#ffffff';
-      const sphereGrad = ctx.createRadialGradient(cx * 0.85, cy * 0.85, 0, cx, cy, R);
-      sphereGrad.addColorStop(0,   bgColor);
-      sphereGrad.addColorStop(0.7, bgColor);
-      sphereGrad.addColorStop(1,   bgEdge);
+      const sphereGrad = ctx.createRadialGradient(cx, cy - R * 0.3, 0, cx, cy, R);
+      if (isDark) {
+        sphereGrad.addColorStop(0,   '#1a1205');
+        sphereGrad.addColorStop(0.6, '#130d03');
+        sphereGrad.addColorStop(1,   '#0d0a02');
+      } else {
+        sphereGrad.addColorStop(0,   '#fffdf5');
+        sphereGrad.addColorStop(0.5, '#fff9e6');
+        sphereGrad.addColorStop(1,   '#fff4cc');
+      }
       ctx.beginPath();
       ctx.arc(cx, cy, R, 0, Math.PI * 2);
       ctx.fillStyle = sphereGrad;
