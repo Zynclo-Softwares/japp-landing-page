@@ -16,6 +16,7 @@ import PricingSection from '../components/landing/PricingSection';
 import FaqSection from '../components/landing/FaqSection';
 import FinalCTASection from '../components/landing/FinalCTASection';
 import Footer from '../components/landing/Footer';
+import WelcomeModal from '../components/landing/WelcomeModal';
 
 export default function Landing() {
   const [theme, setTheme] = useState(() => {
@@ -39,6 +40,7 @@ export default function Landing() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <WelcomeModal />
       <NoiseOverlay />
 
       {/* Skip to content */}
