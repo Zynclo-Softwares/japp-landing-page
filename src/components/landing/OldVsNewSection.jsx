@@ -38,20 +38,26 @@ export default function OldVsNewSection() {
           <div
             className="absolute"
             style={{
-              top: '50%',
-              right: '4%',
-              width: '40%',
-              transform: 'translateY(-50%) perspective(900px) rotateY(-4deg) rotateX(2deg)',
+              top: '-18%',
+              bottom: '-18%',
+              right: '2%',
+              width: '52%',
+              transform: 'perspective(900px) rotateY(-4deg) rotateX(2deg)',
               boxShadow: '-32px 0 80px -8px oklch(0 0 0 / 0.5), 0 40px 80px -12px oklch(0 0 0 / 0.4)',
-              borderRadius: '16px',
+              borderRadius: '20px',
               overflow: 'hidden',
             }}
           >
             <img
               src={CARD_URL}
               alt="Just Apply card"
-              className="w-full"
-              style={{ display: 'block' }}
+              style={{
+                display: 'block',
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'center center',
+              }}
             />
           </div>
         </div>
