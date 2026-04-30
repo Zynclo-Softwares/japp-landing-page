@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Sun, Moon, Download } from 'lucide-react';
+import { Sun, Moon } from 'lucide-react';
 
 export default function Nav({ theme, toggleTheme }) {
   const [scrolled, setScrolled] = useState(false);
@@ -73,8 +73,7 @@ export default function Nav({ theme, toggleTheme }) {
             onMouseEnter={e => e.currentTarget.style.boxShadow = '0 8px 32px -4px oklch(0.852 0.199 91.936 / 0.65)'}
             onMouseLeave={e => e.currentTarget.style.boxShadow = '0 4px 20px -4px oklch(0.852 0.199 91.936 / 0.4)'}
           >
-            <Download size={13} />
-            Download for Mac
+            Download Now
           </a>
         </div>
       </div>
