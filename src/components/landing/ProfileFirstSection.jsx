@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 const steps = [
   {
@@ -33,14 +34,38 @@ const steps = [
   },
 ];
 
-function StepCard({ num, title, desc, align, cardRef }) {
+function StepCard({ num, title, desc, align, cardRef, floatDelay = 0 }) {
   return (
-    <div
+    <motion.div
       ref={cardRef}
-      className={`rounded-2xl border border-border p-6 lg:p-8 transition-all duration-200 hover:-translate-y-0.5 hover:border-[oklch(0.852_0.199_91.936_/_0.35)] relative z-10 ${align === 'right' ? 'text-right' : 'text-left'}`}
+      className={`rounded-2xl border border-border p-6 lg:p-8 relative z-10 ${align === 'right' ? 'text-right' : 'text-left'}`}
       style={{
         background: 'var(--card)',
-        boxShadow: '0 2px 16px -4px oklch(0.852 0.199 91.936 / 0.1)',
+        transformStyle: 'preserve-3d',
+        perspective: '800px',
+      }}
+      animate={{
+        y: [0, -8, 0],
+        rotateX: [0, 2, 0],
+        rotateZ: align === 'right' ? [0, -1, 0] : [0, 1, 0],
+        boxShadow: [
+          '0 4px 20px -4px oklch(0.852 0.199 91.936 / 0.12), 0 2px 8px -2px rgba(0,0,0,0.06)',
+          '0 18px 40px -8px oklch(0.852 0.199 91.936 / 0.22), 0 8px 24px -4px rgba(0,0,0,0.10)',
+          '0 4px 20px -4px oklch(0.852 0.199 91.936 / 0.12), 0 2px 8px -2px rgba(0,0,0,0.06)',
+        ],
+      }}
+      transition={{
+        duration: 4,
+        delay: floatDelay,
+        repeat: Infinity,
+        ease: 'easeInOut',
+      }}
+      whileHover={{
+        y: -12,
+        rotateX: 3,
+        boxShadow: '0 24px 50px -8px oklch(0.852 0.199 91.936 / 0.30), 0 10px 28px -4px rgba(0,0,0,0.12)',
+        borderColor: 'oklch(0.852 0.199 91.936 / 0.4)',
+        transition: { duration: 0.3 },
       }}
     >
       <span
@@ -56,7 +81,7 @@ function StepCard({ num, title, desc, align, cardRef }) {
         {title}
       </h3>
       <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
-    </div>
+    </motion.div>
   );
 }
 
@@ -170,12 +195,12 @@ export default function ProfileFirstSection() {
               <div key={num} className="flex">
                 <div className="w-1/2 pr-4">
                   {side === 'left' && (
-                    <StepCard num={num} title={title} desc={desc} align="right" cardRef={el => cardRefs.current[idx] = el} />
+                    <StepCard num={num} title={title} desc={desc} align="right" floatDelay={idx * 0.7} cardRef={el => cardRefs.current[idx] = el} />
                   )}
                 </div>
                 <div className="w-1/2 pl-4">
                   {side === 'right' && (
-                    <StepCard num={num} title={title} desc={desc} align="left" cardRef={el => cardRefs.current[idx] = el} />
+                    <StepCard num={num} title={title} desc={desc} align="left" floatDelay={idx * 0.7} cardRef={el => cardRefs.current[idx] = el} />
                   )}
                 </div>
               </div>
