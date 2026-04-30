@@ -192,42 +192,39 @@ function GlobeCanvas() {
 
 export default function ApplyAnywhereSection() {
   return (
-    <section className="py-24 lg:py-32 overflow-hidden">
-      <div className="max-w-6xl mx-auto px-6 lg:px-8 text-center mb-10">
-        {/* Label */}
-        <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-muted-foreground mb-4">
-          Apply anywhere on the internet
-        </p>
-
-        {/* Main headline */}
-        <h2
-          className="font-black tracking-[-0.03em] text-foreground mb-3"
-          style={{ fontSize: 'clamp(32px, 5vw, 64px)', lineHeight: '1.05' }}
-        >
-          No job-board lock-in.
-          <br />
-          No API limits.
-        </h2>
-
-        {/* Tagline — small, under the headline */}
-        <p className="text-base font-semibold text-muted-foreground mb-8">
-          If a human can apply,{' '}
-          <span style={{ color: 'var(--primary)' }}>Just Apply can apply.</span>
-        </p>
-
-        {/* Board names */}
-        <div className="flex flex-wrap justify-center gap-x-6 gap-y-1">
-          {boards.map((board) => (
-            <span key={board} className="text-sm font-semibold text-foreground/50 hover:text-foreground/80 transition-colors cursor-default">
-              {board}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* Globe — transparent background, page bg shows through */}
-      <div className="relative w-full" style={{ height: 'clamp(300px, 45vw, 520px)' }}>
+    <section className="overflow-hidden">
+      {/* Full-width globe block — page background shows through canvas */}
+      <div className="relative w-full" style={{ height: 'clamp(480px, 65vw, 720px)' }}>
         <GlobeCanvas />
+
+        {/* All text overlaid on globe, same as blue reference */}
+        <div className="absolute inset-0 flex flex-col items-center justify-start pt-16 z-10 pointer-events-none px-6">
+          <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-muted-foreground mb-5">
+            Apply anywhere on the internet
+          </p>
+
+          <h2
+            className="font-black text-foreground text-center mb-3"
+            style={{ fontSize: 'clamp(32px, 5vw, 64px)', lineHeight: '1.05', letterSpacing: '-0.03em' }}
+          >
+            No job-board lock-in.
+            <br />
+            No API limits.
+          </h2>
+
+          <p className="text-base text-muted-foreground mb-8">
+            If a human can apply,{' '}
+            <span style={{ color: 'var(--primary)' }}>Just Apply can apply.</span>
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-1">
+            {boards.map((board) => (
+              <span key={board} className="text-sm font-semibold text-foreground/50">
+                {board}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
