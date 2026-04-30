@@ -53,33 +53,9 @@ function GlobeCanvas({ isDark }) {
 
       // No background — transparent canvas, inherits page bg
 
-      // ── Radial rays from globe apex ──
-      const apexY = cy - R;
-      for (let i = 0; i < 30; i++) {
-        const frac = i / 29;
-        const angle = (-0.7 + frac * 1.4) * Math.PI; // spread 180° upward
-        const x2 = cx + Math.cos(angle) * W;
-        const y2 = apexY + Math.sin(angle) * H;
-        const g = ctx.createLinearGradient(cx, apexY, x2, y2);
-        g.addColorStop(0, 'rgba(255,185,0,0.055)');
-        g.addColorStop(1, 'rgba(255,185,0,0)');
-        ctx.beginPath();
-        ctx.moveTo(cx, apexY);
-        ctx.lineTo(x2, y2);
-        ctx.strokeStyle = g;
-        ctx.lineWidth = 1;
-        ctx.stroke();
-      }
 
-      // ── Globe glow halo (behind sphere) ──
-      const halo = ctx.createRadialGradient(cx, cy, R * 0.85, cx, cy, R * 1.3);
-      halo.addColorStop(0, 'rgba(255,175,0,0.10)');
-      halo.addColorStop(0.5, 'rgba(200,120,0,0.05)');
-      halo.addColorStop(1, 'rgba(0,0,0,0)');
-      ctx.beginPath();
-      ctx.arc(cx, cy, R * 1.5, 0, Math.PI * 2);
-      ctx.fillStyle = halo;
-      ctx.fill();
+
+
 
       // ── Sphere body — matches page background ──
       const bgColor = isDark ? '#17130a' : '#ffffff';
