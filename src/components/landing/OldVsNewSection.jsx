@@ -36,20 +36,20 @@ export default function OldVsNewSection() {
           />
           {/* Floating "Just Apply" card — oversized, breaks out of canvas for 3D effect */}
           <div
-            className="absolute right-[-2%] lg:right-[-1%]"
+            className="absolute"
             style={{
-              top: '-12%',
-              bottom: '-12%',
-              width: '46%',
-              perspective: '1000px',
+              top: '-10%',
+              bottom: '-10%',
+              right: '3%',
+              width: '42%',
             }}
           >
             <img
               src={CARD_URL}
               alt="Just Apply card"
-              className="w-full h-full object-cover object-top rounded-2xl"
+              className="w-full h-full object-cover object-center rounded-2xl"
               style={{
-                boxShadow: '-24px 0 80px -8px oklch(0 0 0 / 0.55), 0 32px 80px -12px oklch(0 0 0 / 0.45)',
+                boxShadow: '-32px 0 80px -8px oklch(0 0 0 / 0.5), 0 40px 80px -12px oklch(0 0 0 / 0.4)',
                 transform: 'perspective(900px) rotateY(-4deg) rotateX(2deg)',
               }}
             />
