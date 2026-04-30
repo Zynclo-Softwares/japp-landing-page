@@ -1,4 +1,5 @@
-const IMG2_URL = 'https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/04492cad3_image.png';
+const IMG_LIGHT = 'https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/04492cad3_image.png';
+const IMG_DARK = 'https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/97083b349_image.png';
 
 export default function OldVsNewSection() {
   return (
@@ -25,11 +26,16 @@ export default function OldVsNewSection() {
           Download. Upload. Repeat 40 times. We collapsed all of it — no copy-pasting, no URL hunting. Just point and apply.
         </p>
 
-        {/* Single combined image */}
+        {/* Single combined image — switches with theme */}
         <img
-          src={IMG2_URL}
+          src={IMG_LIGHT}
           alt="The old way vs Just Apply"
-          className="w-full rounded-3xl"
+          className="w-full rounded-3xl dark:hidden"
+        />
+        <img
+          src={IMG_DARK}
+          alt="The old way vs Just Apply"
+          className="w-full rounded-3xl hidden dark:block"
         />
       </div>
     </section>
