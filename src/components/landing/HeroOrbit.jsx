@@ -67,11 +67,11 @@ export default function HeroOrbit() {
       </div>
 
       {/* Orbiting chips — desktop */}
-      <div className="hidden lg:block absolute inset-0">
+      <div className="hidden lg:block absolute inset-0 overflow-hidden">
         {chips.map(({ icon: Icon, label, delay, angle }) => {
           const rad = (angle * Math.PI) / 180;
-          const x = 50 + 38 * Math.cos(rad);
-          const y = 50 + 35 * Math.sin(rad);
+          const x = 50 + 32 * Math.cos(rad);
+          const y = 50 + 30 * Math.sin(rad);
           return (
             <div
               key={label}
