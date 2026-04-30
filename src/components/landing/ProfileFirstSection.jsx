@@ -97,20 +97,19 @@ export default function ProfileFirstSection() {
         const cur = points[i];
         const nxt = points[i + 1];
 
-        // Exit from center-bottom of current card
-        const x1 = cur.midX;
-        const y1 = cur.bottom;
+        // Exit from right-center of left card, or left-center of right card
+        const x1 = cur.side === 'left' ? cur.right : cur.left;
+        const y1 = cur.midY;
 
-        // Enter at center-top of next card
+        // Enter at top-center of next card
         const x2 = nxt.midX;
         const y2 = nxt.top;
 
-        // Smooth vertical S-curve between center-bottom and center-top
-        const midY = (y1 + y2) / 2;
-        const cp1x = x1;
-        const cp1y = midY;
+        // Curve: go horizontally out then sweep down to top-center
+        const cp1x = x1 + (cur.side === 'left' ? 60 : -60);
+        const cp1y = y1;
         const cp2x = x2;
-        const cp2y = midY;
+        const cp2y = y2 - 60;
 
         d += `M ${x1} ${y1} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${x2} ${y2} `;
       }
