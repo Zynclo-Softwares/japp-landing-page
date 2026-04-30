@@ -105,12 +105,13 @@ export default function ProfileFirstSection() {
         const x2 = nxt.midX;
         const y2 = nxt.top;
 
-        // Curve: go horizontally out then sweep down to top-center
-        // Use butt linecap so ends are flat/square against the cards
-        const cp1x = x1 + (cur.side === 'left' ? 60 : -60);
+        // cp1: leave horizontally (tangent matches card side edge)
+        const hOut = cur.side === 'left' ? 120 : -120;
+        const cp1x = x1 + hOut;
         const cp1y = y1;
+        // cp2: arrive vertically from above (tangent matches card top edge)
         const cp2x = x2;
-        const cp2y = y2 - 60;
+        const cp2y = y2 - 120;
 
         d += `M ${x1} ${y1} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${x2} ${y2} `;
       }
