@@ -88,9 +88,9 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* 3D scene */}
+          {/* Floating tags */}
           <div className="flex flex-col items-center justify-center">
-            <HeroScene3D />
+            <HeroOrbit />
           </div>
         </div>
       </div>
