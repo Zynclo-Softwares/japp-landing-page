@@ -1,3 +1,8 @@
+import ImagePlaceholder from './ImagePlaceholder';
+
+const IMG7_PROMPT =
+  'A clean dashboard mockup, dark mode, showing a kanban-style tracker with columns Saved / Applied / Interviewing / Offer. Each card shows a company logo, role, a tiny structured-data preview (must-haves chips), and a small "v3 · resume + cover" version badge. A side panel shows analytics: response rate sparkline in amber. Photorealistic UI render, no text legibility required, just vibe. 16:9.';
+
 const trackerCards = [
   {
     company: 'Anthropic',
@@ -5,7 +10,6 @@ const trackerCards = [
     status: 'Applied',
     meta: 'applied 3h ago · v3',
     mustHaves: ['LLM fine-tuning', 'Python', 'Distributed systems'],
-    color: 'orange',
   },
   {
     company: 'Vercel',
@@ -13,7 +17,6 @@ const trackerCards = [
     status: 'Interviewing',
     meta: 'applied 2d ago · v2',
     mustHaves: ['React', 'Next.js', 'TypeScript'],
-    color: 'blue',
   },
   {
     company: 'Linear',
@@ -21,7 +24,6 @@ const trackerCards = [
     status: 'Applied',
     meta: 'applied 5d ago · v4',
     mustHaves: ['Product sense', 'TypeScript', 'Design systems'],
-    color: 'purple',
   },
 ];
 
@@ -33,7 +35,7 @@ const statusColor = {
 
 export default function JobTrackerSection() {
   return (
-    <section className="py-24 lg:py-32 border-t border-border bg-muted/30">
+    <section className="py-24 lg:py-32 bg-muted/30">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-muted-foreground mb-4 text-center">
           Smart job tracker
@@ -53,7 +55,10 @@ export default function JobTrackerSection() {
           Every entry, every artifact, every outcome — organized automatically.
         </p>
 
-        {/* Tracker mock */}
+        {/* IMG-7 placeholder — the centerpiece */}
+        <ImagePlaceholder id="IMG-7" prompt={IMG7_PROMPT} tall className="mb-8" />
+
+        {/* Live kanban mock */}
         <div
           className="rounded-3xl border border-border overflow-hidden"
           style={{ background: 'var(--card)' }}
@@ -63,17 +68,20 @@ export default function JobTrackerSection() {
             <div className="w-3 h-3 rounded-full bg-red-400/70" />
             <div className="w-3 h-3 rounded-full bg-yellow-400/70" />
             <div className="w-3 h-3 rounded-full bg-green-400/70" />
-            <span className="ml-3 text-xs text-muted-foreground font-medium">Job Tracker · Just Apply</span>
+            <span className="ml-3 text-xs text-muted-foreground font-medium">
+              Job Tracker · Just Apply
+            </span>
           </div>
 
-          {/* Columns — desktop kanban */}
           <div className="p-5 grid grid-cols-1 md:grid-cols-3 gap-4">
             {['Saved', 'Applied', 'Interviewing'].map((col) => (
               <div key={col}>
-                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wide mb-3">{col}</p>
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-wide mb-3">
+                  {col}
+                </p>
                 <div className="space-y-3">
                   {trackerCards
-                    .filter((c) => c.status === col || (col === 'Saved' && false))
+                    .filter((c) => c.status === col)
                     .map((card) => (
                       <div
                         key={card.company}
@@ -91,7 +99,10 @@ export default function JobTrackerSection() {
                         </div>
                         <div className="flex flex-wrap gap-1 mb-2">
                           {card.mustHaves.map((tag) => (
-                            <span key={tag} className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-muted text-muted-foreground">
+                            <span
+                              key={tag}
+                              className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-muted text-muted-foreground"
+                            >
                               {tag}
                             </span>
                           ))}
@@ -110,12 +121,7 @@ export default function JobTrackerSection() {
           </div>
         </div>
 
-        {/* IMG-7 placeholder */}
-        <div className="mt-4 rounded-xl border border-border bg-muted/50 flex items-center justify-center h-16 text-muted-foreground text-xs font-medium">
-          IMG-7 · Full kanban dashboard mockup
-        </div>
-
-        {/* Feature bullets as type */}
+        {/* Feature bullets */}
         <div className="mt-12 grid md:grid-cols-2 gap-6">
           {[
             { title: 'AI auto-marks applied jobs', desc: 'When the agent submits, the tracker updates automatically.' },
@@ -124,7 +130,10 @@ export default function JobTrackerSection() {
             { title: 'Response analytics', desc: 'Response rate, top-matched keywords, weekly application velocity.' },
           ].map(({ title, desc }) => (
             <div key={title} className="flex gap-3">
-              <div className="mt-1 w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'var(--primary)' }} />
+              <div
+                className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0"
+                style={{ background: 'var(--primary)' }}
+              />
               <div>
                 <p className="text-sm font-bold text-foreground">{title}</p>
                 <p className="text-sm text-muted-foreground mt-0.5">{desc}</p>

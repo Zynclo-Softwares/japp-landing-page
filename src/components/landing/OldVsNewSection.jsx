@@ -1,17 +1,22 @@
-export default function OldVsNewSection() {
-  const oldSteps = [
-    'Open the job post',
-    'Paste JD into ChatGPT',
-    'Paste output into Google Docs',
-    '"Make it ATS-friendly"',
-    'Re-format the whole thing',
-    'Download as PDF',
-    'Upload to the ATS portal',
-    'Repeat 40 more times',
-  ];
+import ImagePlaceholder from './ImagePlaceholder';
 
+const IMG2_PROMPT =
+  'Split-screen illustration. Left half: tangled mess of arrows looping between a job-post browser tab, a ChatGPT window, a Google Doc, an ATS-checker, a downloads folder, and an upload dialog — drawn in scratchy hand-drawn ink on aged paper, slightly chaotic, labeled "the old way" in a tired serif. Right half: one single clean amber-glowing window labeled "Just Apply" sitting on a polished walnut desk, surrounded by negative space. Visual contrast between chaos and calm. 21:9.';
+
+const oldSteps = [
+  'Open the job post',
+  'Paste JD into ChatGPT',
+  'Paste output into Google Docs',
+  '"Make it ATS-friendly"',
+  'Re-format the whole thing',
+  'Download as PDF',
+  'Upload to the ATS portal',
+  'Repeat 40 more times',
+];
+
+export default function OldVsNewSection() {
   return (
-    <section className="py-24 lg:py-32 border-t border-border" id="features">
+    <section className="py-24 lg:py-32" id="features">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Eyebrow */}
         <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-muted-foreground mb-4 text-center">
@@ -34,13 +39,25 @@ export default function OldVsNewSection() {
           Download. Upload. Repeat 40 times. We collapsed all of it into one window.
         </p>
 
-        {/* Split comparison */}
+        {/* IMG-2 — full-width centerpiece (the viral screenshot moment) */}
+        <ImagePlaceholder
+          id="IMG-2"
+          prompt={IMG2_PROMPT}
+          tall
+          className="mb-10"
+        />
+
+        {/* Split comparison — below the image */}
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
           {/* Old way */}
           <div className="relative rounded-3xl border border-border p-8 lg:p-10 overflow-hidden">
             <div
-              className="absolute inset-0 opacity-[0.03]"
-              style={{ backgroundImage: 'repeating-linear-gradient(45deg, currentColor 0, currentColor 1px, transparent 0, transparent 50%)', backgroundSize: '20px 20px' }}
+              className="absolute inset-0 opacity-[0.025]"
+              style={{
+                backgroundImage:
+                  'repeating-linear-gradient(45deg, currentColor 0, currentColor 1px, transparent 0, transparent 50%)',
+                backgroundSize: '20px 20px',
+              }}
             />
             <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-muted-foreground mb-6">
               The old way
@@ -53,7 +70,10 @@ export default function OldVsNewSection() {
                   </span>
                   <span
                     className="text-sm text-foreground/60 font-medium leading-snug"
-                    style={{ textDecoration: i > 3 ? 'line-through' : 'none', opacity: i > 3 ? 0.4 : 0.7 }}
+                    style={{
+                      textDecoration: i > 3 ? 'line-through' : 'none',
+                      opacity: i > 3 ? 0.35 : 0.7,
+                    }}
                   >
                     {step}
                   </span>
@@ -68,7 +88,10 @@ export default function OldVsNewSection() {
           {/* New way */}
           <div
             className="relative rounded-3xl border p-8 lg:p-10 overflow-hidden"
-            style={{ borderColor: 'oklch(0.852 0.199 91.936 / 0.3)', background: 'oklch(0.852 0.199 91.936 / 0.04)' }}
+            style={{
+              borderColor: 'oklch(0.852 0.199 91.936 / 0.3)',
+              background: 'oklch(0.852 0.199 91.936 / 0.04)',
+            }}
           >
             <p
               className="text-[11px] font-bold tracking-[0.12em] uppercase mb-6"
@@ -98,12 +121,16 @@ export default function OldVsNewSection() {
               ))}
             </div>
 
-            {/* Pull stat */}
+            {/* Pull stats */}
             <div
               className="mt-8 pt-6 border-t flex items-center gap-6"
               style={{ borderColor: 'oklch(0.852 0.199 91.936 / 0.2)' }}
             >
-              {[['20×', 'faster'], ['0', 'tabs open'], ['1', 'window']].map(([num, label]) => (
+              {[
+                ['20×', 'faster'],
+                ['0', 'tabs open'],
+                ['1', 'window'],
+              ].map(([num, label]) => (
                 <div key={label} className="text-center">
                   <p
                     className="text-3xl font-black tracking-[-0.03em]"
@@ -116,11 +143,6 @@ export default function OldVsNewSection() {
               ))}
             </div>
           </div>
-        </div>
-
-        {/* Image placeholder */}
-        <div className="mt-10 rounded-3xl border border-border overflow-hidden bg-muted/50 flex items-center justify-center h-64 text-muted-foreground text-sm font-medium">
-          IMG-2 · Old-way vs new-way illustration
         </div>
       </div>
     </section>

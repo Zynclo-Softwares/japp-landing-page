@@ -1,16 +1,18 @@
 import { Download } from 'lucide-react';
+import ImagePlaceholder from './ImagePlaceholder';
+
+const IMG9_PROMPT =
+  'Full-bleed abstract background: a soft amber-to-deep-bronze radial gradient with a faint topographic line pattern overlay. Slight film grain. No subjects. Used as a hero band behind white headline text. 21:9.';
 
 export default function FinalCTASection() {
   return (
-    <section
-      className="relative py-40 overflow-hidden"
-      id="download"
-    >
+    <section className="relative py-40 overflow-hidden" id="download">
       {/* Amber gradient background */}
       <div
         className="absolute inset-0"
         style={{
-          background: 'linear-gradient(135deg, oklch(0.852 0.199 91.936) 0%, oklch(0.7 0.18 75) 50%, oklch(0.5 0.14 55) 100%)',
+          background:
+            'linear-gradient(135deg, oklch(0.852 0.199 91.936) 0%, oklch(0.7 0.18 75) 50%, oklch(0.5 0.14 55) 100%)',
         }}
       />
       {/* Topographic overlay */}
@@ -21,15 +23,22 @@ export default function FinalCTASection() {
           backgroundSize: '200px 100px',
         }}
       />
-      {/* IMG-9 placeholder */}
-      <div className="absolute top-4 left-4 bg-black/20 text-white/60 text-[10px] font-medium px-2 py-1 rounded">
-        IMG-9 · Full-bleed background
+
+      {/* IMG-9 prompt label — top-left corner */}
+      <div className="absolute top-4 left-4 z-10">
+        <span className="text-[10px] font-medium px-2 py-1 rounded bg-black/20 text-white/60 font-mono">
+          IMG-9 · Full-bleed background · {IMG9_PROMPT.slice(0, 60)}…
+        </span>
       </div>
 
       <div className="relative max-w-4xl mx-auto px-6 lg:px-8 text-center">
         <h2
           className="font-black text-white tracking-[-0.035em] mb-6"
-          style={{ fontSize: 'clamp(44px, 7vw, 88px)', lineHeight: '0.95', textShadow: '0 2px 20px oklch(0 0 0 / 0.2)' }}
+          style={{
+            fontSize: 'clamp(44px, 7vw, 88px)',
+            lineHeight: '0.95',
+            textShadow: '0 2px 20px oklch(0 0 0 / 0.2)',
+          }}
         >
           Stop applying.
           <br />

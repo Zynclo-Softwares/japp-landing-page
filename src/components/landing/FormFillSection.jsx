@@ -1,3 +1,8 @@
+import ImagePlaceholder from './ImagePlaceholder';
+
+const IMG8_PROMPT =
+  'A short cinemagraph-style frame: a Greenhouse application form on screen with fields auto-filling in real time, an amber cursor moving smoothly, a PDF resume thumbnail dragging into the upload zone. Subtle motion blur on the cursor. Dark UI, amber highlights. 16:9.';
+
 const formFields = [
   { label: 'Full Name', value: 'Alex Rivera', filled: true },
   { label: 'Email', value: 'alex@example.com', filled: true },
@@ -8,7 +13,7 @@ const formFields = [
 
 export default function FormFillSection() {
   return (
-    <section className="py-24 lg:py-32 border-t border-border overflow-hidden">
+    <section className="py-24 lg:py-32 overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Copy */}
@@ -54,18 +59,22 @@ export default function FormFillSection() {
               </div>
             </div>
 
-            {/* Form */}
             <div className="p-6 space-y-3" style={{ background: 'var(--card)' }}>
               <p className="text-xs font-bold text-foreground/50 uppercase tracking-wide mb-4">
                 Application Form
               </p>
               {formFields.map(({ label, value, filled, isTextarea }) => (
                 <div key={label}>
-                  <label className="block text-xs font-semibold text-foreground/60 mb-1">{label}</label>
+                  <label className="block text-xs font-semibold text-foreground/60 mb-1">
+                    {label}
+                  </label>
                   {isTextarea ? (
                     <div
                       className="w-full rounded-lg border p-3 text-sm min-h-16 relative overflow-hidden"
-                      style={{ borderColor: 'oklch(0.852 0.199 91.936 / 0.4)', background: 'oklch(0.852 0.199 91.936 / 0.04)' }}
+                      style={{
+                        borderColor: 'oklch(0.852 0.199 91.936 / 0.4)',
+                        background: 'oklch(0.852 0.199 91.936 / 0.04)',
+                      }}
                     >
                       <div className="h-2 rounded-full w-full bg-border animate-pulse mb-2" />
                       <div className="h-2 rounded-full w-3/4 bg-border animate-pulse" />
@@ -81,13 +90,13 @@ export default function FormFillSection() {
                       className="w-full rounded-lg border px-3 py-2 text-sm font-medium text-foreground flex items-center justify-between"
                       style={{
                         borderColor: filled ? 'oklch(0.852 0.199 91.936 / 0.35)' : 'var(--border)',
-                        background: filled ? 'oklch(0.852 0.199 91.936 / 0.05)' : 'oklch(var(--muted))',
+                        background: filled
+                          ? 'oklch(0.852 0.199 91.936 / 0.05)'
+                          : 'hsl(var(--muted))',
                       }}
                     >
                       <span>{value}</span>
-                      {filled && (
-                        <span className="text-[10px] font-bold text-green-600">✓</span>
-                      )}
+                      {filled && <span className="text-[10px] font-bold text-green-600">✓</span>}
                     </div>
                   )}
                 </div>
@@ -104,8 +113,8 @@ export default function FormFillSection() {
         </div>
 
         {/* IMG-8 placeholder */}
-        <div className="mt-10 rounded-xl border border-border bg-muted/50 flex items-center justify-center h-20 text-muted-foreground text-xs font-medium">
-          IMG-8 · Form-fill cinemagraph / video
+        <div className="mt-10">
+          <ImagePlaceholder id="IMG-8" prompt={IMG8_PROMPT} />
         </div>
       </div>
     </section>

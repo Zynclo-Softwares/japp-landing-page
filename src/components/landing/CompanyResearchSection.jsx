@@ -1,20 +1,23 @@
 import { Globe, Newspaper, Users, FileText } from 'lucide-react';
+import ImagePlaceholder from './ImagePlaceholder';
+
+const IMG4_PROMPT =
+  'A dossier folder slightly open on a dark desk, papers fanned out: a company logo sketch, a highlighted news clipping, a "what they value" sticky note, an org chart fragment, and a paperclip holding a job description. An amber desk lamp lights it from the upper-left. Top-down 45° angle. Hyperreal, slight grain. Evokes investigative journalism, not corporate. 3:2.';
 
 const researchItems = [
   { icon: Globe, label: 'Company website', sub: 'Values, mission, product direction' },
   { icon: Newspaper, label: 'Recent news', sub: 'Funding, launches, pivots' },
   { icon: Users, label: 'Team page', sub: 'Culture signals, hiring patterns' },
-  { icon: FileText, label: 'Job post deep-read', sub: 'What they\'re actually asking for' },
+  { icon: FileText, label: 'Job post deep-read', sub: "What they're actually asking for" },
 ];
 
 export default function CompanyResearchSection() {
   return (
-    <section className="py-24 lg:py-32 border-t border-border bg-muted/30">
+    <section className="py-24 lg:py-32 bg-muted/30">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Visual left */}
-          <div className="order-2 lg:order-1">
-            {/* Dossier UI mock */}
+          {/* Visual left — dossier mock + IMG-4 placeholder */}
+          <div className="order-2 lg:order-1 space-y-4">
             <div
               className="rounded-3xl border border-border p-6 lg:p-8"
               style={{ background: 'var(--card)', boxShadow: 'inset 0 1px 0 0 oklch(1 0 0 / 0.04)' }}
@@ -32,8 +35,8 @@ export default function CompanyResearchSection() {
                 {researchItems.map(({ icon: Icon, label, sub }) => (
                   <div
                     key={label}
-                    className="flex items-start gap-3 p-3 rounded-xl border border-border hover:border-[oklch(0.852_0.199_91.936_/_0.3)] transition-colors"
-                    style={{ background: 'oklch(var(--muted))' }}
+                    className="flex items-start gap-3 p-3 rounded-xl border border-border transition-colors"
+                    style={{ background: 'hsl(var(--muted))' }}
                   >
                     <div
                       className="mt-0.5 w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
@@ -60,10 +63,7 @@ export default function CompanyResearchSection() {
               </div>
             </div>
 
-            {/* IMG-4 placeholder */}
-            <div className="mt-4 rounded-xl border border-border bg-muted/50 flex items-center justify-center h-20 text-muted-foreground text-xs font-medium">
-              IMG-4 · Investigative dossier
-            </div>
+            <ImagePlaceholder id="IMG-4" prompt={IMG4_PROMPT} />
           </div>
 
           {/* Copy right */}
