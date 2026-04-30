@@ -98,16 +98,15 @@ export default function ProfileFirstSection() {
         const nxt = points[i + 1];
 
         // Exit from right-center of left card, or left-center of right card
-        // Inset by 20px so the thick stroke doesn't bleed into the card
-        const GAP = 20;
-        const x1 = cur.side === 'left' ? cur.right + GAP : cur.left - GAP;
+        const x1 = cur.side === 'left' ? cur.right : cur.left;
         const y1 = cur.midY;
 
-        // Enter at top-center of next card, inset 20px above
+        // Enter at top-center of next card
         const x2 = nxt.midX;
-        const y2 = nxt.top - GAP;
+        const y2 = nxt.top;
 
         // Curve: go horizontally out then sweep down to top-center
+        // Use butt linecap so ends are flat/square against the cards
         const cp1x = x1 + (cur.side === 'left' ? 60 : -60);
         const cp1y = y1;
         const cp2x = x2;
@@ -154,13 +153,13 @@ export default function ProfileFirstSection() {
             {pathD && (
               <>
                 {/* Road outer glow */}
-                <path d={pathD} fill="none" stroke="oklch(0.852 0.199 91.936)" strokeWidth="64" strokeLinecap="round" strokeLinejoin="round" opacity="0.07" />
+                <path d={pathD} fill="none" stroke="oklch(0.852 0.199 91.936)" strokeWidth="64" strokeLinecap="butt" strokeLinejoin="round" opacity="0.07" />
                 {/* Road shoulder */}
-                <path d={pathD} fill="none" stroke="oklch(0.852 0.199 91.936)" strokeWidth="48" strokeLinecap="round" strokeLinejoin="round" opacity="0.13" />
+                <path d={pathD} fill="none" stroke="oklch(0.852 0.199 91.936)" strokeWidth="48" strokeLinecap="butt" strokeLinejoin="round" opacity="0.13" />
                 {/* Road surface */}
-                <path d={pathD} fill="none" stroke="oklch(0.852 0.199 91.936)" strokeWidth="36" strokeLinecap="round" strokeLinejoin="round" opacity="0.20" />
+                <path d={pathD} fill="none" stroke="oklch(0.852 0.199 91.936)" strokeWidth="36" strokeLinecap="butt" strokeLinejoin="round" opacity="0.20" />
                 {/* Centre dashed line */}
-                <path d={pathD} fill="none" stroke="oklch(0.852 0.199 91.936)" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="22 14" opacity="0.9" />
+                <path d={pathD} fill="none" stroke="oklch(0.852 0.199 91.936)" strokeWidth="2.5" strokeLinecap="butt" strokeDasharray="22 14" opacity="0.9" />
               </>
             )}
           </svg>
