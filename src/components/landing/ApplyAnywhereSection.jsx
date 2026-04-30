@@ -22,168 +22,144 @@ function GlobeCanvas() {
 
     const ctx = canvas.getContext('2d');
 
-    const dots = Array.from({ length: 420 }, () => {
-      const theta = 2 * Math.PI * Math.random();
-      const phi = Math.acos(2 * Math.random() - 1);
-      return { theta, phi, pulse: Math.random() * Math.PI * 2, speed: 0.4 + Math.random() * 1.2 };
+    // Particles on globe surface
+    const particles = Array.from({ length: 600 }, () => {
+      const u = Math.random();
+      const v = Math.random();
+      const theta = 2 * Math.PI * u;
+      const phi = Math.acos(2 * v - 1);
+      return {
+        theta, phi,
+        size: 0.5 + Math.random() * 1.5,
+        brightness: 0.3 + Math.random() * 0.7,
+        twinkle: Math.random() * Math.PI * 2,
+        twinkleSpeed: 0.02 + Math.random() * 0.04,
+      };
     });
 
-    const arcs = Array.from({ length: 18 }, () => ({
-      a: Math.floor(Math.random() * dots.length),
-      b: Math.floor(Math.random() * dots.length),
-      progress: Math.random(),
-      speed: 0.002 + Math.random() * 0.003,
-    }));
-
     let t = 0;
-    const rotSpeed = 0.002;
+    const ROT = 0.0015;
 
     function draw() {
       const W = canvas.width;
       const H = canvas.height;
       ctx.clearRect(0, 0, W, H);
 
-      // Globe radius — large so only the top arc is visible (like blue reference)
-      const R = W * 0.62;
       const cx = W / 2;
-      // Globe center pushed well below the canvas so only top arc peeks up
-      const cy = H + R * 0.18;
+      // Globe radius = 75% of width so it fills most of the section width
+      const R = W * 0.48;
+      // Center is at 80% down the canvas — only top portion of sphere is visible
+      const cy = H * 0.82;
 
-      // ── Full section dark background ──
-      ctx.fillStyle = '#07040a';
+      // ── Dark background ──
+      ctx.fillStyle = '#06040f';
       ctx.fillRect(0, 0, W, H);
 
-      // Subtle radial rays from globe top
-      const rayY = cy - R;
-      for (let i = 0; i < 24; i++) {
-        const angle = -Math.PI / 2 + (i / 23 - 0.5) * Math.PI * 1.5;
-        const grad = ctx.createLinearGradient(cx, rayY, cx + Math.cos(angle) * W, rayY + Math.sin(angle) * H);
-        grad.addColorStop(0, 'rgba(245,175,0,0.06)');
-        grad.addColorStop(1, 'rgba(245,175,0,0)');
+      // ── Radial rays from globe apex ──
+      const apexY = cy - R;
+      for (let i = 0; i < 30; i++) {
+        const frac = i / 29;
+        const angle = (-0.7 + frac * 1.4) * Math.PI; // spread 180° upward
+        const x2 = cx + Math.cos(angle) * W;
+        const y2 = apexY + Math.sin(angle) * H;
+        const g = ctx.createLinearGradient(cx, apexY, x2, y2);
+        g.addColorStop(0, 'rgba(255,185,0,0.055)');
+        g.addColorStop(1, 'rgba(255,185,0,0)');
         ctx.beginPath();
-        ctx.moveTo(cx, rayY);
-        ctx.lineTo(cx + Math.cos(angle) * W * 1.5, rayY + Math.sin(angle) * H * 1.5);
-        ctx.strokeStyle = grad;
-        ctx.lineWidth = 1.2;
+        ctx.moveTo(cx, apexY);
+        ctx.lineTo(x2, y2);
+        ctx.strokeStyle = g;
+        ctx.lineWidth = 1;
         ctx.stroke();
       }
 
-      // Outer halo
-      const halo = ctx.createRadialGradient(cx, cy, R * 0.6, cx, cy, R * 1.4);
-      halo.addColorStop(0, 'rgba(245,170,0,0.22)');
-      halo.addColorStop(0.5, 'rgba(180,100,0,0.07)');
+      // ── Globe glow halo (behind sphere) ──
+      const halo = ctx.createRadialGradient(cx, cy, R * 0.7, cx, cy, R * 1.5);
+      halo.addColorStop(0, 'rgba(255,175,0,0.28)');
+      halo.addColorStop(0.4, 'rgba(200,120,0,0.10)');
       halo.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.beginPath();
-      ctx.arc(cx, cy, R * 1.4, 0, Math.PI * 2);
+      ctx.arc(cx, cy, R * 1.5, 0, Math.PI * 2);
       ctx.fillStyle = halo;
       ctx.fill();
 
-      // Sphere body — very dark, glow only near the rim top
-      const sphere = ctx.createRadialGradient(cx, cy - R * 0.85, R * 0.1, cx, cy, R);
-      sphere.addColorStop(0, 'rgba(255,200,30,0.08)');
-      sphere.addColorStop(0.15, 'rgba(10,5,0,0.97)');
-      sphere.addColorStop(1, 'rgba(2,1,0,1)');
+      // ── Sphere body — very dark, almost black ──
+      const sphereGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, R);
+      sphereGrad.addColorStop(0, '#0e0a02');
+      sphereGrad.addColorStop(0.6, '#080501');
+      sphereGrad.addColorStop(1, '#030200');
       ctx.beginPath();
       ctx.arc(cx, cy, R, 0, Math.PI * 2);
-      ctx.fillStyle = sphere;
+      ctx.fillStyle = sphereGrad;
       ctx.fill();
 
-      // Grid lines clipped to sphere
+      // ── Grid lines (lat/long) clipped to sphere ──
       ctx.save();
       ctx.beginPath();
       ctx.arc(cx, cy, R, 0, Math.PI * 2);
       ctx.clip();
 
+      const rot = t * ROT;
+
+      // Latitude rings
       for (let lat = -75; lat <= 75; lat += 15) {
         const phi = (90 - lat) * Math.PI / 180;
-        const yr = cy - Math.cos(phi) * R;
-        const xr = Math.abs(Math.sin(phi)) * R;
+        const ringY = cy - Math.cos(phi) * R;
+        const ringR = Math.abs(Math.sin(phi)) * R;
+        if (ringR < 1) continue;
         ctx.beginPath();
-        ctx.ellipse(cx, yr, xr < 1 ? 1 : xr, xr * 0.14, 0, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(245,175,0,0.10)';
-        ctx.lineWidth = 0.6;
+        ctx.ellipse(cx, ringY, ringR, ringR * 0.12, 0, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(255,185,0,0.09)';
+        ctx.lineWidth = 0.7;
         ctx.stroke();
       }
 
-      const rot = t * rotSpeed;
+      // Longitude lines
       for (let i = 0; i < 12; i++) {
-        const angle = (i / 12) * Math.PI + rot;
-        const rx = Math.abs(Math.cos(angle)) * R;
+        const a = (i / 12) * Math.PI + rot;
+        const rx = Math.abs(Math.cos(a)) * R;
         ctx.beginPath();
-        ctx.ellipse(cx, cy, rx < 1 ? 1 : rx, R, 0, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(245,175,0,0.08)';
-        ctx.lineWidth = 0.6;
+        ctx.ellipse(cx, cy, rx < 0.5 ? 0.5 : rx, R, 0, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(255,185,0,0.07)';
+        ctx.lineWidth = 0.7;
         ctx.stroke();
       }
 
-      dots.forEach(d => {
-        const sx = Math.sin(d.phi) * Math.cos(d.theta + rot);
-        const sy = Math.cos(d.phi);
-        const sz = Math.sin(d.phi) * Math.sin(d.theta + rot);
-        if (sz < -0.05) return;
+      // ── Particles on globe surface ──
+      particles.forEach(p => {
+        const sx = Math.sin(p.phi) * Math.cos(p.theta + rot);
+        const sy = Math.cos(p.phi);
+        const sz = Math.sin(p.phi) * Math.sin(p.theta + rot);
+        if (sz < 0) return; // back-face cull
         const px = cx + sx * R;
         const py = cy - sy * R;
-        const pulse = 0.5 + 0.5 * Math.sin(t * d.speed * 0.05 + d.pulse);
-        const size = (0.7 + pulse * 1.6) * (0.35 + sz * 0.65);
-        const alpha = (0.2 + pulse * 0.65) * (0.25 + sz * 0.75);
+        const twinkle = 0.5 + 0.5 * Math.sin(t * p.twinkleSpeed + p.twinkle);
+        const alpha = p.brightness * twinkle * (0.2 + sz * 0.8);
+        const size = p.size * (0.4 + sz * 0.6);
         ctx.beginPath();
         ctx.arc(px, py, size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,200,20,${alpha})`;
+        ctx.fillStyle = `rgba(255,210,60,${alpha})`;
         ctx.fill();
       });
 
       ctx.restore();
 
-      // Bright rim — tight glowing edge like blue reference
+      // ── Glowing rim ──
+      // Inner bright line
       ctx.beginPath();
       ctx.arc(cx, cy, R, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(255,195,0,0.75)';
-      ctx.lineWidth = 2.5;
-      ctx.stroke();
-      // Outer glow ring
-      ctx.beginPath();
-      ctx.arc(cx, cy, R + 6, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(255,175,0,0.18)';
-      ctx.lineWidth = 10;
+      ctx.strokeStyle = 'rgba(255,200,0,0.85)';
+      ctx.lineWidth = 1.8;
       ctx.stroke();
 
-      // Travel arcs
-      arcs.forEach(arc => {
-        arc.progress += arc.speed;
-        if (arc.progress > 1) arc.progress = 0;
-        const da = dots[arc.a], db = dots[arc.b];
-        const rot2 = t * rotSpeed;
-        const pAz = Math.sin(da.phi) * Math.sin(da.theta + rot2);
-        const pBz = Math.sin(db.phi) * Math.sin(db.theta + rot2);
-        if (pAz < 0 || pBz < 0) return;
-        const pAx = cx + Math.sin(da.phi) * Math.cos(da.theta + rot2) * R;
-        const pAy = cy - Math.cos(da.phi) * R;
-        const pBx = cx + Math.sin(db.phi) * Math.cos(db.theta + rot2) * R;
-        const pBy = cy - Math.cos(db.phi) * R;
-        const midX = (pAx + pBx) / 2;
-        const midY = (pAy + pBy) / 2 - R * 0.14;
-        const steps = 50;
-        const stop = Math.floor(arc.progress * steps);
+      // Soft outer glow
+      for (let g = 1; g <= 4; g++) {
         ctx.beginPath();
-        for (let s = 0; s <= stop; s++) {
-          const tt = s / steps;
-          const bx = (1-tt)*(1-tt)*pAx + 2*(1-tt)*tt*midX + tt*tt*pBx;
-          const by = (1-tt)*(1-tt)*pAy + 2*(1-tt)*tt*midY + tt*tt*pBy;
-          s === 0 ? ctx.moveTo(bx, by) : ctx.lineTo(bx, by);
-        }
-        ctx.strokeStyle = `rgba(255,200,20,${0.5 - arc.progress * 0.4})`;
-        ctx.lineWidth = 0.85;
+        ctx.arc(cx, cy, R + g * 5, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(255,185,0,${0.12 - g * 0.025})`;
+        ctx.lineWidth = 7;
         ctx.stroke();
-        if (stop > 0) {
-          const tip = stop / steps;
-          const bx = (1-tip)*(1-tip)*pAx + 2*(1-tip)*tip*midX + tip*tip*pBx;
-          const by = (1-tip)*(1-tip)*pAy + 2*(1-tip)*tip*midY + tip*tip*pBy;
-          ctx.beginPath();
-          ctx.arc(bx, by, 2.5, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(255,225,60,0.95)';
-          ctx.fill();
-        }
-      });
+      }
 
       t++;
       animRef.current = requestAnimationFrame(draw);
@@ -202,17 +178,20 @@ function GlobeCanvas() {
 export default function ApplyAnywhereSection() {
   return (
     <section className="overflow-hidden">
-      <div className="relative w-full" style={{ height: 'clamp(520px, 65vw, 740px)' }}>
+      <div className="relative w-full" style={{ height: 'clamp(520px, 62vw, 720px)' }}>
         <GlobeCanvas />
 
-        {/* Text centered vertically in the upper 55% — sitting above the globe arc */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none px-6" style={{ paddingBottom: '20%' }}>
+        {/* Text overlaid — centered vertically, lower half like blue reference */}
+        <div
+          className="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none px-6"
+          style={{ paddingTop: '8%' }}
+        >
           <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-white/40 mb-5">
             Apply anywhere on the internet
           </p>
 
           <h2
-            className="font-black text-white text-center mb-3"
+            className="font-black text-white text-center mb-3 drop-shadow-lg"
             style={{ fontSize: 'clamp(32px, 5vw, 64px)', lineHeight: '1.05', letterSpacing: '-0.03em' }}
           >
             No job-board lock-in.
