@@ -75,17 +75,7 @@ export default function HeroSection() {
               </a>
             </div>
 
-            {/* Trust row */}
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-foreground/50 font-medium">
-              {trustItems.map((item, i) => (
-                <span key={item} className="flex items-center gap-3">
-                  {item}
-                  {i < trustItems.length - 1 && (
-                    <span aria-hidden className="text-foreground/25">·</span>
-                  )}
-                </span>
-              ))}
-            </div>
+
           </div>
 
           {/* Floating tags */}
