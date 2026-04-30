@@ -78,11 +78,11 @@ function GlobeCanvas() {
       ctx.fillStyle = halo;
       ctx.fill();
 
-      // Sphere body
-      const sphere = ctx.createRadialGradient(cx - R * 0.18, cy - R * 0.3, R * 0.01, cx, cy, R);
-      sphere.addColorStop(0, 'rgba(255,200,30,0.18)');
-      sphere.addColorStop(0.3, 'rgba(25,12,0,0.92)');
-      sphere.addColorStop(1, 'rgba(3,1,0,0.99)');
+      // Sphere body — very dark, glow only near the rim top
+      const sphere = ctx.createRadialGradient(cx, cy - R * 0.85, R * 0.1, cx, cy, R);
+      sphere.addColorStop(0, 'rgba(255,200,30,0.08)');
+      sphere.addColorStop(0.15, 'rgba(10,5,0,0.97)');
+      sphere.addColorStop(1, 'rgba(2,1,0,1)');
       ctx.beginPath();
       ctx.arc(cx, cy, R, 0, Math.PI * 2);
       ctx.fillStyle = sphere;
@@ -134,15 +134,17 @@ function GlobeCanvas() {
 
       ctx.restore();
 
-      // Bright rim
-      const rim = ctx.createRadialGradient(cx, cy, R * 0.91, cx, cy, R * 1.03);
-      rim.addColorStop(0, 'rgba(245,175,0,0)');
-      rim.addColorStop(0.5, 'rgba(255,185,0,0.6)');
-      rim.addColorStop(1, 'rgba(245,175,0,0)');
+      // Bright rim — tight glowing edge like blue reference
       ctx.beginPath();
       ctx.arc(cx, cy, R, 0, Math.PI * 2);
-      ctx.strokeStyle = rim;
-      ctx.lineWidth = 4;
+      ctx.strokeStyle = 'rgba(255,195,0,0.75)';
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+      // Outer glow ring
+      ctx.beginPath();
+      ctx.arc(cx, cy, R + 6, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(255,175,0,0.18)';
+      ctx.lineWidth = 10;
       ctx.stroke();
 
       // Travel arcs
