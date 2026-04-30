@@ -58,9 +58,6 @@ export default function Footer() {
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} Just Apply. All rights reserved.
           </p>
-          <p className="text-xs text-muted-foreground">
-            Made with crewAI · Electron · FastAPI
-          </p>
         </div>
       </div>
     </footer>
