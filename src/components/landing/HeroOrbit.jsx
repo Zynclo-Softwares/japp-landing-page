@@ -13,18 +13,18 @@ const chips = [
   { icon: FileText, label: 'Resume Builder' },
 ];
 
-// Fixed positions (left%, top%) spread across the container
+// Fixed positions (left%, top%) spread across the container — kept away from edges
 const positions = [
-  { left: 8,  top: 10 },
-  { left: 55, top: 5  },
-  { left: 72, top: 22 },
-  { left: 80, top: 55 },
-  { left: 60, top: 78 },
-  { left: 25, top: 85 },
-  { left: 2,  top: 65 },
-  { left: 5,  top: 38 },
-  { left: 38, top: 45 },
-  { left: 45, top: 20 },
+  { left: 20, top: 10 },
+  { left: 55, top: 8  },
+  { left: 68, top: 25 },
+  { left: 70, top: 55 },
+  { left: 55, top: 76 },
+  { left: 28, top: 82 },
+  { left: 12, top: 62 },
+  { left: 14, top: 36 },
+  { left: 40, top: 48 },
+  { left: 42, top: 22 },
 ];
 
 // Gentle float animations — alternate direction/duration per chip
