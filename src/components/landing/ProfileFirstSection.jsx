@@ -55,19 +55,38 @@ export default function ProfileFirstSection() {
 
         {/* Roadmap */}
         <div className="relative max-w-3xl mx-auto">
-
-          {/* Vertical amber path */}
-          <div
-            className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-0.5"
-            style={{ background: 'linear-gradient(to bottom, transparent, oklch(0.852 0.199 91.936 / 0.6) 8%, oklch(0.852 0.199 91.936 / 0.6) 92%, transparent)' }}
-          />
+          {/* SVG curved road */}
+          <svg
+            className="absolute inset-0 w-full h-full pointer-events-none"
+            viewBox="0 0 600 750"
+            preserveAspectRatio="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <linearGradient id="roadGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="oklch(0.852 0.199 91.936)" stopOpacity="0" />
+                <stop offset="10%" stopColor="oklch(0.852 0.199 91.936)" stopOpacity="0.7" />
+                <stop offset="90%" stopColor="oklch(0.852 0.199 91.936)" stopOpacity="0.7" />
+                <stop offset="100%" stopColor="oklch(0.852 0.199 91.936)" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            {/* Path snaking left→right→left→right→left across the 5 dot positions */}
+            {/* Dots at x≈150 (left) and x≈450 (right), spaced ~150px vertically */}
+            <path
+              d="M 150 75 C 150 150, 450 100, 450 225 C 450 300, 150 250, 150 375 C 150 450, 450 400, 450 525 C 450 600, 150 550, 150 675"
+              fill="none"
+              stroke="url(#roadGrad)"
+              strokeWidth="2.5"
+              strokeDasharray="6 5"
+            />
+          </svg>
 
           <div className="flex flex-col gap-0">
             {steps.map(({ num, title, desc, side }, idx) => (
-              <div key={num} className="relative flex items-center min-h-[120px]">
+              <div key={num} className="relative flex items-center min-h-[150px]">
 
                 {/* Left slot */}
-                <div className={`w-[calc(50%-28px)] pr-6 ${side === 'left' ? 'text-right' : ''}`}>
+                <div className="w-[calc(50%-28px)] pr-6">
                   {side === 'left' && (
                     <StepCard num={num} title={title} desc={desc} align="right" />
                   )}
@@ -80,7 +99,7 @@ export default function ProfileFirstSection() {
                     style={{
                       background: 'var(--background)',
                       borderColor: 'oklch(0.852 0.199 91.936)',
-                      boxShadow: '0 0 0 4px oklch(0.852 0.199 91.936 / 0.15)',
+                      boxShadow: '0 0 0 5px oklch(0.852 0.199 91.936 / 0.15)',
                     }}
                   >
                     <div className="w-2 h-2 rounded-full" style={{ background: 'oklch(0.852 0.199 91.936)' }} />
@@ -88,7 +107,7 @@ export default function ProfileFirstSection() {
                 </div>
 
                 {/* Right slot */}
-                <div className={`w-[calc(50%-28px)] pl-6`}>
+                <div className="w-[calc(50%-28px)] pl-6">
                   {side === 'right' && (
                     <StepCard num={num} title={title} desc={desc} align="left" />
                   )}
