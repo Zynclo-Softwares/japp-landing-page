@@ -74,9 +74,9 @@ function GlobeCanvas() {
       }
 
       // ── Globe glow halo (behind sphere) ──
-      const halo = ctx.createRadialGradient(cx, cy, R * 0.7, cx, cy, R * 1.5);
-      halo.addColorStop(0, 'rgba(255,175,0,0.28)');
-      halo.addColorStop(0.4, 'rgba(200,120,0,0.10)');
+      const halo = ctx.createRadialGradient(cx, cy, R * 0.85, cx, cy, R * 1.3);
+      halo.addColorStop(0, 'rgba(255,175,0,0.10)');
+      halo.addColorStop(0.5, 'rgba(200,120,0,0.05)');
       halo.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.beginPath();
       ctx.arc(cx, cy, R * 1.5, 0, Math.PI * 2);
@@ -109,8 +109,8 @@ function GlobeCanvas() {
         if (ringR < 1) continue;
         ctx.beginPath();
         ctx.ellipse(cx, ringY, ringR, ringR * 0.12, 0, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(255,185,0,0.09)';
-        ctx.lineWidth = 0.7;
+        ctx.strokeStyle = 'rgba(255,185,0,0.28)';
+        ctx.lineWidth = 0.9;
         ctx.stroke();
       }
 
@@ -120,8 +120,8 @@ function GlobeCanvas() {
         const rx = Math.abs(Math.cos(a)) * R;
         ctx.beginPath();
         ctx.ellipse(cx, cy, rx < 0.5 ? 0.5 : rx, R, 0, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(255,185,0,0.07)';
-        ctx.lineWidth = 0.7;
+        ctx.strokeStyle = 'rgba(255,185,0,0.22)';
+        ctx.lineWidth = 0.9;
         ctx.stroke();
       }
 
@@ -144,18 +144,17 @@ function GlobeCanvas() {
 
       ctx.restore();
 
-      // ── Glowing rim — thick atmospheric fill ──
-      // Wide outer atmospheric halo (fills inward from edge)
-      const rimWidth = R * 0.18;
-      const rimGrad = ctx.createRadialGradient(cx, cy, R - rimWidth, cx, cy, R + rimWidth * 0.5);
-      rimGrad.addColorStop(0,   'rgba(255,185,0,0)');
-      rimGrad.addColorStop(0.5, 'rgba(255,195,0,0.18)');
-      rimGrad.addColorStop(0.78,'rgba(255,200,0,0.55)');
-      rimGrad.addColorStop(0.92,'rgba(255,220,50,0.9)');
-      rimGrad.addColorStop(1,   'rgba(255,230,80,0)');
+      // ── Glowing rim — tight atmospheric band ──
+      const rimWidth = R * 0.06;
+      const rimGrad = ctx.createRadialGradient(cx, cy, R - rimWidth, cx, cy, R + rimWidth * 0.4);
+      rimGrad.addColorStop(0,    'rgba(255,185,0,0)');
+      rimGrad.addColorStop(0.55, 'rgba(255,195,0,0.20)');
+      rimGrad.addColorStop(0.82, 'rgba(255,210,0,0.60)');
+      rimGrad.addColorStop(0.94, 'rgba(255,225,60,0.88)');
+      rimGrad.addColorStop(1,    'rgba(255,230,80,0)');
 
       ctx.beginPath();
-      ctx.arc(cx, cy, R + rimWidth * 0.5, 0, Math.PI * 2);
+      ctx.arc(cx, cy, R + rimWidth * 0.4, 0, Math.PI * 2);
       ctx.arc(cx, cy, R - rimWidth, 0, Math.PI * 2, true);
       ctx.fillStyle = rimGrad;
       ctx.fill();
@@ -163,8 +162,8 @@ function GlobeCanvas() {
       // Crisp bright line at the very edge
       ctx.beginPath();
       ctx.arc(cx, cy, R, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(255,230,80,0.95)';
-      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = 'rgba(255,225,60,0.90)';
+      ctx.lineWidth = 1.2;
       ctx.stroke();
 
       t++;
