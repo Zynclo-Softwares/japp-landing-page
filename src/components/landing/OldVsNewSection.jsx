@@ -1,5 +1,4 @@
-const IMG2_URL = 'https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/6bb39593b_image.png';
-const CARD_URL = 'https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/1d8435744_image.png';
+const IMG2_URL = 'https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/04492cad3_image.png';
 
 export default function OldVsNewSection() {
   return (
@@ -26,43 +25,12 @@ export default function OldVsNewSection() {
           Download. Upload. Repeat 40 times. We collapsed all of it — no copy-pasting, no URL hunting. Just point and apply.
         </p>
 
-        {/* Full image with floating card overlay on the right */}
-        <div className="relative rounded-3xl overflow-visible" style={{ background: 'transparent' }}>
-          <img
-            src={IMG2_URL}
-            alt="The old way vs Just Apply"
-            className="w-full object-cover rounded-3xl"
-            style={{ maxHeight: '520px', minHeight: '400px', height: '100%', objectPosition: 'center' }}
-          />
-          {/* Floating "Just Apply" card — sleek, 3D tilt */}
-          <div
-            className="absolute"
-            style={{
-              top: '-6%',
-              bottom: '-18%',
-              right: '-1%',
-              left: '51%',
-              width: 'auto',
-              transform: 'perspective(1200px) rotateY(-6deg) rotateX(1.5deg)',
-              boxShadow: '-24px 0 60px -8px oklch(0 0 0 / 0.5), 0 32px 60px -12px oklch(0 0 0 / 0.3)',
-              borderRadius: '20px',
-              overflow: 'hidden',
-              border: '1.5px solid oklch(0.852 0.199 91.936 / 0.5)',
-            }}
-          >
-            <img
-              src={CARD_URL}
-              alt="Just Apply card"
-              style={{
-                display: 'block',
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                objectPosition: '20% center',
-              }}
-            />
-          </div>
-        </div>
+        {/* Single combined image */}
+        <img
+          src={IMG2_URL}
+          alt="The old way vs Just Apply"
+          className="w-full rounded-3xl"
+        />
       </div>
     </section>
   );
