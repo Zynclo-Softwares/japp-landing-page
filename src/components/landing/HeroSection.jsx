@@ -67,7 +67,7 @@ export default function HeroSection() {
                 onMouseEnter={e => e.currentTarget.style.boxShadow = '0 18px 60px -12px oklch(0.852 0.199 91.936 / 0.65)'}
                 onMouseLeave={e => e.currentTarget.style.boxShadow = '0 10px 40px -10px oklch(0.852 0.199 91.936 / 0.45)'}
               >
-                Download for Mac — Free beta
+                Download Now
               </a>
               <a
                 href="#demo"
