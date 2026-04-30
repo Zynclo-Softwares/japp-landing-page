@@ -1,31 +1,73 @@
-import ImagePlaceholder from './ImagePlaceholder';
-
-const IMG3_PROMPT =
-  'A grid of six wildly different resume layouts floating in mid-air — one brutalist black-and-white, one pastel editorial magazine style, one ultra-minimal Swiss grid, one playful zine-style with stickers, one terminal/monospace dark theme, one classic serif. All show the same person\'s content, perfectly typeset. They tilt slightly toward the viewer. Warm amber rim light. Background: soft cream paper texture. Caption-free. 4:3.';
+import { motion } from 'framer-motion';
 
 const templateStyles = [
-  { label: 'Brutalist', bg: '#0d0d0d', text: '#fff', accent: '#f5b400' },
-  { label: 'Editorial', bg: '#fdf6ec', text: '#1a1a1a', accent: '#e05a2b' },
-  { label: 'Swiss Grid', bg: '#fff', text: '#0d0d0d', accent: '#0d0d0d' },
-  { label: 'Zine', bg: '#f0e6ff', text: '#1a0030', accent: '#7c3aed' },
-  { label: 'Terminal', bg: '#0a1628', text: '#4ade80', accent: '#22c55e' },
-  { label: 'Classic Serif', bg: '#fafaf8', text: '#1c1917', accent: '#78716c' },
+  { label: 'Brutalist',     bg: '#0d0d0d', text: '#fff',     accent: '#f5b400', lines: [75,55,80,60,70] },
+  { label: 'Editorial',     bg: '#fdf6ec', text: '#1a1a1a',  accent: '#e05a2b', lines: [60,80,50,75,65] },
+  { label: 'Swiss Grid',    bg: '#ffffff', text: '#0d0d0d',  accent: '#0d0d0d', lines: [100,45,90,45,85] },
+  { label: 'Zine',          bg: '#f0e6ff', text: '#1a0030',  accent: '#7c3aed', lines: [70,50,80,40,65] },
+  { label: 'Terminal',      bg: '#0a1628', text: '#4ade80',  accent: '#22c55e', lines: [80,60,75,55,70] },
+  { label: 'Classic Serif', bg: '#fafaf8', text: '#1c1917',  accent: '#78716c', lines: [65,80,55,75,60] },
 ];
 
-function TemplateMiniCard({ label, bg, text, accent }) {
+// Layout: [col, row, rotateY, rotateX, z, floatDelay]
+const layout = [
+  { col: 0, row: 0, ry: -18, rx: 8,  z: 20,  delay: 0    },
+  { col: 1, row: 0, ry:   0, rx: 6,  z: 40,  delay: 0.5  },
+  { col: 2, row: 0, ry:  18, rx: 8,  z: 20,  delay: 1.0  },
+  { col: 0, row: 1, ry: -14, rx: -6, z: 30,  delay: 0.3  },
+  { col: 1, row: 1, ry:   0, rx: -8, z: 50,  delay: 0.8  },
+  { col: 2, row: 1, ry:  14, rx: -6, z: 30,  delay: 1.3  },
+];
+
+function TemplateCard3D({ label, bg, text, accent, lines, ry, rx, z, delay }) {
+  return (
+    <motion.div
+      animate={{ y: [0, -10, 0] }}
+      transition={{ duration: 3.5, delay, repeat: Infinity, ease: 'easeInOut' }}
+      style={{ perspective: '600px' }}
+    >
+      <motion.div
+        style={{
+          background: bg,
+          transform: `rotateY(${ry}deg) rotateX(${rx}deg) translateZ(${z}px)`,
+          transformStyle: 'preserve-3d',
+          boxShadow: `0 ${8 + z / 4}px ${24 + z / 2}px rgba(0,0,0,0.18), 0 2px 6px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.08)`,
+          border: '1px solid rgba(255,255,255,0.12)',
+        }}
+        className="w-36 h-48 rounded-2xl p-3 flex flex-col gap-1.5 cursor-pointer"
+        whileHover={{ scale: 1.06, transition: { duration: 0.2 } }}
+      >
+        <div className="h-2.5 rounded-full w-3/4 mb-1" style={{ background: accent }} />
+        <div className="h-1.5 rounded-full w-1/2" style={{ background: text, opacity: 0.35 }} />
+        <div className="h-px w-full my-1" style={{ background: text, opacity: 0.12 }} />
+        {lines.map((w, i) => (
+          <div key={i} className="h-1 rounded-full" style={{ background: text, opacity: 0.18, width: `${w}%` }} />
+        ))}
+        <div className="mt-auto text-[7px] font-bold tracking-wide uppercase" style={{ color: text, opacity: 0.45 }}>
+          {label}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function Templates3D() {
   return (
     <div
-      className="flex-shrink-0 w-40 h-52 rounded-xl overflow-hidden border border-border/50 p-3 flex flex-col gap-2 transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
-      style={{ background: bg }}
+      className="relative w-full h-[420px] flex items-center justify-center"
+      style={{ perspective: '900px' }}
     >
-      <div className="h-2.5 rounded-full w-3/4" style={{ background: accent, opacity: 0.9 }} />
-      <div className="h-1.5 rounded-full w-1/2" style={{ background: text, opacity: 0.3 }} />
-      <div className="h-px w-full my-1" style={{ background: text, opacity: 0.15 }} />
-      {[80, 65, 75, 55, 70, 60].map((w, i) => (
-        <div key={i} className="h-1 rounded-full" style={{ background: text, opacity: 0.2, width: `${w}%` }} />
-      ))}
-      <div className="mt-auto text-[8px] font-bold" style={{ color: text, opacity: 0.5 }}>
-        {label}
+      {/* Ambient glow */}
+      <div className="absolute inset-0 rounded-3xl pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at 60% 50%, oklch(0.852 0.199 91.936 / 0.12) 0%, transparent 70%)' }}
+      />
+      <div
+        className="grid grid-cols-3 gap-5"
+        style={{ transform: 'rotateX(10deg)', transformStyle: 'preserve-3d' }}
+      >
+        {templateStyles.map((t, i) => (
+          <TemplateCard3D key={t.label} {...t} {...layout[i]} />
+        ))}
       </div>
     </div>
   );
@@ -76,30 +118,8 @@ export default function BYOTemplateSection() {
             </div>
           </div>
 
-          {/* Template grid + IMG-3 placeholder */}
-          <div>
-            {/* Desktop: 3-col grid */}
-            <div className="hidden lg:grid grid-cols-3 gap-3 mb-4">
-              {templateStyles.map((t) => (
-                <TemplateMiniCard key={t.label} {...t} />
-              ))}
-            </div>
-
-            {/* Mobile: scroll rail */}
-            <div className="lg:hidden mb-4">
-              <p className="text-xs text-muted-foreground text-center mb-3">← swipe templates →</p>
-              <div className="flex gap-3 overflow-x-auto pb-3 snap-x snap-mandatory" style={{ scrollbarWidth: 'none' }}>
-                {templateStyles.map((t) => (
-                  <div key={t.label} className="snap-start">
-                    <TemplateMiniCard {...t} />
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* IMG-3 placeholder */}
-            <ImagePlaceholder id="IMG-3" prompt={IMG3_PROMPT} />
-          </div>
+          {/* 3D floating template illustration */}
+          <Templates3D />
         </div>
       </div>
     </section>
