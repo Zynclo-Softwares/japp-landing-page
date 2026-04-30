@@ -156,15 +156,36 @@ export default function ProfileFirstSection() {
             style={{ top: 0, left: 0 }}
           >
             {pathD && (
-              <path
-                d={pathD}
-                fill="none"
-                stroke="oklch(0.852 0.199 91.936)"
-                strokeWidth="2"
-                strokeDasharray="7 5"
-                strokeLinecap="round"
-                opacity="0.75"
-              />
+              <>
+                {/* Road shadow/border */}
+                <path
+                  d={pathD}
+                  fill="none"
+                  stroke="oklch(0.852 0.199 91.936 / 0.15)"
+                  strokeWidth="14"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                {/* Road surface */}
+                <path
+                  d={pathD}
+                  fill="none"
+                  stroke="oklch(0.852 0.199 91.936 / 0.35)"
+                  strokeWidth="10"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                {/* Centre line */}
+                <path
+                  d={pathD}
+                  fill="none"
+                  stroke="oklch(0.852 0.199 91.936 / 0.9)"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeDasharray="18 10"
+                />
+              </>
             )}
           </svg>
 
