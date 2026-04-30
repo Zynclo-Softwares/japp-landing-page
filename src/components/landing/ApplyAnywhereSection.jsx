@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 
 const boards = [
   'LinkedIn', 'Wellfound', 'Lever', 'Greenhouse', 'Workday',
-  'That weird Notion page some founder posted on Twitter',
+
 ];
 
 function GlobeCanvas() {
