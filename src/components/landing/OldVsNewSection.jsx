@@ -34,24 +34,24 @@ export default function OldVsNewSection() {
             className="w-full object-cover rounded-3xl"
             style={{ maxHeight: '520px', objectPosition: 'center' }}
           />
-          {/* Floating "Just Apply" card — oversized, breaks out of canvas for 3D effect */}
+          {/* Floating "Just Apply" card — oversized, breaks out top/bottom for 3D effect */}
           <div
             className="absolute"
             style={{
-              top: '-10%',
-              bottom: '-10%',
-              right: '3%',
-              width: '42%',
+              top: '50%',
+              right: '4%',
+              width: '40%',
+              transform: 'translateY(-50%) perspective(900px) rotateY(-4deg) rotateX(2deg)',
+              boxShadow: '-32px 0 80px -8px oklch(0 0 0 / 0.5), 0 40px 80px -12px oklch(0 0 0 / 0.4)',
+              borderRadius: '16px',
+              overflow: 'hidden',
             }}
           >
             <img
               src={CARD_URL}
               alt="Just Apply card"
-              className="w-full h-full object-cover object-center rounded-2xl"
-              style={{
-                boxShadow: '-32px 0 80px -8px oklch(0 0 0 / 0.5), 0 40px 80px -12px oklch(0 0 0 / 0.4)',
-                transform: 'perspective(900px) rotateY(-4deg) rotateX(2deg)',
-              }}
+              className="w-full"
+              style={{ display: 'block' }}
             />
           </div>
         </div>
