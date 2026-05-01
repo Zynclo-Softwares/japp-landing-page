@@ -52,7 +52,7 @@ export default function PricingSection() {
 
             <div className="space-y-2.5 mb-8">
               {[
-                'Unlimited job applications',
+                '1,400 credits worth of applications / month',
                 'Bring your own template',
                 'All models (GPT-5, Claude, Gemini, Llama)',
                 'Deep company research',
