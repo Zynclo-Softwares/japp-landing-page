@@ -38,9 +38,13 @@ export default function PricingSection() {
             <p className="text-sm font-bold text-foreground mb-1">Just Apply</p>
             <div className="flex items-baseline gap-1 mb-1">
               <span className="text-4xl font-black tracking-[-0.03em]" style={{ color: 'var(--primary)' }}>
-                $14.99
+                $19.99
               </span>
               <span className="text-sm text-muted-foreground font-medium">/month</span>
+            </div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold mb-4"
+              style={{ background: 'oklch(0.852 0.199 91.936 / 0.15)', color: 'var(--primary)' }}>
+              Includes 1,400 credits / month
             </div>
             <p className="text-sm text-muted-foreground mb-6 leading-snug">
               Full access to Just Apply. Cancel anytime.
@@ -67,7 +71,7 @@ export default function PricingSection() {
               className="block text-center py-2.5 rounded-xl text-sm font-bold transition-all duration-180 hover:scale-[1.02] active:scale-[0.98]"
               style={{ background: 'var(--primary)', color: 'var(--primary-foreground)', boxShadow: '0 4px 20px -4px oklch(0.852 0.199 91.936 / 0.4)' }}
             >
-              Get started — $14.99 / mo
+              Get started — $19.99 / mo
             </a>
           </div>
 
