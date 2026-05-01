@@ -1,10 +1,12 @@
-import { Download } from 'lucide-react';
+import { useState } from 'react';
 import ImagePlaceholder from './ImagePlaceholder';
+import WaitlistModal from './WaitlistModal';
 
 const IMG9_PROMPT =
   'Full-bleed abstract background: a soft amber-to-deep-bronze radial gradient with a faint topographic line pattern overlay. Slight film grain. No subjects. Used as a hero band behind white headline text. 21:9.';
 
 export default function FinalCTASection() {
+  const [waitlistOpen, setWaitlistOpen] = useState(false);
   return (
     <section className="relative py-40 overflow-hidden" id="download">
       {/* Amber gradient background */}
@@ -51,8 +53,8 @@ export default function FinalCTASection() {
           Just Apply is in private beta. The first cohort is open.
         </p>
 
-        <a
-          href="#"
+        <button
+          onClick={() => setWaitlistOpen(true)}
           className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl text-base font-black transition-all duration-180 active:scale-95 hover:scale-[1.02]"
           style={{
             background: 'oklch(0.145 0 0)',
@@ -60,13 +62,13 @@ export default function FinalCTASection() {
             boxShadow: '0 8px 32px -4px oklch(0 0 0 / 0.4)',
           }}
         >
-          <Download size={16} />
-          Get the app — Free
-        </a>
+          Join the Preview
+        </button>
 
         <p className="text-white/50 text-sm font-medium mt-4">
-          No credit card · ~80MB
+          No credit card · Invite-only beta
         </p>
+        <WaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
       </div>
     </section>
   );

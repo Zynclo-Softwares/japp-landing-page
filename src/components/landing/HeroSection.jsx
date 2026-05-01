@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import HeroOrbit from './HeroOrbit';
 import HeroScene3D from './HeroScene3D';
+import WaitlistModal from './WaitlistModal';
 
 
 const trustItems = [
@@ -10,6 +12,7 @@ const trustItems = [
 ];
 
 export default function HeroSection() {
+  const [waitlistOpen, setWaitlistOpen] = useState(false);
   return (
     <section className="relative overflow-hidden py-24 lg:py-32" id="how-it-works">
       {/* Amber mesh blobs */}
@@ -54,8 +57,8 @@ export default function HeroSection() {
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-3 mb-10">
-              <a
-                href="#download"
+              <button
+                onClick={() => setWaitlistOpen(true)}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-base font-bold transition-all duration-180 active:scale-95"
                 style={{
                   background: 'var(--primary)',
@@ -65,8 +68,8 @@ export default function HeroSection() {
                 onMouseEnter={e => e.currentTarget.style.boxShadow = '0 18px 60px -12px oklch(0.852 0.199 91.936 / 0.65)'}
                 onMouseLeave={e => e.currentTarget.style.boxShadow = '0 10px 40px -10px oklch(0.852 0.199 91.936 / 0.45)'}
               >
-                Download Now
-              </a>
+                Join the Preview
+              </button>
               <a
                 href="#demo"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-base font-semibold border border-border hover:bg-muted hover:border-foreground/20 transition-all duration-200 text-foreground"
@@ -74,6 +77,7 @@ export default function HeroSection() {
                 See it in 90 seconds →
               </a>
             </div>
+            <WaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
 
 
           </div>

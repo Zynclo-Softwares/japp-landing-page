@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Sun, Moon } from 'lucide-react';
 
-export default function Nav({ theme, toggleTheme }) {
+export default function Nav({ theme, toggleTheme, onJoinClick }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -53,8 +53,8 @@ export default function Nav({ theme, toggleTheme }) {
             {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
           </button>
 
-          <a
-            href="#download"
+          <button
+            onClick={onJoinClick}
             className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-bold transition-all duration-180"
             style={{
               background: 'var(--primary)',
@@ -64,8 +64,8 @@ export default function Nav({ theme, toggleTheme }) {
             onMouseEnter={e => e.currentTarget.style.boxShadow = '0 8px 32px -4px oklch(0.852 0.199 91.936 / 0.65)'}
             onMouseLeave={e => e.currentTarget.style.boxShadow = '0 4px 20px -4px oklch(0.852 0.199 91.936 / 0.4)'}
           >
-            Download Now
-          </a>
+            Join Preview
+          </button>
         </div>
       </div>
     </nav>

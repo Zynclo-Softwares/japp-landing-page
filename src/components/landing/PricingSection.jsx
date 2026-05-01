@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import WaitlistModal from './WaitlistModal';
+
 const creditPacks = [
   { label: 'Starter Pack', credits: '400 credits', price: '$4.99' },
   { label: 'Boost Pack', credits: '800 credits', price: '$9.99' },
@@ -5,6 +8,7 @@ const creditPacks = [
 ];
 
 export default function PricingSection() {
+  const [waitlistOpen, setWaitlistOpen] = useState(false);
   return (
     <section className="py-24 lg:py-32 border-t border-border" id="pricing">
       <div className="max-w-4xl mx-auto px-6 lg:px-8">
@@ -72,13 +76,14 @@ export default function PricingSection() {
               ))}
             </div>
 
-            <a
-              href="#download"
-              className="block text-center py-2.5 rounded-xl text-sm font-bold transition-all duration-180 hover:scale-[1.02] active:scale-[0.98]"
+            <button
+              onClick={() => setWaitlistOpen(true)}
+              className="block w-full text-center py-2.5 rounded-xl text-sm font-bold transition-all duration-180 hover:scale-[1.02] active:scale-[0.98]"
               style={{ background: 'var(--primary)', color: 'var(--primary-foreground)', boxShadow: '0 4px 20px -4px oklch(0.852 0.199 91.936 / 0.4)' }}
             >
-              Get started — $19.99 / mo
-            </a>
+              Join the Preview
+            </button>
+            <WaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
           </div>
 
           {/* Credit top-up card */}

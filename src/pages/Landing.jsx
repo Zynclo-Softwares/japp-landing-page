@@ -13,9 +13,10 @@ import HITLSection from '../components/landing/HITLSection';
 import PricingSection from '../components/landing/PricingSection';
 import FaqSection from '../components/landing/FaqSection';
 import Footer from '../components/landing/Footer';
-import WelcomeModal from '../components/landing/WelcomeModal';
+import WaitlistModal from '../components/landing/WaitlistModal';
 
 export default function Landing() {
+  const [waitlistOpen, setWaitlistOpen] = useState(false);
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('japp-theme') || 'light';
@@ -37,7 +38,7 @@ export default function Landing() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <WelcomeModal />
+      <WaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
       <NoiseOverlay />
 
       {/* Skip to content */}
@@ -50,7 +51,7 @@ export default function Landing() {
       </a>
 
 
-      <Nav theme={theme} toggleTheme={toggleTheme} />
+      <Nav theme={theme} toggleTheme={toggleTheme} onJoinClick={() => setWaitlistOpen(true)} />
 
       <main id="main-content">
         <HeroSection />
