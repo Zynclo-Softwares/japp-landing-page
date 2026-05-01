@@ -18,7 +18,7 @@ export default function PricingSection() {
           One subscription. Pay for what you use.
         </p>
 
-        <div className="grid md:grid-cols-2 gap-6 items-start max-w-2xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6 items-start max-w-3xl mx-auto">
 
           {/* Subscription card */}
           <div
