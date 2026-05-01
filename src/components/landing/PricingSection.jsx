@@ -1,3 +1,9 @@
+const creditPacks = [
+  { label: 'Starter Pack', credits: '400 credits', price: '$4.99' },
+  { label: 'Boost Pack', credits: '800 credits', price: '$9.99' },
+  { label: 'Power Pack', credits: '1,100 credits', price: '$14.99' },
+];
+
 export default function PricingSection() {
   return (
     <section className="py-24 lg:py-32 border-t border-border" id="pricing">
@@ -15,7 +21,7 @@ export default function PricingSection() {
           className="text-center text-foreground/60 max-w-sm mx-auto mb-16"
           style={{ fontSize: '17px', lineHeight: '1.5' }}
         >
-          One subscription. Pay for what you use.
+          One subscription. Top up when you need more.
         </p>
 
         <div className="grid md:grid-cols-2 gap-6 items-start max-w-3xl mx-auto">
@@ -75,46 +81,41 @@ export default function PricingSection() {
             </a>
           </div>
 
-          {/* Credits card */}
+          {/* Credit top-up card */}
           <div
             className="rounded-2xl border p-8"
             style={{ background: 'var(--card)', borderColor: 'hsl(var(--border))' }}
           >
-            <p className="text-sm font-bold text-foreground mb-1">Credits</p>
-            <div className="flex items-baseline gap-1 mb-1">
-              <span className="text-4xl font-black tracking-[-0.03em] text-foreground">Pay</span>
-              <span className="text-sm text-muted-foreground font-medium ml-1">as you go</span>
-            </div>
-            <p className="text-sm text-muted-foreground mb-6 leading-snug">
-              Top up credits for AI generation, deep research, and browser agent runs.
+            <p className="text-sm font-bold text-foreground mb-1">Credit Top-ups</p>
+            <p className="text-sm text-muted-foreground mb-1">For subscribers only</p>
+            <p className="text-xs text-muted-foreground/70 mb-6 leading-snug">
+              Ran out of credits mid-month? Top up instantly — no plan change needed.
             </p>
 
             <div className="space-y-3 mb-8">
-              {[
-                { label: 'Resume + cover letter', cost: '1 credit' },
-                { label: 'Deep company research', cost: '2 credits' },
-                { label: 'Browser agent apply', cost: '3 credits' },
-                { label: 'Profile polish pass', cost: '1 credit' },
-              ].map(({ label, cost }) => (
-                <div key={label} className="flex items-center justify-between text-sm">
-                  <span className="text-foreground/70 font-medium">{label}</span>
+              {creditPacks.map(({ label, credits, price }) => (
+                <div
+                  key={label}
+                  className="flex items-center justify-between rounded-xl px-4 py-3 border"
+                  style={{ borderColor: 'hsl(var(--border))', background: 'hsl(var(--muted))' }}
+                >
+                  <div>
+                    <p className="text-sm font-bold text-foreground">{label}</p>
+                    <p className="text-xs text-muted-foreground">{credits}</p>
+                  </div>
                   <span
-                    className="text-xs font-bold px-2 py-0.5 rounded-full"
-                    style={{ background: 'oklch(0.852 0.199 91.936 / 0.12)', color: 'var(--primary)' }}
+                    className="text-sm font-black"
+                    style={{ color: 'var(--primary)' }}
                   >
-                    {cost}
+                    {price}
                   </span>
                 </div>
               ))}
             </div>
 
-            <a
-              href="#download"
-              className="block text-center py-2.5 rounded-xl text-sm font-bold border transition-all duration-180 hover:bg-muted hover:scale-[1.02] active:scale-[0.98]"
-              style={{ background: 'transparent', color: 'var(--foreground)', borderColor: 'hsl(var(--border))' }}
-            >
-              Buy credits
-            </a>
+            <p className="text-xs text-muted-foreground text-center">
+              Available after subscribing · Credits never expire
+            </p>
           </div>
 
         </div>
