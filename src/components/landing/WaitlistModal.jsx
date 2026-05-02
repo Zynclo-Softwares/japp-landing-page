@@ -6,12 +6,14 @@ const REDIS_URL = import.meta.env.VITE_UPSTASH_REDIS_URL;
 const REDIS_TOKEN = import.meta.env.VITE_UPSTASH_REDIS_TOKEN;
 
 async function pushToWaitlist(name, email) {
+  if (!REDIS_URL || !REDIS_TOKEN) {
+    throw new Error('VITE_UPSTASH_REDIS_URL and VITE_UPSTASH_REDIS_TOKEN environment variables are not set. Please add them in the dashboard settings.');
+  }
   const entry = JSON.stringify({ name, email, ts: Date.now() });
-  // LPUSH into a list key "waitlist"
   const res = await fetch(`${REDIS_URL}/lpush/waitlist/${encodeURIComponent(entry)}`, {
     headers: { Authorization: `Bearer ${REDIS_TOKEN}` },
   });
-  if (!res.ok) throw new Error('Redis write failed');
+  if (!res.ok) throw new Error(`Redis write failed (${res.status})`);
 }
 
 export default function WaitlistModal({ open, onClose }) {
@@ -26,7 +28,8 @@ export default function WaitlistModal({ open, onClose }) {
     try {
       await pushToWaitlist(name.trim(), email.trim().toLowerCase());
       setStatus('done');
-    } catch {
+    } catch (err) {
+      console.error('[WaitlistModal]', err.message);
       setStatus('error');
     }
   };
