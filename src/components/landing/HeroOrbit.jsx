@@ -70,7 +70,7 @@ function ChipEl({ icon: Icon, label }) {
   );
 }
 
-export default function HeroOrbit() {
+export default function HeroOrbit({ mobileOnly = false }) {
   const containerRef = useRef(null);
   const nodeRefs = useRef([]);
   const state = useRef(chips.map(() => ({ x: 0, y: 0, vx: 0, vy: 0 })));
@@ -146,41 +146,39 @@ export default function HeroOrbit() {
 
   return (
     <>
-      {/* Desktop: full animated canvas */}
-      <div
-        ref={containerRef}
-        className="relative w-full h-[420px] lg:h-[480px] overflow-hidden hidden md:block"
-        aria-hidden="true"
-      >
-        {/* Amber glow */}
+      {/* Mobile-only chips (rendered by HeroSection inline) */}
+      {mobileOnly ? (
+        <div className="flex flex-col items-end gap-3" aria-hidden="true">
+          {mobileChips.map(({ icon: Icon, label }) => (
+            <ChipEl key={label} icon={Icon} label={label} />
+          ))}
+        </div>
+      ) : (
+        /* Desktop: full animated canvas */
         <div
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full pointer-events-none"
-          style={{
-            background: 'radial-gradient(circle, oklch(0.852 0.199 91.936 / 0.28) 0%, transparent 70%)',
-            animation: 'pulse_glow 6s ease-in-out infinite',
-            filter: 'blur(50px)',
-          }}
-        />
-        {chips.map(({ icon: Icon, label }, i) => (
+          ref={containerRef}
+          className="relative w-full h-[420px] lg:h-[480px] overflow-hidden"
+          aria-hidden="true"
+        >
           <div
-            key={label}
-            ref={el => nodeRefs.current[i] = el}
-            className="absolute top-0 left-0 pointer-events-none will-change-transform"
-          >
-            <ChipEl icon={Icon} label={label} />
-          </div>
-        ))}
-      </div>
-
-      {/* Mobile/tablet: 5 chips stacked on the right */}
-      <div
-        className="md:hidden relative flex flex-col items-end gap-3 pr-2 py-4"
-        aria-hidden="true"
-      >
-        {mobileChips.map(({ icon: Icon, label }) => (
-          <ChipEl key={label} icon={Icon} label={label} />
-        ))}
-      </div>
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full pointer-events-none"
+            style={{
+              background: 'radial-gradient(circle, oklch(0.852 0.199 91.936 / 0.28) 0%, transparent 70%)',
+              animation: 'pulse_glow 6s ease-in-out infinite',
+              filter: 'blur(50px)',
+            }}
+          />
+          {chips.map(({ icon: Icon, label }, i) => (
+            <div
+              key={label}
+              ref={el => nodeRefs.current[i] = el}
+              className="absolute top-0 left-0 pointer-events-none will-change-transform"
+            >
+              <ChipEl icon={Icon} label={label} />
+            </div>
+          ))}
+        </div>
+      )}
     </>
   );
 }

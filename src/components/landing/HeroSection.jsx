@@ -29,8 +29,8 @@ export default function HeroSection() {
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Copy */}
-          <div>
+          {/* Copy — on mobile: side-by-side with chips */}
+          <div className="flex gap-4 items-start lg:block">
             <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-muted-foreground mb-6">
               The semi-autonomous apply studio · Now in private beta
             </p>
@@ -73,12 +73,15 @@ export default function HeroSection() {
 
             </div>
             <WaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
-
-
           </div>
 
-          {/* Floating tags */}
-          <div className="flex flex-col items-center justify-center">
+          {/* Mobile chips — shown inline to the right of copy on mobile only */}
+          <div className="lg:hidden flex-shrink-0 flex flex-col items-end gap-3 pt-16">
+            <HeroOrbit mobileOnly />
+          </div>
+
+          {/* Floating tags — desktop */}
+          <div className="hidden lg:flex flex-col items-center justify-center">
             <HeroOrbit />
           </div>
         </div>
