@@ -24,7 +24,7 @@ export default function HITLSection() {
           Autonomous when you want speed. Paused when you want control. Never out of your hands.
         </p>
 
-        <div className="mt-12 flex flex-row justify-center gap-4">
+        <div className="mt-12 flex flex-col sm:flex-row justify-center items-stretch gap-4 max-w-xs sm:max-w-none mx-auto">
           {[
             { label: 'Autonomous mode', desc: 'Submit without interruption', icon: '⚡' },
             { label: 'Review mode', desc: 'Approve every step before it ships', icon: '👁' },
