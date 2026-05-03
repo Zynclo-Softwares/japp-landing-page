@@ -70,12 +70,7 @@ export default function HeroSection() {
               >
                 Join the Preview
               </button>
-              <a
-                href="#demo"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-base font-semibold border border-border hover:bg-muted hover:border-foreground/20 transition-all duration-200 text-foreground"
-              >
-                See it in 90 seconds →
-              </a>
+
             </div>
             <WaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
 
