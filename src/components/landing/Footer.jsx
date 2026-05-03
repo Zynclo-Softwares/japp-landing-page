@@ -19,9 +19,13 @@ export default function Footer() {
 
           {/* Links */}
           <div className="flex flex-wrap gap-6 text-sm text-muted-foreground font-medium">
-            {['Privacy', 'Terms', 'Contact'].map((l) => (
-              <a key={l} href="#" className="hover:text-foreground transition-colors">
-                {l}
+            {[
+              { label: 'Privacy', href: '#' },
+              { label: 'Terms', href: '#' },
+              { label: 'Contact', href: 'https://zynclo.com/#support' },
+            ].map(({ label, href }) => (
+              <a key={label} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+                {label}
               </a>
             ))}
           </div>
