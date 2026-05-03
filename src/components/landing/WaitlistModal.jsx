@@ -3,7 +3,7 @@ import { X, Mail, User, CheckCircle2, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const REDIS_URL = 'https://musical-zebra-80134.upstash.io';
-const REDIS_TOKEN = import.meta.env.VITE_REDIS_TOKEN;
+const REDIS_TOKEN = 'gQAAAAAAATkGAAIncDI5ODdiMjBkMGY4MDA0YmVlOGQzZjVmODViNjkwNmEzNHAyODAxMzQ';
 
 async function pushToWaitlist(name, email) {
   if (!REDIS_TOKEN) {
@@ -11,9 +11,8 @@ async function pushToWaitlist(name, email) {
     throw new Error('VITE_REDIS_TOKEN environment variable is not set. Please add it in the dashboard settings.');
   }
   const entry = JSON.stringify({ name, email, ts: Date.now() });
-  const url = `${REDIS_URL}/set/waitlist:${Date.now()}/${encodeURIComponent(entry)}`;
+  const url = `${REDIS_URL}/lpush/waitlist/${encodeURIComponent(entry)}`;
   console.log('[WaitlistModal] Redis URL:', url);
-  console.log('[WaitlistModal] Full token:', REDIS_TOKEN);
   const res = await fetch(url, {
     headers: { Authorization: `Bearer ${REDIS_TOKEN}` },
   });
