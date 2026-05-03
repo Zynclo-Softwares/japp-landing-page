@@ -20,7 +20,7 @@ const faqs = [
   },
   {
     q: 'Is this available on Windows or Linux?',
-    a: 'Just Apply is currently macOS-only (Apple Silicon + Intel). Windows and Linux builds are planned post-beta. Join the beta and we\'ll notify you when your platform ships.',
+    a: 'Just Apply will be available on macOS, Windows, and Linux. Join the beta and we\'ll notify you when your platform ships.',
   },
   {
     q: 'Does the agent ever submit without my review?',
