@@ -33,7 +33,7 @@ export default function OldVsNewSection() {
           The workflow was broken.
         </h2>
         <p
-          className="text-center text-foreground/60 max-w-xl mx-auto mb-16"
+          className="text-center text-foreground/60 max-w-xl mx-auto mb-6 lg:mb-16"
           style={{ fontSize: '18px', lineHeight: '1.5' }}
         >
           Open the JD. Paste into ChatGPT. Paste back into Docs. "Make it ATS-friendly." Re-format.
@@ -48,7 +48,7 @@ export default function OldVsNewSection() {
             className="hidden lg:block w-full rounded-3xl"
           />
           {/* 3D Just Apply card */}
-          <div className="flex items-center justify-center py-8">
+          <div className="flex items-center justify-center mt-2 lg:py-8 scale-90 lg:scale-100 origin-top">
             <JustApplyCard3D />
           </div>
         </div>
