@@ -8,7 +8,7 @@ const faqs = [
   },
   {
     q: 'What do you mean by "bring your own template"?',
-    a: 'You upload any image of a resume template — your own design, one you bought, or one you found online. Just Apply recreates it with tailored, polished content every time. Your visual identity, our words.',
+    a: 'You upload image templates for your resume and cover letter — your own designs, ones you bought, or ones you found online. Just Apply recreates both with tailored, polished content every time. Your visual identity, our words.',
   },
   {
     q: 'How does the company research actually work?',
