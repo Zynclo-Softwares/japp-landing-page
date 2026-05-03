@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     q: 'Which AI models can I use?',
-    a: 'We run the best available model by default. Subscribers can switch between GPT-5, Claude Opus 4.7, Gemini 2.5, Llama 3.3, and local Ollama per generation — free users get the default model only.',
+    a: 'We run the best available model by default. Subscribers can switch between GPT-5, Claude Opus 4.7, Gemini 2.5, and Llama 3.3 per generation — free users get the default model only.',
   },
   {
     q: 'Is this available on Windows or Linux?',
