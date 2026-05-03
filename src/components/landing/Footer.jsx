@@ -19,7 +19,7 @@ export default function Footer() {
 
           {/* Links */}
           <div className="flex flex-wrap gap-6 text-sm text-muted-foreground font-medium">
-            {['Privacy', 'Terms', 'Changelog', 'Contact'].map((l) => (
+            {['Privacy', 'Terms', 'Contact'].map((l) => (
               <a key={l} href="#" className="hover:text-foreground transition-colors">
                 {l}
               </a>
