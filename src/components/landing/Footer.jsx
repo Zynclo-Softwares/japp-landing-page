@@ -23,7 +23,6 @@ export default function Footer() {
               { label: 'Privacy', href: '#' },
               { label: 'Terms', href: '#' },
               { label: 'Contact', href: 'https://zynclo.com/#support' },
-              { label: 'support@zynclo.com', href: 'mailto:support@zynclo.com' },
             ].map(({ label, href }) => (
               <a key={label} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer" className="hover:text-foreground transition-colors">
                 {label}
@@ -60,9 +59,14 @@ export default function Footer() {
         )}
 
         <div className="mt-8 pt-6 border-t border-border flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-          <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Just Apply by <a href="https://zynclo.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Zynclo</a>. All rights reserved.
-          </p>
+          <div>
+            <p className="text-xs text-muted-foreground">
+              © {new Date().getFullYear()} Just Apply by <a href="https://zynclo.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Zynclo</a>. All rights reserved.
+            </p>
+            <p className="text-xs text-muted-foreground mt-1">
+              <a href="mailto:support@zynclo.com" className="hover:text-foreground transition-colors">support@zynclo.com</a>
+            </p>
+          </div>
         </div>
       </div>
     </footer>
