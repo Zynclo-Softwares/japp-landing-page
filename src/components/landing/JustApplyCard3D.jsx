@@ -1,18 +1,21 @@
 import { useRef, useState } from 'react';
 
+const isDesktop = () => window.innerWidth >= 1024;
+
 export default function JustApplyCard3D() {
   const containerRef = useRef(null);
-  const [rotateY, setRotateY] = useState(-16);
+  const [rotateY, setRotateY] = useState(() => isDesktop() ? -16 : 0);
 
   const handleMouseMove = (e) => {
+    if (!isDesktop()) return;
     const rect = containerRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
-    const normalized = (x / rect.width) * 2 - 1; // -1 to 1
+    const normalized = (x / rect.width) * 2 - 1;
     setRotateY(-16 + normalized * 20);
   };
 
   const handleMouseLeave = () => {
-    setRotateY(-16);
+    setRotateY(isDesktop() ? -16 : 0);
   };
 
   return (
