@@ -66,7 +66,7 @@ function Templates3D() {
         style={{ transform: 'rotateX(10deg)', transformStyle: 'preserve-3d' }}
       >
         {templateStyles.map((t, i) => (
-        <div key={t.label} className={i < 2 ? 'block md:hidden' : i < 3 ? 'hidden md:block' : i < 6 ? 'hidden lg:block' : 'hidden'}>
+        <div key={t.label} className={i < 2 ? 'block' : i < 3 ? 'hidden md:block' : i < 6 ? 'hidden lg:block' : 'hidden'}>
             <TemplateCard3D {...t} {...layout[i]} />
           </div>
         ))}
