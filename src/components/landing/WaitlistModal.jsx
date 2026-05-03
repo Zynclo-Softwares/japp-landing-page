@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { X, Mail, User, CheckCircle2, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const REDIS_URL = import.meta.env.VITE_UPSTASH_REDIS_URL;
+const REDIS_URL = 'https://musical-zebra-80134.upstash.io';
 const REDIS_TOKEN = import.meta.env.VITE_REDIS_TOKEN;
 
 async function pushToWaitlist(name, email) {
-  if (!REDIS_URL || !REDIS_TOKEN) {
-    throw new Error('VITE_UPSTASH_REDIS_URL and VITE_REDIS_TOKEN environment variables are not set. Please add them in the dashboard settings.');
+  if (!REDIS_TOKEN) {
+    throw new Error('VITE_REDIS_TOKEN environment variable is not set. Please add it in the dashboard settings.');
   }
   const entry = JSON.stringify({ name, email, ts: Date.now() });
   const res = await fetch(`${REDIS_URL}/lpush/waitlist/${encodeURIComponent(entry)}`, {
