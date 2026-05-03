@@ -178,7 +178,7 @@ export default function ApplyAnywhereSection() {
   const tagColor = isDark ? 'text-white/35' : 'text-foreground/40';
 
   return (
-    <section className="overflow-hidden">
+    <section>
       <div className="relative w-full flex justify-center" style={{ height: 'clamp(520px, 62vw, 720px)' }}>
         <div className="relative w-full" style={{ maxWidth: '1200px' }}>
         <GlobeCanvas isDark={isDark} />
