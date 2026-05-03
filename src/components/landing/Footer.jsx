@@ -56,7 +56,7 @@ export default function Footer() {
 
         <div className="mt-8 pt-6 border-t border-border flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Just Apply. All rights reserved.
+            © {new Date().getFullYear()} Just Apply by <a href="https://zynclo.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Zynclo</a>. All rights reserved.
           </p>
         </div>
       </div>
