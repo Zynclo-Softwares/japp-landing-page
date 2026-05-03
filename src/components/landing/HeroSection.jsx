@@ -56,10 +56,7 @@ export default function HeroSection() {
             </button>
           </div>
 
-          {/* Right col: chips only */}
-          <div className="flex-shrink-0 flex flex-col items-end gap-2.5 pt-8">
-            <HeroOrbit mobileOnly />
-          </div>
+
         </div>
 
         {/* ── Desktop: original two-column grid ── */}
