@@ -23,6 +23,7 @@ export default function Footer() {
               { label: 'Privacy', href: '#' },
               { label: 'Terms', href: '#' },
               { label: 'Contact', href: 'https://zynclo.com/#support' },
+              { label: 'support@zynclo.com', href: 'mailto:support@zynclo.com' },
             ].map(({ label, href }) => (
               <a key={label} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer" className="hover:text-foreground transition-colors">
                 {label}
