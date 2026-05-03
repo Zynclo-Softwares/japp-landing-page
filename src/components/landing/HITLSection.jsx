@@ -50,7 +50,7 @@ export default function HITLSection() {
           <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-muted-foreground mb-6">
             Prompt steering
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-4">
             {[
               { label: 'Guided', desc: 'You pin specific items from your profile — "use Project X, Experience Y" — and the agent builds around exactly those.' },
               { label: 'Semi-guided', desc: 'You set rules like "include at least 1 project and 2 experiences." The agent picks the best matches from your profile to fit the role.' },
