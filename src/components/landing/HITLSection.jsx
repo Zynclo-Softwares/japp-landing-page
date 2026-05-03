@@ -24,14 +24,24 @@ export default function HITLSection() {
           Autonomous when you want speed. Paused when you want control. Never out of your hands.
         </p>
 
-        <div className="mt-12 flex flex-row justify-center gap-12">
+        <div className="mt-12 flex flex-row justify-center gap-4">
           {[
-            { label: 'Autonomous mode', desc: 'Submit without interruption' },
-            { label: 'Review mode', desc: 'Approve every step before it ships' },
-          ].map(({ label, desc }) => (
-            <div key={label} className="text-center">
-              <p className="text-sm font-bold text-foreground">{label}</p>
-              <p className="text-xs text-muted-foreground mt-1">{desc}</p>
+            { label: 'Autonomous mode', desc: 'Submit without interruption', icon: '⚡' },
+            { label: 'Review mode', desc: 'Approve every step before it ships', icon: '👁' },
+          ].map(({ label, desc, icon }) => (
+            <div
+              key={label}
+              className="flex items-center gap-3 px-5 py-3 rounded-full border border-border text-left"
+              style={{
+                background: 'var(--card)',
+                boxShadow: '0 4px 20px -4px oklch(0.852 0.199 91.936 / 0.15), 0 1px 4px rgba(0,0,0,0.06)',
+              }}
+            >
+              <span className="text-lg leading-none">{icon}</span>
+              <div>
+                <p className="text-sm font-bold text-foreground whitespace-nowrap">{label}</p>
+                <p className="text-xs text-muted-foreground">{desc}</p>
+              </div>
             </div>
           ))}
         </div>
