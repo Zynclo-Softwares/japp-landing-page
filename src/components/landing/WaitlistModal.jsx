@@ -3,27 +3,20 @@ import { X, Mail, User, CheckCircle2, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const REDIS_URL = 'https://musical-zebra-80134.upstash.io';
-const REDIS_TOKEN = 'gQAAAAAAATkGAAIncDI5ODdiMjBkMGY4MDA0YmVlOGQzZjVmODViNjkwNmEzNHAyODAxMzQ';
+const REDIS_TOKEN = import.meta.env.VITE_REDIS_TOKEN;
 
 async function pushToWaitlist(name, email) {
-  if (!REDIS_TOKEN) {
-    console.error('[WaitlistModal] VITE_REDIS_TOKEN is not set');
-    throw new Error('VITE_REDIS_TOKEN environment variable is not set. Please add it in the dashboard settings.');
-  }
+  console.log('[WaitlistModal] Token present:', !!REDIS_TOKEN);
+  if (!REDIS_TOKEN) throw new Error('VITE_REDIS_TOKEN is not set');
   const entry = JSON.stringify({ name, email, ts: Date.now() });
   const url = `${REDIS_URL}/lpush/waitlist/${encodeURIComponent(entry)}`;
-  console.log('[WaitlistModal] Redis URL:', url);
   const res = await fetch(url, {
     headers: { Authorization: `Bearer ${REDIS_TOKEN}` },
   });
-  console.log('[WaitlistModal] Redis response status:', res.status);
   if (!res.ok) {
     const body = await res.text().catch(() => '(unreadable)');
-    console.error('[WaitlistModal] Redis error body:', body);
     throw new Error(`Redis write failed (${res.status}): ${body}`);
   }
-  const data = await res.json().catch(() => null);
-  console.log('[WaitlistModal] Redis response data:', data);
 }
 
 export default function WaitlistModal({ open, onClose }) {
@@ -35,14 +28,11 @@ export default function WaitlistModal({ open, onClose }) {
     e.preventDefault();
     if (!name.trim() || !email.trim()) return;
     setStatus('loading');
-    console.log('[WaitlistModal] Submitting:', { name: name.trim(), email: email.trim().toLowerCase() });
     try {
       await pushToWaitlist(name.trim(), email.trim().toLowerCase());
-      console.log('[WaitlistModal] ✅ Successfully added to waitlist');
       setStatus('done');
     } catch (err) {
-      console.error('[WaitlistModal] ❌ Submission failed:', err.message);
-      console.error('[WaitlistModal] Full error:', err);
+      console.error('[WaitlistModal] error:', err.message);
       setStatus('error');
     }
   };
