@@ -80,8 +80,8 @@ function ResearchIllustration() {
         </motion.span>
       </motion.div>
 
-      {/* Stacked research cards */}
-      <div className="flex flex-col gap-3">
+      {/* Research cards grid */}
+      <div className="grid grid-cols-2 gap-3">
         {researchItems.map((item, i) => (
           <ResearchCard3D key={item.label} {...item} index={i} />
         ))}
