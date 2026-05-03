@@ -95,7 +95,7 @@ export default function PricingSection() {
             <p className="text-sm font-bold text-foreground mb-1">Credit Packs</p>
             <p className="text-sm text-muted-foreground mb-1">Available to everyone</p>
             <p className="text-xs text-muted-foreground/70 mb-6 leading-snug">
-              No subscription needed. Subscribers automatically get the discounted price at checkout.
+              No subscription needed. Credit pack users get the default model only — no model selection. Subscribers get the discounted price and full model switching at checkout.
             </p>
 
             <div className="space-y-3 mb-6">
