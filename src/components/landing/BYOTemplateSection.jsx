@@ -62,11 +62,13 @@ function Templates3D() {
         style={{ background: 'radial-gradient(ellipse at 60% 50%, oklch(0.852 0.199 91.936 / 0.12) 0%, transparent 70%)' }}
       />
       <div
-        className="grid grid-cols-3 gap-5"
+        className="grid grid-cols-2 md:grid-cols-3 gap-5"
         style={{ transform: 'rotateX(10deg)', transformStyle: 'preserve-3d' }}
       >
         {templateStyles.map((t, i) => (
-          <TemplateCard3D key={t.label} {...t} {...layout[i]} />
+          <div key={t.label} className={i < 2 ? 'block' : i < 3 ? 'hidden md:block' : i < 6 ? 'hidden lg:block' : 'hidden'}>
+            <TemplateCard3D {...t} {...layout[i]} />
+          </div>
         ))}
       </div>
     </div>
