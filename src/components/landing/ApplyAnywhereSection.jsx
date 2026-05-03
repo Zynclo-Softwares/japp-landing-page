@@ -46,10 +46,9 @@ function GlobeCanvas({ isDark }) {
       ctx.clearRect(0, 0, W, H);
 
       const cx = W / 2;
-      // R = exactly half the canvas width so the circle touches both side edges
       const R = W * 0.5;
-      // Center at the bottom edge so a perfect half-dome is shown
-      const cy = H + R * 0.02;
+      // Push center down so the dome top sits above all text
+      const cy = H + R * 0.35;
 
       // No background — transparent canvas, inherits page bg
 
