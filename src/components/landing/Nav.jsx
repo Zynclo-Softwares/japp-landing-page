@@ -31,7 +31,7 @@ export default function Nav({ theme, toggleTheme, onJoinClick }) {
 
         {/* Links */}
         <div className="hidden md:flex items-center gap-6 text-sm font-semibold text-foreground/60">
-          {['How it works', 'Features', 'Pricing', 'Changelog'].map((l) => (
+          {['How it works', 'Features', 'Pricing'].map((l) => (
             <a
               key={l}
               href={`#${l.toLowerCase().replace(/\s+/g, '-')}`}
