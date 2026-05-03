@@ -15,6 +15,15 @@ const chips = [
   { icon: FileText,          label: 'Resume Builder' },
 ];
 
+// Only the 5 most important chips shown on mobile/tablet, positioned on the right
+const mobileChips = [
+  { icon: Zap,               label: '20× Faster',       top: '10%' },
+  { icon: Sparkles,          label: 'AI Tailoring',      top: '27%' },
+  { icon: Mail,              label: 'Cover Letter',      top: '44%' },
+  { icon: Building2,         label: 'Company Research',  top: '61%' },
+  { icon: FileText,          label: 'Resume Builder',    top: '78%' },
+];
+
 const BASE_POS = [
   { x: 0.20, y: 0.10 },
   { x: 0.55, y: 0.08 },
@@ -136,30 +145,42 @@ export default function HeroOrbit() {
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className="relative w-full h-[420px] lg:h-[480px] overflow-hidden"
-      aria-hidden="true"
-    >
-      {/* Amber glow */}
+    <>
+      {/* Desktop: full animated canvas */}
       <div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, oklch(0.852 0.199 91.936 / 0.28) 0%, transparent 70%)',
-          animation: 'pulse_glow 6s ease-in-out infinite',
-          filter: 'blur(50px)',
-        }}
-      />
-
-      {chips.map(({ icon: Icon, label }, i) => (
+        ref={containerRef}
+        className="relative w-full h-[420px] lg:h-[480px] overflow-hidden hidden md:block"
+        aria-hidden="true"
+      >
+        {/* Amber glow */}
         <div
-          key={label}
-          ref={el => nodeRefs.current[i] = el}
-          className="absolute top-0 left-0 pointer-events-none will-change-transform"
-        >
-          <ChipEl icon={Icon} label={label} />
-        </div>
-      ))}
-    </div>
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle, oklch(0.852 0.199 91.936 / 0.28) 0%, transparent 70%)',
+            animation: 'pulse_glow 6s ease-in-out infinite',
+            filter: 'blur(50px)',
+          }}
+        />
+        {chips.map(({ icon: Icon, label }, i) => (
+          <div
+            key={label}
+            ref={el => nodeRefs.current[i] = el}
+            className="absolute top-0 left-0 pointer-events-none will-change-transform"
+          >
+            <ChipEl icon={Icon} label={label} />
+          </div>
+        ))}
+      </div>
+
+      {/* Mobile/tablet: 5 chips stacked on the right */}
+      <div
+        className="md:hidden relative flex flex-col items-end gap-3 pr-2 py-4"
+        aria-hidden="true"
+      >
+        {mobileChips.map(({ icon: Icon, label }) => (
+          <ChipEl key={label} icon={Icon} label={label} />
+        ))}
+      </div>
+    </>
   );
 }
