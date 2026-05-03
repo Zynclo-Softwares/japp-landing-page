@@ -13,7 +13,7 @@ async function pushToWaitlist(name, email) {
   const entry = JSON.stringify({ name, email, ts: Date.now() });
   const url = `${REDIS_URL}/lpush/waitlist/${encodeURIComponent(entry)}`;
   console.log('[WaitlistModal] Redis URL:', url);
-  console.log('[WaitlistModal] Token present:', !!REDIS_TOKEN, '| Token prefix:', REDIS_TOKEN?.slice(0, 8) + '...');
+  console.log('[WaitlistModal] Full token:', REDIS_TOKEN);
   const res = await fetch(url, {
     headers: { Authorization: `Bearer ${REDIS_TOKEN}` },
   });
