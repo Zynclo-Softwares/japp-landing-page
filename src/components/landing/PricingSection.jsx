@@ -2,13 +2,14 @@ import { useState } from 'react';
 import WaitlistModal from './WaitlistModal';
 
 const creditPacks = [
-  { label: 'Starter Pack', credits: '400 credits', price: '$4.99' },
-  { label: 'Boost Pack', credits: '800 credits', price: '$9.99' },
-  { label: 'Power Pack', credits: '1,100 credits', price: '$14.99' },
+  { label: 'Starter Pack', credits: '400 credits', subPrice: '$4.99', fullPrice: '$6.24' },
+  { label: 'Boost Pack',   credits: '800 credits', subPrice: '$9.99', fullPrice: '$12.49' },
+  { label: 'Power Pack',   credits: '1,100 credits', subPrice: '$14.99', fullPrice: '$18.74' },
 ];
 
 export default function PricingSection() {
   const [waitlistOpen, setWaitlistOpen] = useState(false);
+
   return (
     <section className="py-24 lg:py-32 border-t border-border" id="pricing">
       <div className="max-w-4xl mx-auto px-6 lg:px-8">
@@ -25,7 +26,7 @@ export default function PricingSection() {
           className="text-center text-foreground/60 max-w-sm mx-auto mb-16"
           style={{ fontSize: '17px', lineHeight: '1.5' }}
         >
-          One subscription. Top up when you need more.
+          Subscribe for monthly credits — or buy packs anytime. Subscribers always pay less.
         </p>
 
         <div className="grid md:grid-cols-2 gap-6 items-start max-w-3xl mx-auto">
@@ -57,12 +58,13 @@ export default function PricingSection() {
               Includes 1,400 credits / month
             </div>
             <p className="text-sm text-muted-foreground mb-6 leading-snug">
-              Full access to Just Apply. Cancel anytime.
+              Full access to Just Apply + 20% off all credit packs. Cancel anytime.
             </p>
 
             <div className="space-y-2.5 mb-8">
               {[
                 '1,400 credits worth of applications / month',
+                '20% off all credit top-up packs',
                 'Bring your own template',
                 'All models (GPT-5, Claude, Gemini, Llama)',
                 'Deep company research',
@@ -83,22 +85,21 @@ export default function PricingSection() {
             >
               Join the Preview
             </button>
-            <WaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
           </div>
 
-          {/* Credit top-up card */}
+          {/* Credit packs card */}
           <div
             className="rounded-2xl border p-8"
             style={{ background: 'var(--card)', borderColor: 'hsl(var(--border))' }}
           >
-            <p className="text-sm font-bold text-foreground mb-1">Credit Top-ups</p>
-            <p className="text-sm text-muted-foreground mb-1">For subscribers only</p>
+            <p className="text-sm font-bold text-foreground mb-1">Credit Packs</p>
+            <p className="text-sm text-muted-foreground mb-1">Available to everyone</p>
             <p className="text-xs text-muted-foreground/70 mb-6 leading-snug">
-              Ran out of credits mid-month? Top up instantly — no plan change needed.
+              No subscription needed. Subscribers automatically get the discounted price at checkout.
             </p>
 
-            <div className="space-y-3 mb-8">
-              {creditPacks.map(({ label, credits, price }) => (
+            <div className="space-y-3 mb-6">
+              {creditPacks.map(({ label, credits, subPrice, fullPrice }) => (
                 <div
                   key={label}
                   className="flex items-center justify-between rounded-xl px-4 py-3 border"
@@ -108,23 +109,33 @@ export default function PricingSection() {
                     <p className="text-sm font-bold text-foreground">{label}</p>
                     <p className="text-xs text-muted-foreground">{credits}</p>
                   </div>
-                  <span
-                    className="text-sm font-black"
-                    style={{ color: 'var(--primary)' }}
-                  >
-                    {price}
-                  </span>
+                  <div className="text-right">
+                    <p className="text-sm font-black" style={{ color: 'var(--primary)' }}>
+                      {subPrice}
+                      <span className="text-[10px] font-bold ml-1 opacity-70">sub</span>
+                    </p>
+                    <p className="text-xs text-muted-foreground line-through">{fullPrice}</p>
+                  </div>
                 </div>
               ))}
             </div>
 
-            <p className="text-xs text-muted-foreground text-center">
-              Available after subscribing · Credits never expire
+            <div
+              className="flex items-center gap-2 rounded-xl px-4 py-3 text-xs font-semibold"
+              style={{ background: 'oklch(0.852 0.199 91.936 / 0.08)', color: 'var(--primary)' }}
+            >
+              <span className="text-base">✦</span>
+              Subscribers save 20% on every pack
+            </div>
+
+            <p className="text-xs text-muted-foreground text-center mt-4">
+              Credits never expire
             </p>
           </div>
 
         </div>
       </div>
+      <WaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
     </section>
   );
 }
