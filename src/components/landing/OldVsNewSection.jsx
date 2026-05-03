@@ -41,11 +41,11 @@ export default function OldVsNewSection() {
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          {/* Old way image */}
+          {/* Old way image — desktop only */}
           <img
             src={isDark ? IMG_DARK : IMG_LIGHT}
             alt="The old way"
-            className="w-full rounded-3xl"
+            className="hidden lg:block w-full rounded-3xl"
           />
           {/* 3D Just Apply card */}
           <div className="flex items-center justify-center py-8">
