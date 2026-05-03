@@ -54,7 +54,7 @@ function TemplateCard3D({ label, bg, text, accent, lines, ry, rx, z, delay }) {
 function Templates3D() {
   return (
     <div
-      className="relative w-full h-auto lg:h-[420px] flex items-center justify-center py-8 lg:py-0"
+      className="relative w-full h-auto lg:h-[420px] flex items-center justify-center py-2 lg:py-0"
       style={{ perspective: '900px' }}
     >
       {/* Ambient glow */}
