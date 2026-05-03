@@ -28,7 +28,7 @@ const faqs = [
   },
   {
     q: 'Is my data private?',
-    a: 'Your profile and application data are stored in a secure, encrypted cloud database. When you use cloud models (GPT-5, Claude, etc.), your prompts go through those providers\' APIs.',
+    a: 'Your profile and application data are stored in a secure, encrypted cloud database. When you use cloud models (GPT-5, Claude, etc.), your prompts are sent through fully encrypted HTTPS API channels to those providers.',
   },
   {
     q: 'What does "private beta" mean for pricing?',
