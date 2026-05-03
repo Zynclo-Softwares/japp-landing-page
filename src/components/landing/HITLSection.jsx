@@ -24,7 +24,7 @@ export default function HITLSection() {
           Autonomous when you want speed. Paused when you want control. Never out of your hands.
         </p>
 
-        <div className="mt-12 flex justify-center gap-8">
+        <div className="mt-12 flex flex-wrap justify-center gap-8">
           {[
             { label: 'Autonomous mode', desc: 'Submit without interruption' },
             { label: 'Review mode', desc: 'Approve every step before it ships' },
@@ -34,6 +34,28 @@ export default function HITLSection() {
               <p className="text-xs text-muted-foreground mt-1">{desc}</p>
             </div>
           ))}
+        </div>
+
+        <div className="mt-14 max-w-2xl mx-auto">
+          <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-muted-foreground mb-6">
+            Prompt steering
+          </p>
+          <div className="grid grid-cols-3 gap-4">
+            {[
+              { label: 'Guided', desc: 'You set tone, keywords, and constraints. The agent follows your lead closely.' },
+              { label: 'Semi-guided', desc: 'You give a direction. The agent fills in the rest with smart defaults.' },
+              { label: 'Yolo', desc: 'You approve nothing upfront. The agent writes, tailors, and ships — fully autonomous.' },
+            ].map(({ label, desc }) => (
+              <div
+                key={label}
+                className="rounded-xl border border-border p-4 text-left"
+                style={{ background: 'var(--card)' }}
+              >
+                <p className="text-sm font-black text-foreground mb-1.5" style={{ color: label === 'Yolo' ? 'var(--primary)' : undefined }}>{label}</p>
+                <p className="text-xs text-muted-foreground leading-relaxed">{desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
