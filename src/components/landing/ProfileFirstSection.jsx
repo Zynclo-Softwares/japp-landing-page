@@ -170,17 +170,9 @@ export default function ProfileFirstSection() {
           Five steps — then every application runs on autopilot.
         </p>
 
-        {/* ── Mobile: straight vertical line + centered cards ── */}
+        {/* ── Mobile: stacked cards, no path ── */}
         <div className="lg:hidden relative max-w-sm mx-auto">
-          {/* Straight vertical road */}
-          <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-9 pointer-events-none z-0"
-            style={{ background: 'oklch(0.852 0.199 91.936 / 0.20)' }}
-          />
-          {/* Dashed center line */}
-          <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px pointer-events-none z-0"
-            style={{ background: 'repeating-linear-gradient(to bottom, oklch(0.852 0.199 91.936) 0px, oklch(0.852 0.199 91.936) 18px, transparent 18px, transparent 30px)' }}
-          />
-          <div className="flex flex-col gap-4 relative z-10">
+          <div className="flex flex-col gap-4">
             {steps.map(({ num, title, desc }, idx) => (
               <StepCard key={num} num={num} title={title} desc={desc} align="left" floatDelay={idx * 0.7} cardRef={el => cardRefs.current[idx] = el} />
             ))}
