@@ -28,7 +28,7 @@ export default function JustApplyCard3D() {
         perspectiveOrigin: '55% 50%',
         cursor: 'pointer',
       }}
-      className="flex items-center justify-center w-full py-16"
+      className="flex items-center justify-center w-full py-0 lg:py-16"
     >
       <div
         style={{
