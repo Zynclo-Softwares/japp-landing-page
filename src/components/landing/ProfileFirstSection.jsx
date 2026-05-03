@@ -170,7 +170,25 @@ export default function ProfileFirstSection() {
           Five steps — then every application runs on autopilot.
         </p>
 
-        <div ref={containerRef} className="relative max-w-3xl mx-auto">
+        {/* ── Mobile: straight vertical line + centered cards ── */}
+        <div className="lg:hidden relative max-w-sm mx-auto">
+          {/* Straight vertical road */}
+          <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-9 pointer-events-none z-0"
+            style={{ background: 'oklch(0.852 0.199 91.936 / 0.20)' }}
+          />
+          {/* Dashed center line */}
+          <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px pointer-events-none z-0"
+            style={{ background: 'repeating-linear-gradient(to bottom, oklch(0.852 0.199 91.936) 0px, oklch(0.852 0.199 91.936) 18px, transparent 18px, transparent 30px)' }}
+          />
+          <div className="flex flex-col gap-4 relative z-10">
+            {steps.map(({ num, title, desc }, idx) => (
+              <StepCard key={num} num={num} title={title} desc={desc} align="left" floatDelay={idx * 0.7} cardRef={el => cardRefs.current[idx] = el} />
+            ))}
+          </div>
+        </div>
+
+        {/* ── Desktop: original zigzag layout ── */}
+        <div ref={containerRef} className="hidden lg:block relative max-w-3xl mx-auto">
           {/* SVG road — behind cards */}
           <svg
             className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible"
@@ -178,13 +196,9 @@ export default function ProfileFirstSection() {
           >
             {pathD && (
               <>
-                {/* Road outer glow */}
                 <path d={pathD} fill="none" stroke="oklch(0.852 0.199 91.936)" strokeWidth="64" strokeLinecap="butt" strokeLinejoin="round" opacity="0.07" />
-                {/* Road shoulder */}
                 <path d={pathD} fill="none" stroke="oklch(0.852 0.199 91.936)" strokeWidth="48" strokeLinecap="butt" strokeLinejoin="round" opacity="0.13" />
-                {/* Road surface */}
                 <path d={pathD} fill="none" stroke="oklch(0.852 0.199 91.936)" strokeWidth="36" strokeLinecap="butt" strokeLinejoin="round" opacity="0.20" />
-                {/* Centre dashed line */}
                 <path d={pathD} fill="none" stroke="oklch(0.852 0.199 91.936)" strokeWidth="2.5" strokeLinecap="butt" strokeDasharray="22 14" opacity="0.9" />
               </>
             )}
