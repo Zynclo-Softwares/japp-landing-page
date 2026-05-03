@@ -65,7 +65,7 @@ export default function PricingSection() {
               {[
                 '1,400 credits worth of applications / month',
                 '20% off all credit top-up packs',
-                'Bring your own template',
+                'Bring your own image resume template',
                 'All models (GPT-5, Claude, Gemini, Llama)',
                 'Deep company research',
                 'Smart job tracker + analytics',
