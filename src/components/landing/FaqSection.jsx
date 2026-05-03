@@ -28,7 +28,7 @@ const faqs = [
   },
   {
     q: 'Is my data private?',
-    a: 'Your profile and application data stay local by default. When you use cloud models (GPT-5, Claude, etc.), your prompts go through those providers\' APIs.',
+    a: 'Your profile and application data are stored in a secure, encrypted cloud database. When you use cloud models (GPT-5, Claude, etc.), your prompts go through those providers\' APIs.',
   },
   {
     q: 'What does "private beta" mean for pricing?',
