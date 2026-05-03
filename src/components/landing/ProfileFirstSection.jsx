@@ -170,8 +170,8 @@ export default function ProfileFirstSection() {
           Five steps — then every application runs on autopilot.
         </p>
 
-        {/* ── Mobile: stacked cards, no path ── */}
-        <div className="lg:hidden relative max-w-sm mx-auto">
+        {/* ── Mobile only: stacked cards, no path ── */}
+        <div className="md:hidden relative max-w-sm mx-auto">
           <div className="flex flex-col gap-4">
             {steps.map(({ num, title, desc }, idx) => (
               <StepCard key={num} num={num} title={title} desc={desc} align="left" floatDelay={idx * 0.7} cardRef={el => cardRefs.current[idx] = el} />
@@ -179,8 +179,8 @@ export default function ProfileFirstSection() {
           </div>
         </div>
 
-        {/* ── Desktop: original zigzag layout ── */}
-        <div ref={containerRef} className="hidden lg:block relative max-w-3xl mx-auto">
+        {/* ── Tablet + Desktop: original zigzag layout ── */}
+        <div ref={containerRef} className="hidden md:block relative max-w-3xl mx-auto">
           {/* SVG road — behind cards */}
           <svg
             className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible"
