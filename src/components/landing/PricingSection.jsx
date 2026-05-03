@@ -29,7 +29,7 @@ export default function PricingSection() {
           Subscribe for monthly credits — or buy packs anytime. Subscribers always pay less.
         </p>
 
-        <div className="grid md:grid-cols-2 gap-6 items-start max-w-3xl mx-auto">
+        <div className="grid grid-cols-2 gap-6 items-start max-w-3xl mx-auto">
 
           {/* Subscription card */}
           <div
