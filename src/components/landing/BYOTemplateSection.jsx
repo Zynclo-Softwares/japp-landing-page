@@ -77,7 +77,7 @@ function Templates3D() {
 
 export default function BYOTemplateSection() {
   return (
-    <section className="py-24 lg:py-32 overflow-hidden" id="features">
+    <section className="py-24 lg:py-32" id="features">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Copy */}
