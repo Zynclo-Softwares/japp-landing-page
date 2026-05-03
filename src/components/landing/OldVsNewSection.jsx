@@ -48,7 +48,7 @@ export default function OldVsNewSection() {
             className="hidden lg:block w-full rounded-3xl"
           />
           {/* 3D Just Apply card */}
-          <div className="flex items-center justify-center mt-2 lg:py-8 scale-90 lg:scale-100 origin-top">
+          <div className="flex items-center justify-center mt-2 lg:py-8 scale-90 lg:scale-100 origin-center">
             <JustApplyCard3D />
           </div>
         </div>
