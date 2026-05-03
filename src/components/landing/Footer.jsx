@@ -92,7 +92,7 @@ export default function Footer() {
           className="fixed bottom-6 right-6 z-[999] px-5 py-3.5 rounded-2xl shadow-xl text-sm font-semibold text-foreground flex items-center gap-2 border border-border"
           style={{ background: 'var(--card)', boxShadow: '0 8px 32px -4px rgba(0,0,0,0.18)' }}
         >
-          🎉🫡 Yet to be announced
+          <span className="text-lg">🎉🫡</span> Yet to be announced
         </div>
       )}
     </>
