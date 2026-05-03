@@ -2,8 +2,16 @@ import { useState } from 'react';
 
 export default function Footer() {
   const [easterEgg, setEasterEgg] = useState(false);
+  const [toast, setToast] = useState(false);
+
+  const showToast = (e) => {
+    e.preventDefault();
+    setToast(true);
+    setTimeout(() => setToast(false), 3500);
+  };
 
   return (
+    <>
     <footer className="border-t border-border py-12">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
@@ -20,11 +28,18 @@ export default function Footer() {
           {/* Links */}
           <div className="flex flex-wrap gap-6 text-sm text-muted-foreground font-medium">
             {[
-              { label: 'Privacy', href: '#' },
-              { label: 'Terms', href: '#' },
-              { label: 'Contact', href: 'https://zynclo.com/#support' },
-            ].map(({ label, href }) => (
-              <a key={label} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+              { label: 'Privacy', href: '#', comingSoon: true },
+              { label: 'Terms', href: '#', comingSoon: true },
+              { label: 'Contact', href: 'https://zynclo.com/#support', comingSoon: false },
+            ].map(({ label, href, comingSoon }) => (
+              <a
+                key={label}
+                href={href}
+                onClick={comingSoon ? showToast : undefined}
+                target={!comingSoon && href.startsWith('http') ? '_blank' : undefined}
+                rel="noopener noreferrer"
+                className="hover:text-foreground transition-colors"
+              >
                 {label}
               </a>
             ))}
@@ -70,5 +85,16 @@ export default function Footer() {
         </div>
       </div>
     </footer>
+
+      {/* Toast */}
+      {toast && (
+        <div
+          className="fixed bottom-6 right-6 z-[999] px-5 py-3.5 rounded-2xl shadow-xl text-sm font-semibold text-foreground flex items-center gap-2 border border-border"
+          style={{ background: 'var(--card)', boxShadow: '0 8px 32px -4px rgba(0,0,0,0.18)' }}
+        >
+          🎉🫡 Yet to be announced
+        </div>
+      )}
+    </>
   );
 }
