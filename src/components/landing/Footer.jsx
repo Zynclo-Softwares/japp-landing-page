@@ -61,10 +61,10 @@ export default function Footer() {
         <div className="mt-8 pt-6 border-t border-border flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
           <div>
             <p className="text-xs text-muted-foreground">
-              © {new Date().getFullYear()} Just Apply by <a href="https://zynclo.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Zynclo</a>. All rights reserved.
+              © {new Date().getFullYear()} Just Apply by <a href="https://zynclo.com" target="_blank" rel="noopener noreferrer" className="transition-colors" style={{ color: '#7c3aed' }}>Zynclo</a>. All rights reserved.
             </p>
             <p className="text-xs text-muted-foreground mt-1">
-              <a href="mailto:support@zynclo.com" className="hover:text-foreground transition-colors">support@zynclo.com</a>
+              <a href="mailto:support@zynclo.com" className="transition-colors" style={{ color: '#2563eb' }}>support@zynclo.com</a>
             </p>
           </div>
         </div>
