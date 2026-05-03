@@ -42,9 +42,9 @@ export default function HITLSection() {
           </p>
           <div className="grid grid-cols-3 gap-4">
             {[
-              { label: 'Guided', desc: 'You set tone, keywords, and constraints. The agent follows your lead closely.' },
-              { label: 'Semi-guided', desc: 'You give a direction. The agent fills in the rest with smart defaults.' },
-              { label: 'Yolo', desc: 'You approve nothing upfront. The agent writes, tailors, and ships — fully autonomous.' },
+              { label: 'Guided', desc: 'You pin specific items from your profile — "use Project X, Experience Y" — and the agent builds around exactly those.' },
+              { label: 'Semi-guided', desc: 'You set rules like "include at least 1 project and 2 experiences." The agent picks the best matches from your profile to fit the role.' },
+              { label: 'Yolo', desc: 'You hand the wheel over. The agent selects the strongest combination from everything in your profile — zero constraints, maximum relevance.' },
             ].map(({ label, desc }) => (
               <div
                 key={label}
