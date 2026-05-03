@@ -180,7 +180,7 @@ export default function ApplyAnywhereSection() {
   return (
     <section className="overflow-hidden">
       <div className="relative w-full flex justify-center" style={{ height: 'clamp(520px, 62vw, 720px)' }}>
-        <div className="relative w-full" style={{ maxWidth: '900px' }}>
+        <div className="relative w-full" style={{ maxWidth: '1200px' }}>
         <GlobeCanvas isDark={isDark} />
 
         <div
