@@ -44,9 +44,7 @@ export default function HeroSection() {
             <br />
             anything.
             <br />
-            <span style={{ color: 'var(--primary)' }}>In your</span>
-            <br />
-            <span style={{ color: 'var(--primary)' }}>vibe.</span>
+            <span style={{ color: 'var(--primary)' }}>In your vibe.</span>
             <br />
             At <span style={{ color: 'var(--primary)' }}>20×</span>
             <br />
