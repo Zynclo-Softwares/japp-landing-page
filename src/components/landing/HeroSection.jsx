@@ -22,7 +22,7 @@ export default function HeroSection() {
         />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 -mt-8">
 
         {/* ── Mobile / Tablet: two-column row ── */}
         <div className="flex items-center gap-4 lg:hidden">
