@@ -148,7 +148,7 @@ export default function HeroOrbit({ mobileOnly = false }) {
     <>
       {/* Mobile-only chips (rendered by HeroSection inline) */}
       {mobileOnly ? (
-        <div className="flex flex-col items-end gap-3" aria-hidden="true">
+        <div className="flex flex-wrap gap-2" aria-hidden="true">
           {mobileChips.map(({ icon: Icon, label }) => (
             <ChipEl key={label} icon={Icon} label={label} />
           ))}

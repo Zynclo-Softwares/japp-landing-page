@@ -24,64 +24,59 @@ export default function HeroSection() {
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8 -mt-20">
 
-        {/* ── Mobile / Tablet: two-column row ── */}
-        <div className="flex items-center gap-4 lg:hidden">
-          {/* Left col: all copy stacked vertically */}
-          <div className="flex-1 min-w-0 flex flex-col">
-            <p className="text-[10px] font-bold tracking-[0.10em] uppercase text-muted-foreground mb-1.5">
-              The semi-autonomous apply studio
-            </p>
-            <span
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-black tracking-wide uppercase mb-4"
-              style={{ background: 'oklch(0.852 0.199 91.936 / 0.15)', color: 'var(--primary)' }}
+        {/* ── Mobile / Tablet ── */}
+        <div className="flex flex-col lg:hidden">
+          <p className="text-[10px] font-bold tracking-[0.10em] uppercase text-muted-foreground mb-1.5">
+            The semi-autonomous apply studio
+          </p>
+          <span
+            className="self-start inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-black tracking-wide uppercase mb-4"
+            style={{ background: 'oklch(0.852 0.199 91.936 / 0.15)', color: 'var(--primary)' }}
+          >
+            <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: 'var(--primary)' }} />
+            Now in private beta
+          </span>
+          <h1
+            className="font-black leading-[0.92] tracking-[-0.03em] mb-4 text-foreground"
+            style={{ fontSize: 'clamp(36px, 10vw, 56px)' }}
+          >
+            Apply to anything.
+            <br />
+            <span style={{ color: 'var(--primary)' }}>In your vibe.</span>
+            <br />
+            At <span style={{ color: 'var(--primary)' }}>20×</span> the speed.
+          </h1>
+          <p className="text-foreground/70 mb-5 text-sm leading-relaxed max-w-sm">
+            You build the profile once. Just Apply researches the company, writes a tailored
+            resume + cover letter in your own template, fills the form, and tracks every shot —
+            with you in the loop.
+          </p>
+          <div className="flex flex-wrap gap-2 mb-8">
+            <button
+              onClick={() => setWaitlistOpen(true)}
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-bold transition-all active:scale-95"
+              style={{
+                background: 'var(--primary)',
+                color: 'var(--primary-foreground)',
+                boxShadow: '0 10px 40px -10px oklch(0.852 0.199 91.936 / 0.45)',
+              }}
             >
-              <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: 'var(--primary)' }} />
-              Now in private beta
-            </span>
-            <h1
-              className="font-black leading-[0.92] tracking-[-0.03em] mb-4 text-foreground"
-              style={{ fontSize: 'clamp(28px, 7vw, 52px)' }}
+              Join the Preview
+            </button>
+            <a
+              href={VIDEO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold transition-all active:scale-95 hover:opacity-90"
+              style={{ background: '#FF0000', color: '#fff' }}
             >
-              Apply to
-              <br />
-              anything.
-              <br />
-              <span style={{ color: 'var(--primary)' }}>In your vibe.</span>
-              <br />
-              At <span style={{ color: 'var(--primary)' }}>20×</span>
-              <br />
-              the speed.
-            </h1>
-            <p className="text-foreground/70 mb-5 text-sm leading-relaxed">
-              You build the profile once. Just Apply researches the company, writes a tailored
-              resume + cover letter in your own template, fills the form, and tracks every shot —
-              with you in the loop.
-            </p>
-            <div className="flex flex-wrap gap-2">
-              <button
-                onClick={() => setWaitlistOpen(true)}
-                className="self-start inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-bold transition-all active:scale-95"
-                style={{
-                  background: 'var(--primary)',
-                  color: 'var(--primary-foreground)',
-                  boxShadow: '0 10px 40px -10px oklch(0.852 0.199 91.936 / 0.45)',
-                }}
-              >
-                Join the Preview
-              </button>
-              <a
-                href={VIDEO_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="self-start inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold transition-all active:scale-95 hover:opacity-90"
-                style={{ background: '#FF0000', color: '#fff' }}
-              >
-                <PlayCircle size={16} /> Watch Preview
-              </a>
-            </div>
+              <PlayCircle size={16} /> Watch Preview
+            </a>
           </div>
-
-
+          {/* Chips on mobile */}
+          <div className="flex flex-wrap gap-2">
+            <HeroOrbit mobileOnly />
+          </div>
         </div>
 
         {/* ── Desktop: original two-column grid ── */}
