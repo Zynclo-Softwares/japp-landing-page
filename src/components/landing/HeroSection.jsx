@@ -22,7 +22,7 @@ export default function HeroSection() {
         />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 mt-8 lg:-mt-20">
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 mt-2 lg:-mt-20">
 
         {/* ── Mobile / Tablet ── */}
         <div className="flex flex-col lg:hidden">
