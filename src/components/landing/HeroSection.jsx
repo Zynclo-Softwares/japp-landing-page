@@ -9,7 +9,7 @@ export default function HeroSection() {
   const [waitlistOpen, setWaitlistOpen] = useState(false);
 
   return (
-    <section className="relative overflow-hidden flex flex-col justify-center py-10 lg:py-32" style={{ minHeight: '80vh' }} id="how-it-works">
+    <section className="relative overflow-hidden flex flex-col justify-center py-10 pb-16 lg:py-32" style={{ minHeight: '80vh' }} id="how-it-works">
       {/* Amber mesh blobs */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
         <div
