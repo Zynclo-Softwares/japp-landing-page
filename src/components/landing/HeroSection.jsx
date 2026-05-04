@@ -28,9 +28,16 @@ export default function HeroSection() {
         <div className="flex items-start gap-4 lg:hidden">
           {/* Left col: all copy stacked vertically */}
           <div className="flex-1 min-w-0 flex flex-col">
-            <p className="text-[10px] font-bold tracking-[0.10em] uppercase text-muted-foreground mb-3">
-              The semi-autonomous apply studio · Now in private beta
+            <p className="text-[10px] font-bold tracking-[0.10em] uppercase text-muted-foreground mb-1.5">
+              The semi-autonomous apply studio
             </p>
+            <span
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-black tracking-wide uppercase mb-4"
+              style={{ background: 'oklch(0.852 0.199 91.936 / 0.15)', color: 'var(--primary)' }}
+            >
+              <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: 'var(--primary)' }} />
+              Now in private beta
+            </span>
             <h1
               className="font-black leading-[0.95] tracking-[-0.03em] mb-4 text-foreground"
               style={{ fontSize: 'clamp(30px, 7.5vw, 52px)' }}
@@ -76,9 +83,16 @@ export default function HeroSection() {
         {/* ── Desktop: original two-column grid ── */}
         <div className="hidden lg:grid lg:grid-cols-2 gap-16 items-center">
           <div>
-            <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-muted-foreground mb-6">
-              The semi-autonomous apply studio · Now in private beta
+            <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-muted-foreground mb-2">
+              The semi-autonomous apply studio
             </p>
+            <span
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black tracking-wide uppercase mb-6"
+              style={{ background: 'oklch(0.852 0.199 91.936 / 0.15)', color: 'var(--primary)' }}
+            >
+              <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: 'var(--primary)' }} />
+              Now in private beta
+            </span>
             <h1
               className="font-black leading-[0.95] tracking-[-0.035em] mb-6 text-foreground"
               style={{ fontSize: 'clamp(48px, 7vw, 88px)' }}
