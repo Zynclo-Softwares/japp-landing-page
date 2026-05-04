@@ -25,7 +25,7 @@ export default function HeroSection() {
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
 
         {/* ── Mobile / Tablet: two-column row ── */}
-        <div className="flex items-start gap-4 lg:hidden">
+        <div className="flex items-center gap-4 lg:hidden">
           {/* Left col: all copy stacked vertically */}
           <div className="flex-1 min-w-0 flex flex-col">
             <p className="text-[10px] font-bold tracking-[0.10em] uppercase text-muted-foreground mb-1.5">
@@ -39,14 +39,18 @@ export default function HeroSection() {
               Now in private beta
             </span>
             <h1
-              className="font-black leading-[0.95] tracking-[-0.03em] mb-4 text-foreground"
-              style={{ fontSize: 'clamp(30px, 7.5vw, 52px)' }}
+              className="font-black leading-[0.92] tracking-[-0.03em] mb-4 text-foreground"
+              style={{ fontSize: 'clamp(38px, 11vw, 52px)' }}
             >
-              Apply to anything.
+              Apply to
+              <br />
+              anything.
               <br />
               <span style={{ color: 'var(--primary)' }}>In your vibe.</span>
               <br />
-              At <span style={{ color: 'var(--primary)' }}>20×</span> the speed.
+              At <span style={{ color: 'var(--primary)' }}>20×</span>
+              <br />
+              the speed.
             </h1>
             <p className="text-foreground/70 mb-5 text-sm leading-relaxed">
               You build the profile once. Just Apply researches the company, writes a tailored
