@@ -46,7 +46,7 @@ export default function HeroSection() {
               <br />
               <span style={{ color: 'var(--primary)' }}>In your vibe.</span>
               <br />
-              At 20× the speed.
+              At <span style={{ color: 'var(--primary)' }}>20×</span> the speed.
             </h1>
             <p className="text-foreground/70 mb-5 text-sm leading-relaxed">
               You build the profile once. Just Apply researches the company, writes a tailored
@@ -101,7 +101,7 @@ export default function HeroSection() {
               <br />
               <span style={{ color: 'var(--primary)' }}>In your vibe.</span>
               <br />
-              At 20× the speed.
+              At <span style={{ color: 'var(--primary)' }}>20×</span> the speed.
             </h1>
             <p
               className="text-foreground/70 mb-10 max-w-lg"
