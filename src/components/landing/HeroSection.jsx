@@ -73,10 +73,7 @@ export default function HeroSection() {
               <PlayCircle size={16} /> Watch Preview
             </a>
           </div>
-          {/* Chips on mobile */}
-          <div className="flex flex-wrap gap-2">
-            <HeroOrbit mobileOnly />
-          </div>
+
         </div>
 
         {/* ── Desktop: original two-column grid ── */}
