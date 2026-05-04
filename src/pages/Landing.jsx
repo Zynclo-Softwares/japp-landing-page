@@ -19,7 +19,7 @@ export default function Landing() {
   const [waitlistOpen, setWaitlistOpen] = useState(false);
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('japp-theme') || 'light';
+      return localStorage.getItem('japp-theme') || 'dark';
     }
     return 'light';
   });
