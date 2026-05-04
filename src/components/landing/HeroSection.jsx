@@ -37,14 +37,20 @@ export default function HeroSection() {
             Now in private beta
           </span>
           <h1
-            className="font-black leading-[0.92] tracking-[-0.03em] mb-4 text-foreground"
-            style={{ fontSize: 'clamp(36px, 10vw, 56px)' }}
+            className="font-black leading-[0.88] tracking-[-0.04em] mb-6 text-foreground"
+            style={{ fontSize: 'clamp(52px, 16vw, 80px)' }}
           >
-            Apply to anything.
+            Apply to
             <br />
-            <span style={{ color: 'var(--primary)' }}>In your vibe.</span>
+            anything.
             <br />
-            At <span style={{ color: 'var(--primary)' }}>20×</span> the speed.
+            <span style={{ color: 'var(--primary)' }}>In your</span>
+            <br />
+            <span style={{ color: 'var(--primary)' }}>vibe.</span>
+            <br />
+            At <span style={{ color: 'var(--primary)' }}>20×</span>
+            <br />
+            the speed.
           </h1>
           <p className="text-foreground/70 mb-5 text-sm leading-relaxed max-w-sm">
             You build the profile once. Just Apply researches the company, writes a tailored
