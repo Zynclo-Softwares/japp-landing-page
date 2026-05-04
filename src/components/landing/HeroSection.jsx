@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import HeroOrbit from './HeroOrbit';
 import WaitlistModal from './WaitlistModal';
+import VideoModal from './VideoModal';
+import { PlayCircle } from 'lucide-react';
 
 export default function HeroSection() {
   const [waitlistOpen, setWaitlistOpen] = useState(false);
+  const [videoOpen, setVideoOpen] = useState(false);
 
   return (
     <section className="relative overflow-hidden py-16 lg:py-32" id="how-it-works">
@@ -43,17 +46,26 @@ export default function HeroSection() {
               resume + cover letter in your own template, fills the form, and tracks every shot —
               with you in the loop.
             </p>
-            <button
-              onClick={() => setWaitlistOpen(true)}
-              className="self-start inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-bold transition-all active:scale-95"
-              style={{
-                background: 'var(--primary)',
-                color: 'var(--primary-foreground)',
-                boxShadow: '0 10px 40px -10px oklch(0.852 0.199 91.936 / 0.45)',
-              }}
-            >
-              Join the Preview
-            </button>
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={() => setWaitlistOpen(true)}
+                className="self-start inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-bold transition-all active:scale-95"
+                style={{
+                  background: 'var(--primary)',
+                  color: 'var(--primary-foreground)',
+                  boxShadow: '0 10px 40px -10px oklch(0.852 0.199 91.936 / 0.45)',
+                }}
+              >
+                Join the Preview
+              </button>
+              <button
+                onClick={() => setVideoOpen(true)}
+                className="self-start inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold transition-all active:scale-95"
+                style={{ background: '#FF0000', color: '#fff' }}
+              >
+                <PlayCircle size={16} /> Watch Preview
+              </button>
+            </div>
           </div>
 
 
@@ -83,7 +95,7 @@ export default function HeroSection() {
               resume + cover letter in your own template, fills the form, and tracks every shot —
               with you in the loop.
             </p>
-            <div className="flex gap-3 mb-10">
+            <div className="flex gap-3 mb-10 flex-wrap">
               <button
                 onClick={() => setWaitlistOpen(true)}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-base font-bold transition-all duration-180 active:scale-95"
@@ -97,6 +109,13 @@ export default function HeroSection() {
               >
                 Join the Preview
               </button>
+              <button
+                onClick={() => setVideoOpen(true)}
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-base font-bold transition-all duration-180 active:scale-95 hover:opacity-90"
+                style={{ background: '#FF0000', color: '#fff' }}
+              >
+                <PlayCircle size={18} /> Watch Preview
+              </button>
             </div>
           </div>
           <div className="flex flex-col items-center justify-center">
@@ -107,6 +126,7 @@ export default function HeroSection() {
       </div>
 
       <WaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
+      <VideoModal open={videoOpen} onClose={() => setVideoOpen(false)} />
     </section>
   );
 }
