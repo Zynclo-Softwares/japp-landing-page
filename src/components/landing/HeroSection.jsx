@@ -9,7 +9,7 @@ export default function HeroSection() {
   const [waitlistOpen, setWaitlistOpen] = useState(false);
 
   return (
-    <section className="relative overflow-hidden min-h-screen flex flex-col justify-center py-16 lg:py-32" id="how-it-works">
+    <section className="relative overflow-hidden h-screen flex flex-col justify-center py-8 lg:py-32" id="how-it-works">
       {/* Amber mesh blobs */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
         <div
@@ -40,7 +40,7 @@ export default function HeroSection() {
             </span>
             <h1
               className="font-black leading-[0.92] tracking-[-0.03em] mb-4 text-foreground"
-              style={{ fontSize: 'clamp(38px, 11vw, 52px)' }}
+              style={{ fontSize: 'clamp(28px, 7vw, 52px)' }}
             >
               Apply to
               <br />
