@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { X, Mail, User, CheckCircle2, Loader2 } from 'lucide-react';
+import { X, CheckCircle2, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const REDIS_URL = 'https://musical-zebra-80134.upstash.io';
 const REDIS_TOKEN = import.meta.env.VITE_REDIS_TOKEN;
 
 async function pushToWaitlist(name, email) {
-  console.log('[WaitlistModal] Token present:', !!REDIS_TOKEN);
   if (!REDIS_TOKEN) throw new Error('VITE_REDIS_TOKEN is not set');
   const entry = JSON.stringify({ name, email, ts: Date.now() });
   const url = `${REDIS_URL}/lpush/waitlist/${encodeURIComponent(entry)}`;
@@ -22,7 +21,7 @@ async function pushToWaitlist(name, email) {
 export default function WaitlistModal({ open, onClose }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [status, setStatus] = useState('idle'); // idle | loading | done | error
+  const [status, setStatus] = useState('idle');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,6 +41,8 @@ export default function WaitlistModal({ open, onClose }) {
     setTimeout(() => { setStatus('idle'); setName(''); setEmail(''); }, 400);
   };
 
+  const inputClass = "w-full px-4 py-2.5 rounded-lg text-sm bg-black/5 dark:bg-white/8 border border-black/10 dark:border-white/10 text-foreground placeholder:text-foreground/35 focus:outline-none focus:border-[#F5C800] focus:bg-transparent transition-all duration-150";
+
   return (
     <AnimatePresence>
       {open && (
@@ -51,45 +52,42 @@ export default function WaitlistModal({ open, onClose }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
+            transition={{ duration: 0.2 }}
             className="fixed inset-0 z-[90] bg-black/60 backdrop-blur-sm"
             onClick={handleClose}
           />
 
           <motion.div
             key="modal"
-            initial={{ opacity: 0, scale: 0.9, y: 30 }}
+            initial={{ opacity: 0, scale: 0.94, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.93, y: 16 }}
-            transition={{ type: 'spring', stiffness: 340, damping: 28 }}
+            exit={{ opacity: 0, scale: 0.95, y: 12 }}
+            transition={{ type: 'spring', stiffness: 380, damping: 30 }}
             className="fixed inset-0 z-[91] flex items-center justify-center px-4 pointer-events-none"
           >
             <div
-              className="relative pointer-events-auto max-w-md w-full rounded-3xl overflow-hidden"
-              style={{
-                background: 'oklch(0.98 0.018 90)',
-                boxShadow: '0 32px 80px -8px rgba(0,0,0,0.45), 0 0 0 1px oklch(0.852 0.199 91.936 / 0.2)',
-              }}
+              className="relative pointer-events-auto w-full max-w-sm rounded-2xl overflow-hidden bg-background border border-border"
+              style={{ boxShadow: '0 24px 64px -8px rgba(0,0,0,0.4), 0 0 0 1px oklch(0.852 0.199 91.936 / 0.15)' }}
             >
-              {/* Amber top band */}
-              <div className="h-2 w-full" style={{ background: 'linear-gradient(90deg, #F5C800, #e8a800)' }} />
+              {/* Amber top stripe */}
+              <div className="h-[3px] w-full" style={{ background: 'linear-gradient(90deg, #F5C800, #e8a800)' }} />
 
               <button
                 onClick={handleClose}
-                className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-black/8 transition-colors text-foreground/40 hover:text-foreground/70"
+                className="absolute top-3.5 right-3.5 p-1.5 rounded-full hover:bg-foreground/8 transition-colors text-foreground/30 hover:text-foreground/60"
               >
-                <X size={16} />
+                <X size={14} />
               </button>
 
-              <div className="px-10 pt-8 pb-10">
+              <div className="px-7 pt-6 pb-7">
                 {status === 'done' ? (
-                  <div className="text-center py-6">
-                    <CheckCircle2 size={48} className="mx-auto mb-4" style={{ color: '#F5C800' }} />
-                    <h3 className="font-black text-2xl text-foreground mb-2">You're on the list.</h3>
-                    <p className="text-foreground/55 text-sm">We'll reach out when your spot opens up.</p>
+                  <div className="text-center py-4">
+                    <CheckCircle2 size={40} className="mx-auto mb-3" style={{ color: '#F5C800' }} />
+                    <h3 className="font-black text-xl text-foreground mb-1.5">You're on the list.</h3>
+                    <p className="text-foreground/50 text-sm">We'll reach out when your spot opens up.</p>
                     <button
                       onClick={handleClose}
-                      className="mt-6 px-6 py-2.5 rounded-xl text-sm font-bold transition-all"
+                      className="mt-5 px-5 py-2 rounded-lg text-sm font-bold transition-all"
                       style={{ background: '#F5C800', color: '#3d2800' }}
                     >
                       Close
@@ -97,52 +95,42 @@ export default function WaitlistModal({ open, onClose }) {
                   </div>
                 ) : (
                   <>
-                    <div className="flex items-center gap-3 mb-5">
+                    {/* Header */}
+                    <div className="flex items-center gap-2.5 mb-5">
                       <img
                         src="https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/bfb560be2_logo.png"
                         alt="Just Apply logo"
-                        className="w-10 h-10 rounded-xl object-cover"
+                        className="w-8 h-8 rounded-lg object-cover"
                       />
-                      <p className="text-[11px] font-black tracking-[0.14em] uppercase" style={{ color: '#F5C800' }}>
+                      <p className="text-[10px] font-black tracking-[0.14em] uppercase" style={{ color: '#F5C800' }}>
                         Just Apply · Private Beta
                       </p>
                     </div>
 
-                    <h2
-                      className="font-black tracking-[-0.03em] text-foreground mb-2"
-                      style={{ fontSize: 'clamp(22px, 4vw, 28px)', lineHeight: '1.1' }}
-                    >
+                    <h2 className="font-black tracking-[-0.03em] text-foreground mb-1" style={{ fontSize: '22px', lineHeight: '1.1' }}>
                       Join the preview.
                     </h2>
-                    <p className="text-foreground/55 text-sm mb-7 leading-relaxed">
-                      We're rolling out access in small batches. Drop your info and we'll let you know when your spot is ready.
+                    <p className="text-foreground/45 text-xs mb-5 leading-relaxed">
+                      Early access, small batches. We'll ping you when your spot's ready.
                     </p>
 
-                    <form onSubmit={handleSubmit} className="space-y-3">
-                      <div className="relative">
-                        <User size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
-                        <input
-                          type="text"
-                          placeholder="Your name"
-                          value={name}
-                          onChange={e => setName(e.target.value)}
-                          required
-                          className="w-full pl-9 pr-4 py-3 rounded-xl text-sm border border-black/20 bg-white text-gray-900 focus:outline-none focus:ring-2 placeholder:text-gray-400"
-                          style={{ '--tw-ring-color': '#F5C800' }}
-                        />
-                      </div>
-                      <div className="relative">
-                        <Mail size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
-                        <input
-                          type="email"
-                          placeholder="your@email.com"
-                          value={email}
-                          onChange={e => setEmail(e.target.value)}
-                          required
-                          className="w-full pl-9 pr-4 py-3 rounded-xl text-sm border border-black/20 bg-white text-gray-900 focus:outline-none focus:ring-2 placeholder:text-gray-400"
-                          style={{ '--tw-ring-color': '#F5C800' }}
-                        />
-                      </div>
+                    <form onSubmit={handleSubmit} className="space-y-2.5">
+                      <input
+                        type="text"
+                        placeholder="Your name"
+                        value={name}
+                        onChange={e => setName(e.target.value)}
+                        required
+                        className={inputClass}
+                      />
+                      <input
+                        type="email"
+                        placeholder="your@email.com"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                        required
+                        className={inputClass}
+                      />
 
                       {status === 'error' && (
                         <p className="text-xs text-red-500 font-medium">Something went wrong — please try again.</p>
@@ -151,20 +139,20 @@ export default function WaitlistModal({ open, onClose }) {
                       <button
                         type="submit"
                         disabled={status === 'loading'}
-                        className="flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl text-base font-black transition-all duration-150 active:scale-95 disabled:opacity-70"
+                        className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-black transition-all duration-150 active:scale-95 disabled:opacity-70 mt-1"
                         style={{
                           background: '#F5C800',
                           color: '#3d2800',
-                          boxShadow: '0 8px 32px -6px rgba(245,200,0,0.55)',
+                          boxShadow: '0 4px 20px -4px rgba(245,200,0,0.5)',
                         }}
                       >
-                        {status === 'loading' ? <Loader2 size={16} className="animate-spin" /> : null}
+                        {status === 'loading' ? <Loader2 size={14} className="animate-spin" /> : null}
                         {status === 'loading' ? 'Joining...' : 'Join the Preview →'}
                       </button>
                     </form>
 
-                    <p className="text-center text-xs text-foreground/35 font-medium mt-3">
-                      No spam · We'll only email you about your access
+                    <p className="text-center text-[10px] text-foreground/30 font-medium mt-3.5">
+                      No spam · Access notification only
                     </p>
                   </>
                 )}
