@@ -120,26 +120,26 @@ export default function WaitlistModal({ open, onClose }) {
 
                     <form onSubmit={handleSubmit} className="space-y-3">
                       <div className="relative">
-                        <User size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-foreground/40" />
+                        <User size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
                         <input
                           type="text"
                           placeholder="Your name"
                           value={name}
                           onChange={e => setName(e.target.value)}
                           required
-                          className="w-full pl-9 pr-4 py-3 rounded-xl text-sm border border-foreground/20 bg-transparent focus:outline-none focus:ring-2 text-foreground placeholder:text-foreground/40"
+                          className="w-full pl-9 pr-4 py-3 rounded-xl text-sm border border-black/20 bg-white text-gray-900 focus:outline-none focus:ring-2 placeholder:text-gray-400"
                           style={{ '--tw-ring-color': '#F5C800' }}
                         />
                       </div>
                       <div className="relative">
-                        <Mail size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-foreground/40" />
+                        <Mail size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
                         <input
                           type="email"
                           placeholder="your@email.com"
                           value={email}
                           onChange={e => setEmail(e.target.value)}
                           required
-                          className="w-full pl-9 pr-4 py-3 rounded-xl text-sm border border-foreground/20 bg-transparent focus:outline-none focus:ring-2 text-foreground placeholder:text-foreground/40"
+                          className="w-full pl-9 pr-4 py-3 rounded-xl text-sm border border-black/20 bg-white text-gray-900 focus:outline-none focus:ring-2 placeholder:text-gray-400"
                           style={{ '--tw-ring-color': '#F5C800' }}
                         />
                       </div>
