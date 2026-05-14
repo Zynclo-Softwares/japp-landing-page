@@ -119,30 +119,24 @@ export default function WaitlistModal({ open, onClose }) {
                     </p>
 
                     <form onSubmit={handleSubmit} className="space-y-3">
-                      <div className="relative">
-                        <User size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-foreground/35" />
-                        <input
-                          type="text"
-                          placeholder="Your name"
-                          value={name}
-                          onChange={e => setName(e.target.value)}
-                          required
-                          className="w-full pl-9 pr-4 py-3 rounded-xl text-sm border border-border bg-white/60 focus:outline-none focus:ring-2 text-foreground placeholder:text-foreground/35"
-                          style={{ '--tw-ring-color': '#F5C800' }}
-                        />
-                      </div>
-                      <div className="relative">
-                        <Mail size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-foreground/35" />
-                        <input
-                          type="email"
-                          placeholder="your@email.com"
-                          value={email}
-                          onChange={e => setEmail(e.target.value)}
-                          required
-                          className="w-full pl-9 pr-4 py-3 rounded-xl text-sm border border-border bg-white/60 focus:outline-none focus:ring-2 text-foreground placeholder:text-foreground/35"
-                          style={{ '--tw-ring-color': '#F5C800' }}
-                        />
-                      </div>
+                      <input
+                        type="text"
+                        placeholder="Your name"
+                        value={name}
+                        onChange={e => setName(e.target.value)}
+                        required
+                        className="w-full px-4 py-3 rounded-xl text-sm border border-foreground/20 bg-transparent focus:outline-none focus:ring-2 text-foreground placeholder:text-foreground/40"
+                        style={{ '--tw-ring-color': '#F5C800' }}
+                      />
+                      <input
+                        type="email"
+                        placeholder="your@email.com"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                        required
+                        className="w-full px-4 py-3 rounded-xl text-sm border border-foreground/20 bg-transparent focus:outline-none focus:ring-2 text-foreground placeholder:text-foreground/40"
+                        style={{ '--tw-ring-color': '#F5C800' }}
+                      />
 
                       {status === 'error' && (
                         <p className="text-xs text-red-500 font-medium">Something went wrong — please try again.</p>
