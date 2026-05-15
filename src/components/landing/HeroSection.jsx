@@ -3,7 +3,7 @@ import HeroOrbit from './HeroOrbit';
 import WaitlistModal from './WaitlistModal';
 import { PlayCircle } from 'lucide-react';
 
-const VIDEO_URL = 'https://youtu.be/YRgo4OErGXw';
+const VIDEO_URL = 'https://youtu.be/kmzKrYFHxV8';
 
 export default function HeroSection() {
   const [waitlistOpen, setWaitlistOpen] = useState(false);
