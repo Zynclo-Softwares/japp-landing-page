@@ -1,20 +1,12 @@
 import { useState } from 'react';
 import { X, CheckCircle2, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-
-const REDIS_URL = 'https://musical-zebra-80134.upstash.io';
-const REDIS_TOKEN = import.meta.env.VITE_REDIS_TOKEN;
+import { base44 } from '@/api/base44Client';
 
 async function pushToWaitlist(name, email) {
-  if (!REDIS_TOKEN) throw new Error('VITE_REDIS_TOKEN is not set');
-  const entry = JSON.stringify({ name, email, ts: Date.now() });
-  const url = `${REDIS_URL}/lpush/waitlist/${encodeURIComponent(entry)}`;
-  const res = await fetch(url, {
-    headers: { Authorization: `Bearer ${REDIS_TOKEN}` },
-  });
-  if (!res.ok) {
-    const body = await res.text().catch(() => '(unreadable)');
-    throw new Error(`Redis write failed (${res.status}): ${body}`);
+  const res = await base44.functions.invoke('addToWaitlist', { name, email });
+  if (!res.data?.success) {
+    throw new Error(res.data?.error || 'Failed to join waitlist');
   }
 }
 
