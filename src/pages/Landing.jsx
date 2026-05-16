@@ -1,19 +1,19 @@
 import { useState, useEffect } from 'react';
-import NoiseOverlay from '../components/landing/NoiseOverlay';
-import PromoBar from '../components/landing/PromoBar';
-import Nav from '../components/landing/Nav';
-import HeroSection from '../components/landing/HeroSection';
-import OldVsNewSection from '../components/landing/OldVsNewSection';
-import ProfileFirstSection from '../components/landing/ProfileFirstSection';
-import BYOTemplateSection from '../components/landing/BYOTemplateSection';
-import CompanyResearchSection from '../components/landing/CompanyResearchSection';
-import ApplyAnywhereSection from '../components/landing/ApplyAnywhereSection';
-import JobTrackerSection from '../components/landing/JobTrackerSection';
-import HITLSection from '../components/landing/HITLSection';
-import PricingSection from '../components/landing/PricingSection';
-import FaqSection from '../components/landing/FaqSection';
-import Footer from '../components/landing/Footer';
-import WaitlistModal from '../components/landing/WaitlistModal';
+import NoiseOverlay from '../components/landing/NoiseOverlay.jsx';
+import PromoBar from '../components/landing/PromoBar.jsx';
+import Nav from '../components/landing/Nav.jsx';
+import HeroSection from '../components/landing/HeroSection.jsx';
+import OldVsNewSection from '../components/landing/OldVsNewSection.jsx';
+import ProfileFirstSection from '../components/landing/ProfileFirstSection.jsx';
+import BYOTemplateSection from '../components/landing/BYOTemplateSection.jsx';
+import CompanyResearchSection from '../components/landing/CompanyResearchSection.jsx';
+import ApplyAnywhereSection from '../components/landing/ApplyAnywhereSection.jsx';
+import JobTrackerSection from '../components/landing/JobTrackerSection.jsx';
+import HITLSection from '../components/landing/HITLSection.jsx';
+import PricingSection from '../components/landing/PricingSection.jsx';
+import FaqSection from '../components/landing/FaqSection.jsx';
+import Footer from '../components/landing/Footer.jsx';
+import WaitlistModal from '../components/landing/WaitlistModal.jsx';
 
 export default function Landing() {
   const [waitlistOpen, setWaitlistOpen] = useState(false);

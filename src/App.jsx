@@ -6,7 +6,7 @@ import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 // Add page imports here
-import Landing from './pages/Landing';
+import Landing from './pages/Landing.jsx';
 
 const AuthenticatedApp = () => {
   // Render immediately — this is a public landing page with no auth requirement

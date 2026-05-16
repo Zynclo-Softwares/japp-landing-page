@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import JustApplyCard3D from './JustApplyCard3D';
+import JustApplyCard3D from './JustApplyCard3D.jsx';
 
 const IMG_LIGHT = 'https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/ded278d39_image.png';
 const IMG_DARK = 'https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/c6e319554_image.png';

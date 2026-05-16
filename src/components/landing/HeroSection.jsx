@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import HeroOrbit from './HeroOrbit';
-import WaitlistModal from './WaitlistModal';
+import HeroOrbit from './HeroOrbit.jsx';
+import WaitlistModal from './WaitlistModal.jsx';
 import { PlayCircle } from 'lucide-react';
 
 const VIDEO_URL = 'https://youtu.be/kmzKrYFHxV8';

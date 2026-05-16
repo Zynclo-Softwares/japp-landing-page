@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import WaitlistModal from './WaitlistModal';
+import WaitlistModal from './WaitlistModal.jsx';
 
 const creditPacks = [
   { label: 'Starter Pack', credits: '400 credits', subPrice: '$4.99', fullPrice: '$6.24' },
