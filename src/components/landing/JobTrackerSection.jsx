@@ -14,7 +14,7 @@ export default function JobTrackerSection() {
   }, []);
 
   const IMG_LIGHT = 'https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/f0486e669_image.png';
-  const IMG_DARK = 'https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/02bac3435_image.png';
+  const IMG_DARK = 'https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/6626c2fea_image.png';
 
   return (
     <section className="py-24 lg:py-32 bg-muted/30">
