@@ -14,7 +14,7 @@ export default function JobTrackerSection() {
   }, []);
 
   const IMG_LIGHT = 'https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/f0486e669_image.png';
-  const IMG_DARK = 'https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/b6ccfa8af_image.png';
+  const IMG_DARK = 'https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/02bac3435_image.png';
 
   return (
     <section className="py-24 lg:py-32 bg-muted/30">
@@ -41,8 +41,10 @@ export default function JobTrackerSection() {
           <img
             src={isDark ? IMG_DARK : IMG_LIGHT}
             alt="Job Tracker Dashboard"
-            className="w-full rounded-2xl"
-            style={{ maxWidth: 860 }}
+            className="w-full rounded-2xl shadow-2xl"
+            style={{ maxWidth: 860, objectFit: 'cover' }}
+            loading="lazy"
+            decoding="async"
           />
         </div>
       </div>
