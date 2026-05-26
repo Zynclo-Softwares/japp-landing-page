@@ -20,4 +20,4 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
-Sitemap: https://justapply.zynclo.com/sitemap.xml
+Sitemap: https://just-apply.zynclo.com/sitemap.xml
