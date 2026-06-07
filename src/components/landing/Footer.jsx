@@ -1,8 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Footer() {
   const [easterEgg, setEasterEgg] = useState(false);
   const [toast, setToast] = useState(false);
+  const [isDark, setIsDark] = useState(() =>
+    document.documentElement.classList.contains('dark')
+  );
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    });
+    observer.observe(document.documentElement, { attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
 
   const showToast = (e) => {
     e.preventDefault();
@@ -18,9 +29,11 @@ export default function Footer() {
           {/* Wordmark */}
           <div className="flex items-center gap-2 font-black text-base tracking-tight text-foreground">
             <img
-              src="https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/bfb560be2_logo.png"
+              src={isDark
+                ? "https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/d4d0bfd36_just-apply-icon.svg"
+                : "https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/cb2b88d8e_just-apply-icon-knockout.svg"}
               alt="Just Apply logo"
-              className="w-6 h-6 rounded-md object-cover"
+              className="w-6 h-6 object-contain"
             />
             Just Apply
           </div>
