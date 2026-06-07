@@ -22,9 +22,11 @@ export default function Nav({ theme, toggleTheme, onJoinClick }) {
         {/* Wordmark */}
         <a href="#" className="flex items-center gap-2 font-black text-lg tracking-tight text-foreground">
           <img
-            src="https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/bfb560be2_logo.png"
+            src={theme === 'dark'
+              ? "https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/d4d0bfd36_just-apply-icon.svg"
+              : "https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/cb2b88d8e_just-apply-icon-knockout.svg"}
             alt="Just Apply logo"
-            className="w-7 h-7 rounded-lg object-cover"
+            className="w-7 h-7 object-contain"
           />
           Just Apply
         </a>
