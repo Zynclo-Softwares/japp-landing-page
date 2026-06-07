@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { X, CheckCircle2, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -22,6 +22,17 @@ export default function WaitlistModal({ open, onClose }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState('idle');
+  const [isDark, setIsDark] = useState(() =>
+    document.documentElement.classList.contains('dark')
+  );
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    });
+    observer.observe(document.documentElement, { attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -98,9 +109,9 @@ export default function WaitlistModal({ open, onClose }) {
                     {/* Header */}
                     <div className="flex items-center gap-2.5 mb-5">
                       <img
-                        src="https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/bfb560be2_logo.png"
+                        src={isDark ? "https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/d4d0bfd36_just-apply-icon.svg" : "https://media.base44.com/images/public/69c758b2cd46d17f5c7b2dd0/cb2b88d8e_just-apply-icon-knockout.svg"}
                         alt="Just Apply logo"
-                        className="w-8 h-8 rounded-lg object-cover"
+                        className="w-8 h-8 object-cover"
                       />
                       <p className="text-[10px] font-black tracking-[0.14em] uppercase" style={{ color: '#F5C800' }}>
                         Just Apply · Private Beta
