@@ -1,8 +1,5 @@
 import HeroOrbit from './HeroOrbit.jsx';
 import DownloadButtons from './DownloadButtons.jsx';
-import { PlayCircle } from 'lucide-react';
-
-const VIDEO_URL = 'https://youtu.be/kmzKrYFHxV8';
 
 export default function HeroSection() {
   return (
@@ -53,16 +50,7 @@ export default function HeroSection() {
             with you in the loop.
           </p>
           <div className="mb-8">
-            <DownloadButtons tone="light" size="md" className="mb-4" />
-            <a
-              href={VIDEO_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold transition-all active:scale-95 hover:opacity-90"
-              style={{ background: '#FF0000', color: '#fff' }}
-            >
-              <PlayCircle size={16} /> Watch Preview
-            </a>
+            <DownloadButtons tone="light" size="md" />
           </div>
 
         </div>
@@ -99,16 +87,7 @@ export default function HeroSection() {
               with you in the loop.
             </p>
             <div className="mb-10">
-              <DownloadButtons tone="light" size="lg" className="mb-4" />
-              <a
-                href={VIDEO_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-base font-bold transition-all duration-180 active:scale-95 hover:opacity-90"
-                style={{ background: '#FF0000', color: '#fff' }}
-              >
-                <PlayCircle size={18} /> Watch Preview
-              </a>
+              <DownloadButtons tone="light" size="lg" />
             </div>
           </div>
           <div className="flex flex-col items-center justify-center">

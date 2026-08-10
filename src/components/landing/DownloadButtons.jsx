@@ -59,10 +59,19 @@ export default function DownloadButtons({ tone = 'light', size = 'md', className
                   color: 'var(--primary-foreground)',
                   boxShadow: '0 10px 40px -10px oklch(0.852 0.199 91.936 / 0.45)',
                 };
+          // Secondary buttons carry a real surface rather than a bare border —
+          // on the near-black hero a transparent chip reads as unstyled text,
+          // not something clickable. `--muted`/`--card` are theme tokens, so
+          // this stays legible in both light and dark.
           const secondaryStyle =
             tone === 'dark'
-              ? { background: 'oklch(1 0 0 / 0.15)', color: '#fff', border: '1px solid oklch(1 0 0 / 0.35)' }
-              : { background: 'transparent', color: 'var(--foreground)', border: '1px solid var(--border)' };
+              ? { background: 'oklch(1 0 0 / 0.18)', color: '#fff', border: '1px solid oklch(1 0 0 / 0.28)' }
+              : {
+                  background: 'var(--muted)',
+                  color: 'var(--foreground)',
+                  border: '1px solid var(--border)',
+                  boxShadow: '0 2px 12px -4px oklch(0 0 0 / 0.35)',
+                };
 
           return (
             <a

@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Sun, Moon } from 'lucide-react';
+import { Sun, Moon, PlayCircle } from 'lucide-react';
 
-export default function Nav({ theme, toggleTheme, onJoinClick }) {
+const VIDEO_URL = 'https://youtu.be/kmzKrYFHxV8';
+
+export default function Nav({ theme, toggleTheme }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -55,19 +57,21 @@ export default function Nav({ theme, toggleTheme, onJoinClick }) {
             {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
           </button>
 
-          <button
-            onClick={onJoinClick}
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-bold transition-all duration-180"
+          <a
+            href={VIDEO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-bold transition-all duration-180 hover:opacity-90"
             style={{
-              background: 'var(--primary)',
-              color: 'var(--primary-foreground)',
-              boxShadow: '0 4px 20px -4px oklch(0.852 0.199 91.936 / 0.4)',
+              background: '#FF0000',
+              color: '#fff',
+              boxShadow: '0 4px 20px -4px oklch(0.55 0.24 27 / 0.45)',
             }}
-            onMouseEnter={e => e.currentTarget.style.boxShadow = '0 8px 32px -4px oklch(0.852 0.199 91.936 / 0.65)'}
-            onMouseLeave={e => e.currentTarget.style.boxShadow = '0 4px 20px -4px oklch(0.852 0.199 91.936 / 0.4)'}
+            onMouseEnter={e => e.currentTarget.style.boxShadow = '0 8px 32px -4px oklch(0.55 0.24 27 / 0.65)'}
+            onMouseLeave={e => e.currentTarget.style.boxShadow = '0 4px 20px -4px oklch(0.55 0.24 27 / 0.45)'}
           >
-            Join Preview
-          </button>
+            <PlayCircle size={15} /> Watch Preview
+          </a>
         </div>
       </div>
     </nav>
