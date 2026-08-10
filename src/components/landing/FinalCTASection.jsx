@@ -1,12 +1,10 @@
-import { useState } from 'react';
 import ImagePlaceholder from './ImagePlaceholder';
-import WaitlistModal from './WaitlistModal';
+import DownloadButtons from './DownloadButtons.jsx';
 
 const IMG9_PROMPT =
   'Full-bleed abstract background: a soft amber-to-deep-bronze radial gradient with a faint topographic line pattern overlay. Slight film grain. No subjects. Used as a hero band behind white headline text. 21:9.';
 
 export default function FinalCTASection() {
-  const [waitlistOpen, setWaitlistOpen] = useState(false);
   return (
     <section className="relative py-40 overflow-hidden" id="download">
       {/* Amber gradient background */}
@@ -50,25 +48,14 @@ export default function FinalCTASection() {
           className="text-white/80 mb-10 font-medium max-w-md mx-auto"
           style={{ fontSize: '20px', lineHeight: '1.5' }}
         >
-          Just Apply is in private beta. The first cohort is open.
+          Download Just Apply and run your first application in minutes.
         </p>
 
-        <button
-          onClick={() => setWaitlistOpen(true)}
-          className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl text-base font-black transition-all duration-180 active:scale-95 hover:scale-[1.02]"
-          style={{
-            background: 'oklch(0.145 0 0)',
-            color: 'oklch(0.985 0 0)',
-            boxShadow: '0 8px 32px -4px oklch(0 0 0 / 0.4)',
-          }}
-        >
-          Join the Preview
-        </button>
+        <DownloadButtons tone="dark" size="lg" className="flex flex-col items-center" />
 
         <p className="text-white/50 text-sm font-medium mt-4">
-          No credit card · Invite-only beta
+          No credit card · Free to install
         </p>
-        <WaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
       </div>
     </section>
   );

@@ -1,13 +1,10 @@
-import { useState } from 'react';
 import HeroOrbit from './HeroOrbit.jsx';
-import WaitlistModal from './WaitlistModal.jsx';
+import DownloadButtons from './DownloadButtons.jsx';
 import { PlayCircle } from 'lucide-react';
 
 const VIDEO_URL = 'https://youtu.be/kmzKrYFHxV8';
 
 export default function HeroSection() {
-  const [waitlistOpen, setWaitlistOpen] = useState(false);
-
   return (
     <section className="relative overflow-hidden flex flex-col justify-center py-10 pb-16 lg:py-32" style={{ minHeight: '80vh' }} id="how-it-works">
       {/* Amber mesh blobs */}
@@ -55,18 +52,8 @@ export default function HeroSection() {
             resume + cover letter in your own template, fills the form, and tracks every shot —
             with you in the loop.
           </p>
-          <div className="flex flex-wrap gap-2 mb-8">
-            <button
-              onClick={() => setWaitlistOpen(true)}
-              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-bold transition-all active:scale-95"
-              style={{
-                background: 'var(--primary)',
-                color: 'var(--primary-foreground)',
-                boxShadow: '0 10px 40px -10px oklch(0.852 0.199 91.936 / 0.45)',
-              }}
-            >
-              Join the Preview
-            </button>
+          <div className="mb-8">
+            <DownloadButtons tone="light" size="md" className="mb-4" />
             <a
               href={VIDEO_URL}
               target="_blank"
@@ -111,20 +98,8 @@ export default function HeroSection() {
               resume + cover letter in your own template, fills the form, and tracks every shot —
               with you in the loop.
             </p>
-            <div className="flex gap-3 mb-10 flex-wrap">
-              <button
-                onClick={() => setWaitlistOpen(true)}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-base font-bold transition-all duration-180 active:scale-95"
-                style={{
-                  background: 'var(--primary)',
-                  color: 'var(--primary-foreground)',
-                  boxShadow: '0 10px 40px -10px oklch(0.852 0.199 91.936 / 0.45)',
-                }}
-                onMouseEnter={e => e.currentTarget.style.boxShadow = '0 18px 60px -12px oklch(0.852 0.199 91.936 / 0.65)'}
-                onMouseLeave={e => e.currentTarget.style.boxShadow = '0 10px 40px -10px oklch(0.852 0.199 91.936 / 0.45)'}
-              >
-                Join the Preview
-              </button>
+            <div className="mb-10">
+              <DownloadButtons tone="light" size="lg" className="mb-4" />
               <a
                 href={VIDEO_URL}
                 target="_blank"
@@ -143,7 +118,6 @@ export default function HeroSection() {
 
       </div>
 
-      <WaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
     </section>
   );
 }
