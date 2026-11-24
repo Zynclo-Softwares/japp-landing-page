@@ -28,7 +28,7 @@ export default function HeroSection() {
             style={{ background: 'oklch(0.852 0.199 91.936 / 0.15)', color: 'var(--primary)' }}
           >
             <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: 'var(--primary)' }} />
-            Now in private beta
+            Now in beta
           </span>
           <h1
             className="font-black leading-[0.88] tracking-[-0.04em] mb-6 text-foreground"
@@ -66,7 +66,7 @@ export default function HeroSection() {
               style={{ background: 'oklch(0.852 0.199 91.936 / 0.15)', color: 'var(--primary)' }}
             >
               <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: 'var(--primary)' }} />
-              Now in private beta
+              Now in beta
             </span>
             <h1
               className="font-black leading-[0.95] tracking-[-0.035em] mb-6 text-foreground"

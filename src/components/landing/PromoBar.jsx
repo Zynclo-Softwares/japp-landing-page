@@ -17,8 +17,8 @@ export default function PromoBar() {
         For the first time — a semi-autonomous job-application software that gives humans full flexibility to apply to any job, tailor documents in their own UI vibe, track and edit on their terms.{' '}
         <span className="font-700">It keeps you in the loop. It keeps the company in the loop. It produces exactly what you want.</span>
       </span>
-      <span className="sm:hidden text-[oklch(0.3_0.05_57)]">Semi-autonomous job-application studio · Now in private beta</span>
-      <span className="hidden sm:inline text-[oklch(0.5_0.05_57)] shrink-0">· Now in private beta</span>
+      <span className="sm:hidden text-[oklch(0.3_0.05_57)]">Semi-autonomous job-application studio · Now in beta</span>
+      <span className="hidden sm:inline text-[oklch(0.5_0.05_57)] shrink-0">· Now in beta</span>
       <button
         onClick={() => setVisible(false)}
         aria-label="Dismiss announcement"

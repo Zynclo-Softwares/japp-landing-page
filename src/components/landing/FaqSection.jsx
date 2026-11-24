@@ -20,7 +20,7 @@ const faqs = [
   },
   {
     q: 'Which platforms does Just Apply run on?',
-    a: 'Just Apply is a desktop app for macOS (Apple silicon) and Windows, with automatic updates. Linux isn\'t supported yet.',
+    a: 'Just Apply is a desktop app for macOS (Apple silicon), Windows, and Linux (AppImage), with automatic updates.',
   },
   {
     q: 'Does the agent ever submit without my review?',
@@ -31,7 +31,7 @@ const faqs = [
     a: 'Your profile and application data are stored in a secure, encrypted cloud database. When the agent calls an AI model (DeepSeek, Claude, etc.), your prompts are sent through fully encrypted HTTPS API channels to those providers.',
   },
   {
-    q: 'What does "private beta" mean for pricing?',
+    q: 'What does "beta" mean for pricing?',
     a: 'Beta users get early access at lower pricing and help shape the product. Beta pricing is locked in when you subscribe — it won\'t increase when we launch publicly.',
   },
 ];
