@@ -66,7 +66,7 @@ export default function PricingSection() {
                 '1,400 credits worth of applications / month',
                 '20% off all credit top-up packs',
                 'Bring your own template',
-                'All models (GPT-5, Claude, Gemini, Llama)',
+                'Pick your model (DeepSeek, Claude, GLM)',
                 'Deep company research',
                 'Smart job tracker + analytics',
                 'Human-in-the-loop review',
@@ -95,7 +95,7 @@ export default function PricingSection() {
             <p className="text-sm font-bold text-foreground mb-1">Credit Packs</p>
             <p className="text-sm text-muted-foreground mb-1">Available to everyone</p>
             <p className="text-xs text-muted-foreground/70 mb-6 leading-snug">
-              No subscription needed. Credit pack users get the default model only — no model selection. Subscribers get the discounted price and full model switching at checkout.
+              No subscription needed. Every account can pick its model; subscribers get 20% off every pack at checkout.
             </p>
 
             <div className="space-y-3 mb-6">
