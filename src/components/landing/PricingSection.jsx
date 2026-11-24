@@ -42,7 +42,7 @@ export default function PricingSection() {
             >
               Monthly plan
             </div>
-            <p className="text-sm font-bold text-foreground mb-1">Just Apply</p>
+            <p className="text-sm font-bold text-foreground mb-1">Just Apply Pro</p>
             <div className="flex items-baseline gap-1 mb-1">
               <span className="text-4xl font-black tracking-[-0.03em]" style={{ color: 'var(--primary)' }}>
                 $19.99
