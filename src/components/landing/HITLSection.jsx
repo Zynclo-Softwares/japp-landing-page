@@ -21,13 +21,13 @@ export default function HITLSection() {
           className="text-foreground/50 mt-8 max-w-md mx-auto font-medium"
           style={{ fontSize: '17px', lineHeight: '1.6' }}
         >
-          Autonomous when you want speed. Paused when you want control. Never out of your hands.
+          The agent does the legwork. You review every document, and nothing gets submitted until you say so.
         </p>
 
         <div className="mt-12 flex flex-col sm:flex-row justify-center items-stretch gap-4 max-w-xs sm:max-w-none mx-auto">
           {[
-            { label: 'Autonomous mode', desc: 'Submit without interruption', icon: '⚡' },
-            { label: 'Review mode', desc: 'Approve every step before it ships', icon: '👁' },
+            { label: 'Document review', desc: 'Approve or send back each resume and letter', icon: '👁' },
+            { label: 'Submit gate', desc: 'Always asks you before the final submit', icon: '✋' },
           ].map(({ label, desc, icon }) => (
             <div
               key={label}

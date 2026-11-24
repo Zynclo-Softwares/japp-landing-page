@@ -16,22 +16,22 @@ const faqs = [
   },
   {
     q: 'Which AI models can I use?',
-    a: 'We run the best available model by default. Subscribers can switch between GPT-5, Claude Opus 4.7, Gemini 2.5, and Llama 3.3 per generation — free users get the default model only.',
+    a: 'DeepSeek V4 Pro is the recommended default. You can switch the agent to DeepSeek V4 Flash, Claude Sonnet 4.6, Claude Sonnet 5, or GLM 5.2 Fast at any time in settings.',
   },
   {
-    q: 'Is this available on Windows or Linux?',
-    a: 'Just Apply will be available on macOS, Windows, and Linux. Join the beta and we\'ll notify you when your platform ships.',
+    q: 'Which platforms does Just Apply run on?',
+    a: 'Just Apply is a desktop app for macOS (Apple silicon), Windows, and Linux (AppImage), with automatic updates.',
   },
   {
     q: 'Does the agent ever submit without my review?',
-    a: 'Only if you choose Autonomous mode. In the default Review mode, the agent pauses before submitting — you see the tailored resume and cover letter, make any edits, then approve. You\'re always in the loop.',
+    a: 'No. Every resume and cover letter waits for your approval (or your feedback for another pass), and the agent always stops to ask you before it clicks the final submit button. You\'re always in the loop.',
   },
   {
     q: 'Is my data private?',
-    a: 'Your profile and application data are stored in a secure, encrypted cloud database. When you use cloud models (GPT-5, Claude, etc.), your prompts are sent through fully encrypted HTTPS API channels to those providers.',
+    a: 'Your profile and application data are stored in a secure, encrypted cloud database. When the agent calls an AI model (DeepSeek, Claude, etc.), your prompts are sent through fully encrypted HTTPS API channels to those providers.',
   },
   {
-    q: 'What does "private beta" mean for pricing?',
+    q: 'What does "beta" mean for pricing?',
     a: 'Beta users get early access at lower pricing and help shape the product. Beta pricing is locked in when you subscribe — it won\'t increase when we launch publicly.',
   },
 ];

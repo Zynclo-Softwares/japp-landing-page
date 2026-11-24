@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import WaitlistModal from './WaitlistModal.jsx';
 
 const creditPacks = [
   { label: 'Starter Pack', credits: '400 credits', subPrice: '$4.99', fullPrice: '$6.24' },
@@ -8,8 +6,6 @@ const creditPacks = [
 ];
 
 export default function PricingSection() {
-  const [waitlistOpen, setWaitlistOpen] = useState(false);
-
   return (
     <section className="py-24 lg:py-32 border-t border-border" id="pricing">
       <div className="max-w-4xl mx-auto px-6 lg:px-8">
@@ -46,7 +42,7 @@ export default function PricingSection() {
             >
               Monthly plan
             </div>
-            <p className="text-sm font-bold text-foreground mb-1">Just Apply</p>
+            <p className="text-sm font-bold text-foreground mb-1">Just Apply Pro</p>
             <div className="flex items-baseline gap-1 mb-1">
               <span className="text-4xl font-black tracking-[-0.03em]" style={{ color: 'var(--primary)' }}>
                 $19.99
@@ -66,7 +62,7 @@ export default function PricingSection() {
                 '1,400 credits worth of applications / month',
                 '20% off all credit top-up packs',
                 'Bring your own template',
-                'All models (GPT-5, Claude, Gemini, Llama)',
+                'Pick your model (DeepSeek, Claude, GLM)',
                 'Deep company research',
                 'Smart job tracker + analytics',
                 'Human-in-the-loop review',
@@ -78,13 +74,13 @@ export default function PricingSection() {
               ))}
             </div>
 
-            <button
-              onClick={() => setWaitlistOpen(true)}
+            <a
+              href="#main-content"
               className="block w-full text-center py-2.5 rounded-xl text-sm font-bold transition-all duration-180 hover:scale-[1.02] active:scale-[0.98]"
               style={{ background: 'var(--primary)', color: 'var(--primary-foreground)', boxShadow: '0 4px 20px -4px oklch(0.852 0.199 91.936 / 0.4)' }}
             >
-              Join the Preview
-            </button>
+              Download Just Apply
+            </a>
           </div>
 
           {/* Credit packs card */}
@@ -95,7 +91,7 @@ export default function PricingSection() {
             <p className="text-sm font-bold text-foreground mb-1">Credit Packs</p>
             <p className="text-sm text-muted-foreground mb-1">Available to everyone</p>
             <p className="text-xs text-muted-foreground/70 mb-6 leading-snug">
-              No subscription needed. Credit pack users get the default model only — no model selection. Subscribers get the discounted price and full model switching at checkout.
+              No subscription needed. Every account can pick its model; subscribers get 20% off every pack at checkout.
             </p>
 
             <div className="space-y-3 mb-6">
@@ -135,7 +131,6 @@ export default function PricingSection() {
 
         </div>
       </div>
-      <WaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
     </section>
   );
 }

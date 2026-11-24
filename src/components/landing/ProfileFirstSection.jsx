@@ -23,7 +23,7 @@ const steps = [
   {
     num: '04',
     title: 'Browser agent applies for you.',
-    desc: 'An autonomous browser agent navigates the job site, fills every form field, and submits — no clicks needed from you.',
+    desc: 'A browser agent navigates the job site, fills every form field, and uploads your PDFs, then asks you before it hits submit.',
     side: 'right',
   },
   {
